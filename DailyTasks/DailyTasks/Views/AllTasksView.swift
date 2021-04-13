@@ -13,8 +13,9 @@ struct AllTasksView: View {
   var body: some View {
     AllTasksDisplay(
       tasks: viewModel.state.allTasks,
-      addNewTask: viewModel.AddNewTask,
-      updateTask: viewModel.updateTask
+      addNewTask: viewModel.addNewTask,
+      updateTask: viewModel.updateTask,
+      deleteAllTasks: viewModel.deleteAllTasks
     )
   }
 }
@@ -22,7 +23,8 @@ struct AllTasksView: View {
 struct AllTasksDisplay: View {
   var tasks: [Task]
   var addNewTask: () -> Void
-  var updateTask: (UUID) -> Void
+  var updateTask: (_ id: UUID) -> Void
+  var deleteAllTasks: () -> Void
   
   var body: some View {
     VStack {
@@ -30,8 +32,6 @@ struct AllTasksDisplay: View {
         ForEach(tasks, id: \.self) { task in
           Button(
             action: {
-              //task.status.toggle()
-              print("asddsa")
               updateTask(task.id)
             },
             label: {
@@ -50,18 +50,39 @@ struct AllTasksDisplay: View {
         }
       }
 
-      Button(
-        action: {
-          addNewTask()
-        },
-        label: {
-          Text("New Task")
-            .padding()
-            .backgroundColor(.blue)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-        }
-      )
+      HStack {
+        Spacer()
+        
+        Button(
+          action: {
+            deleteAllTasks()
+          },
+          label: {
+            Text("Delete All Tasks")
+              .padding()
+              .backgroundColor(.red)
+              .foregroundColor(.white)
+              .cornerRadius(12)
+          }
+        )
+        
+        Spacer()
+        
+        Button(
+          action: {
+            addNewTask()
+          },
+          label: {
+            Text("New Task")
+              .padding()
+              .backgroundColor(.blue)
+              .foregroundColor(.white)
+              .cornerRadius(12)
+          }
+        )
+        
+        Spacer()
+      }
     }
   }
 }
@@ -71,7 +92,8 @@ struct ContentView_Previews: PreviewProvider {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
       addNewTask: {},
-      updateTask: {_ in }
+      updateTask: {_ in },
+      deleteAllTasks: {}
     )
   }
 }
