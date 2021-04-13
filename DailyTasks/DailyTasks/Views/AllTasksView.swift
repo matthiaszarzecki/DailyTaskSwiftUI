@@ -15,7 +15,8 @@ struct AllTasksView: View {
       tasks: viewModel.state.allTasks,
       addNewTask: viewModel.addNewTask,
       updateTask: viewModel.updateTask,
-      deleteAllTasks: viewModel.deleteAllTasks
+      deleteAllTasks: viewModel.deleteAllTasks,
+      checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting
     )
   }
 }
@@ -25,6 +26,7 @@ struct AllTasksDisplay: View {
   var addNewTask: () -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
+  var checkIfTasksNeedResetting: () -> Void
   
   var body: some View {
     VStack {
@@ -84,6 +86,16 @@ struct AllTasksDisplay: View {
         Spacer()
       }
     }
+    
+    // When the app is put to the foreground,
+    // check if a reset should happen.
+    .onReceive(
+      NotificationCenter.default.publisher(
+        for: UIApplication.willEnterForegroundNotification)
+    ) { _ in
+      print("Updating!")
+      checkIfTasksNeedResetting()
+    }
   }
 }
 
@@ -93,7 +105,8 @@ struct ContentView_Previews: PreviewProvider {
       tasks: MockClasses.tasks,
       addNewTask: {},
       updateTask: {_ in },
-      deleteAllTasks: {}
+      deleteAllTasks: {},
+      checkIfTasksNeedResetting: {}
     )
   }
 }

@@ -11,9 +11,48 @@ import SwiftUI
 class AllTasksViewModel: ObservableObject {
   @Published private(set) var state = AllTasksViewState()
   @AppStorage("all_daily_tasks") private var allTasksData = Data()
+  @AppStorage("reset_date") private var resetDate: String = ISO8601DateFormatter().string(from: Date.distantPast)
   
   init() {
     LoadAllTasks()
+    
+    print("Updating as!")
+    checkIfTasksNeedResetting()
+  }
+  
+  func checkIfTasksNeedResetting() {
+    if let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
+       Date() > expiryDateParsed {
+      print("RESET!")
+      
+      // Set new reset date
+      //resetDate = getResetDate()
+      resetDate = getResetDateOneMinuteInTheFuture()
+      
+      // get all indices of not done tasks
+      
+    } else {
+      print("NO RESET!")
+    }
+  }
+  
+  func getResetDate() -> String {
+    // Set expiry date to next day...
+    let expiryAdvance = DateComponents(day: 1)
+    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
+    
+    // ...at 0400 in the morning.
+    nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
+
+    let stringDate = ISO8601DateFormatter().string(from: nextDate)
+    return stringDate
+  }
+  
+  func getResetDateOneMinuteInTheFuture() -> String {
+    let expiryAdvance = DateComponents(minute: 1)
+    let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
+    let stringDate = ISO8601DateFormatter().string(from: nextDate)
+    return stringDate
   }
 
   // MARK: - Create, Update, Delete actions
