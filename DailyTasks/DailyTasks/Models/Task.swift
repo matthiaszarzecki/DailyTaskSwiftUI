@@ -9,6 +9,6 @@ import Foundation
 
 struct Task: Codable, Identifiable, Hashable {
   var id = UUID()
-  let name: String
-  let status: Bool
+  var name: String
+  var status: Bool
 }

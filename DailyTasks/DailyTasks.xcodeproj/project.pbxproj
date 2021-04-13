@@ -19,6 +19,7 @@
 		CC0AD8452625BE46003F9A9F /* Data-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8442625BE46003F9A9F /* Data-Extension.swift */; };
 		CC0AD8582625C4C3003F9A9F /* AllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8572625C4C3003F9A9F /* AllTasksViewModel.swift */; };
 		CC0AD8612625C4E9003F9A9F /* MockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8602625C4E9003F9A9F /* MockClasses.swift */; };
+		CC0AD8732625C879003F9A9F /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8722625C879003F9A9F /* View-Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		CC0AD8442625BE46003F9A9F /* Data-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data-Extension.swift"; sourceTree = "<group>"; };
 		CC0AD8572625C4C3003F9A9F /* AllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewModel.swift; sourceTree = "<group>"; };
 		CC0AD8602625C4E9003F9A9F /* MockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClasses.swift; sourceTree = "<group>"; };
+		CC0AD8722625C879003F9A9F /* View-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,11 +112,11 @@
 				CC0AD8092625AAC5003F9A9F /* Info.plist */,
 				CC0AD82E2625AB14003F9A9F /* AppDelegate */,
 				CC0AD8492625BE4C003F9A9F /* Extensions */,
+				CC0AD8652625C4FD003F9A9F /* MockClasses */,
 				CC0AD8402625BE28003F9A9F /* Models */,
 				CC0AD8032625AAC5003F9A9F /* Preview Content */,
 				CC0AD8362625AB23003F9A9F /* SupportingFiles */,
 				CC0AD8322625AB1D003F9A9F /* Views */,
-				CC0AD8652625C4FD003F9A9F /* MockClasses */,
 			);
 			path = DailyTasks;
 			sourceTree = "<group>";
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				CC0AD8442625BE46003F9A9F /* Data-Extension.swift */,
+				CC0AD8722625C879003F9A9F /* View-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				CC0AD83C2625BE15003F9A9F /* Task.swift in Sources */,
 				CC0AD7FC2625AAC3003F9A9F /* AppDelegate.swift in Sources */,
 				CC0AD7FE2625AAC3003F9A9F /* SceneDelegate.swift in Sources */,
+				CC0AD8732625C879003F9A9F /* View-Extension.swift in Sources */,
 				CC0AD8002625AAC3003F9A9F /* AllTasksView.swift in Sources */,
 				CC0AD8612625C4E9003F9A9F /* MockClasses.swift in Sources */,
 				CC0AD8582625C4C3003F9A9F /* AllTasksViewModel.swift in Sources */,

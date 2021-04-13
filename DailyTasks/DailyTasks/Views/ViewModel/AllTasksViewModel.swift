@@ -35,6 +35,17 @@ class AllTasksViewModel: ObservableObject {
     }
     state.allTasks = decodedTasks
   }
+
+  
+  func updateTask(id: UUID) {
+    if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
+      state.allTasks[index].status.toggle()
+    }
+  }
+  
+  func deleteAllTasks() {
+    
+  }
   
   struct AllTasksViewState {
     var allTasks = [Task]()

@@ -13,7 +13,8 @@ struct AllTasksView: View {
   var body: some View {
     AllTasksDisplay(
       tasks: viewModel.state.allTasks,
-      addNewTask: viewModel.AddNewTask
+      addNewTask: viewModel.AddNewTask,
+      updateTask: viewModel.updateTask
     )
   }
 }
@@ -21,16 +22,46 @@ struct AllTasksView: View {
 struct AllTasksDisplay: View {
   var tasks: [Task]
   var addNewTask: () -> Void
+  var updateTask: (UUID) -> Void
   
   var body: some View {
     VStack {
-      ForEach(tasks, id: \.self) { task in
-        Text("\(task.name)")
+      List {
+        ForEach(tasks, id: \.self) { task in
+          Button(
+            action: {
+              //task.status.toggle()
+              print("asddsa")
+              updateTask(task.id)
+            },
+            label: {
+              HStack {
+                Text("\(task.name)")
+                
+                if task.status {
+                  Image(systemName: "checkmark")
+                    .foregroundColor(.green)
+                } else {
+                  Image(systemName: "circle")
+                }
+              }
+            }
+          )
+        }
       }
-      
-      Button("New Task") {
-        addNewTask()
-      }
+
+      Button(
+        action: {
+          addNewTask()
+        },
+        label: {
+          Text("New Task")
+            .padding()
+            .backgroundColor(.blue)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+        }
+      )
     }
   }
 }
@@ -39,7 +70,8 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
-      addNewTask: {}
+      addNewTask: {},
+      updateTask: {_ in }
     )
   }
 }
