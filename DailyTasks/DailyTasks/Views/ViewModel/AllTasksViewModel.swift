@@ -14,26 +14,38 @@ class AllTasksViewModel: ObservableObject {
   @AppStorage("reset_date") private var resetDate: String = ISO8601DateFormatter().string(from: Date.distantPast)
   
   init() {
-    LoadAllTasks()
+    loadAllTasks()
     
     print("Updating as!")
     checkIfTasksNeedResetting()
   }
   
   func checkIfTasksNeedResetting() {
+    loadAllTasks()
     if let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
        Date() > expiryDateParsed {
-      print("RESET!")
+      print("RESET")
       
       // Set new reset date
       //resetDate = getResetDate()
       resetDate = getResetDateOneMinuteInTheFuture()
       
-      // get all indices of not done tasks
-      
+      resetAllTasks()
     } else {
-      print("NO RESET!")
+      print("NO RESET")
     }
+  }
+  
+  func resetAllTasks() {
+    var counter = 0
+    for index in 0..<state.allTasks.count {
+      if !state.allTasks[index].status {
+        state.allTasks[index].status = false
+        counter += 1
+      }
+    }
+    saveAllData()
+    print("Reset \(counter) Tasks!")
   }
   
   func getResetDate() -> String {
@@ -82,7 +94,7 @@ class AllTasksViewModel: ObservableObject {
   
   // MARK: - Loading & Saving
 
-  private func LoadAllTasks() {
+  private func loadAllTasks() {
     guard let decodedTasks = try? JSONDecoder().decode([Task].self, from: allTasksData) else {
       return
     }
