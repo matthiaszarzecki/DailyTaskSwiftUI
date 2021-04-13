@@ -15,6 +15,8 @@
 		CC0AD8082625AAC5003F9A9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0AD8062625AAC5003F9A9F /* LaunchScreen.storyboard */; };
 		CC0AD8132625AAC6003F9A9F /* DailyTasksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8122625AAC6003F9A9F /* DailyTasksTests.swift */; };
 		CC0AD81E2625AAC6003F9A9F /* DailyTasksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD81D2625AAC6003F9A9F /* DailyTasksUITests.swift */; };
+		CC0AD83C2625BE15003F9A9F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD83B2625BE15003F9A9F /* Task.swift */; };
+		CC0AD8452625BE46003F9A9F /* Data-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8442625BE46003F9A9F /* Data-Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		CC0AD8192625AAC6003F9A9F /* DailyTasksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyTasksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0AD81D2625AAC6003F9A9F /* DailyTasksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTasksUITests.swift; sourceTree = "<group>"; };
 		CC0AD81F2625AAC6003F9A9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC0AD83B2625BE15003F9A9F /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		CC0AD8442625BE46003F9A9F /* Data-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data-Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 			children = (
 				CC0AD8092625AAC5003F9A9F /* Info.plist */,
 				CC0AD82E2625AB14003F9A9F /* AppDelegate */,
+				CC0AD8492625BE4C003F9A9F /* Extensions */,
+				CC0AD8402625BE28003F9A9F /* Models */,
 				CC0AD8032625AAC5003F9A9F /* Preview Content */,
 				CC0AD8362625AB23003F9A9F /* SupportingFiles */,
 				CC0AD8322625AB1D003F9A9F /* Views */,
@@ -158,6 +164,22 @@
 				CC0AD8062625AAC5003F9A9F /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		CC0AD8402625BE28003F9A9F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CC0AD83B2625BE15003F9A9F /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CC0AD8492625BE4C003F9A9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC0AD8442625BE46003F9A9F /* Data-Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +312,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0AD8452625BE46003F9A9F /* Data-Extension.swift in Sources */,
+				CC0AD83C2625BE15003F9A9F /* Task.swift in Sources */,
 				CC0AD7FC2625AAC3003F9A9F /* AppDelegate.swift in Sources */,
 				CC0AD7FE2625AAC3003F9A9F /* SceneDelegate.swift in Sources */,
 				CC0AD8002625AAC3003F9A9F /* ContentView.swift in Sources */,

@@ -7,15 +7,48 @@
 
 import SwiftUI
 
-struct Task {
-  let name: String
-  let status: Bool
-}
-
 struct ContentView: View {
+  @AppStorage("tasks")
+  private var tasksData: Data = Data()
+  
+  @State private var outputTasks = [Task]()
+  
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    VStack {
+      Button("Load from Storage") {
+        guard let tasks = try? JSONDecoder().decode([Task].self, from: tasksData) else {
+          return
+        }
+        outputTasks = tasks
+      }
+      
+      Button("New Task") {
+        let task = Task(
+          name: "Drink Water \(Int.random(in: 0...100))",
+          status: false
+        )
+        outputTasks.append(task)
+        
+        guard let tasksData = try? JSONEncoder().encode(outputTasks) else {
+          return
+        }
+        self.tasksData = tasksData
+      }
+      
+      ForEach(outputTasks, id: \.self) { task in
+        Text("\(task.name)")
+      }
+      
+      /*Button("Save to storage") {
+        let task = Task(name: "Drink Water", status: false)
+        
+        guard let taskData = try? JSONEncoder().encode(task) else {
+          return
+        }
+        
+        self.taskData = taskData
+      }*/
+    }
   }
 }
 
