@@ -16,7 +16,8 @@ struct AllTasksView: View {
       addNewTask: viewModel.addNewTask,
       updateTask: viewModel.updateTask,
       deleteAllTasks: viewModel.deleteAllTasks,
-      checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting
+      checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
+      resetTasks: viewModel.resetAllTasks
     )
   }
 }
@@ -27,6 +28,7 @@ struct AllTasksDisplay: View {
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void
+  var resetTasks: () -> Void
   
   var body: some View {
     VStack {
@@ -53,8 +55,6 @@ struct AllTasksDisplay: View {
       }
 
       HStack {
-        Spacer()
-        
         Button(
           action: {
             deleteAllTasks()
@@ -68,7 +68,18 @@ struct AllTasksDisplay: View {
           }
         )
         
-        Spacer()
+        Button(
+          action: {
+            resetTasks()
+          },
+          label: {
+            Text("Reset All Tasks")
+              .padding()
+              .backgroundColor(.green)
+              .foregroundColor(.white)
+              .cornerRadius(12)
+          }
+        )
         
         Button(
           action: {
@@ -82,8 +93,6 @@ struct AllTasksDisplay: View {
               .cornerRadius(12)
           }
         )
-        
-        Spacer()
       }
     }
     
@@ -106,7 +115,8 @@ struct ContentView_Previews: PreviewProvider {
       addNewTask: {},
       updateTask: {_ in },
       deleteAllTasks: {},
-      checkIfTasksNeedResetting: {}
+      checkIfTasksNeedResetting: {},
+      resetTasks: {}
     )
   }
 }

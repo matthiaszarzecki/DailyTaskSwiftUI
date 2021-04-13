@@ -27,8 +27,8 @@ class AllTasksViewModel: ObservableObject {
       print("RESET")
       
       // Set new reset date
-      //resetDate = getResetDate()
-      resetDate = getResetDateOneMinuteInTheFuture()
+      resetDate = getResetDate()
+      //resetDate = getResetDateOneMinuteInTheFuture()
       
       resetAllTasks()
     } else {
@@ -39,7 +39,7 @@ class AllTasksViewModel: ObservableObject {
   func resetAllTasks() {
     var counter = 0
     for index in 0..<state.allTasks.count {
-      if !state.allTasks[index].status {
+      if state.allTasks[index].status == true {
         state.allTasks[index].status = false
         counter += 1
       }
