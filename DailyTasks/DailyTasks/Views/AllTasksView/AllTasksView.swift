@@ -24,7 +24,7 @@ struct AllTasksView: View {
 
 struct AllTasksDisplay: View {
   var tasks: [Task]
-  var addNewTask: () -> Void
+  var addNewTask: (_ name: String) -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void
@@ -110,7 +110,8 @@ struct AllTasksDisplay: View {
       if showNewTaskPopover {
         CreateNewTaskView(
           showCreateTaskView: $showNewTaskPopover,
-          width: geometry.size.width - 16*2
+          width: geometry.size.width,
+          addNewTask: addNewTask
         )
       }
     }
@@ -131,7 +132,7 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
-      addNewTask: {},
+      addNewTask: {_ in },
       updateTask: {_ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},

@@ -69,9 +69,9 @@ class AllTasksViewModel: ObservableObject {
 
   // MARK: - Create, Update, Delete actions
   
-  func addNewTask() {
+  func addNewTask(name: String) {
     let task = Task(
-      name: "Drink Water \(Int.random(in: 0...100))",
+      name: "\(name) \(Int.random(in: 0...100))",
       status: false
     )
     state.allTasks.append(task)

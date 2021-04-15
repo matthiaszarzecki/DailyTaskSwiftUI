@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateNewTaskView: View {
   @Binding var showCreateTaskView: Bool
   var width: CGFloat
+  var addNewTask: (_ name: String) -> Void
   
   @State private var taskName = ""
   
@@ -32,6 +33,7 @@ struct CreateNewTaskView: View {
   var confirmTaskButton: some View {
     Button(
       action: {
+        addNewTask(taskName)
         showCreateTaskView = false
       },
       label: {
@@ -78,7 +80,8 @@ struct CreateNewTaskView_Previews: PreviewProvider {
   static var previews: some View {
     CreateNewTaskView(
       showCreateTaskView: .constant(false),
-      width: 350
+      width: 350,
+      addNewTask: {_ in }
     )
     .padding()
     .previewLayout(.sizeThatFits)
