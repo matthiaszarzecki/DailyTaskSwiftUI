@@ -12,6 +12,8 @@ struct TaskCell: View {
   
   var body: some View {
     HStack {
+      Image(systemName: "drop")
+      
       Text("\(task.name)")
       
       if task.status {
