@@ -41,6 +41,10 @@ struct AllTasksDisplay: View {
     return tasks.count
   }
   
+  private var taskDoneRatio: Double {
+    return Double(doneTasks) / Double(allTasks)
+  }
+  
   var deleteAllTasksButton: some View {
     Button(
       action: {
@@ -100,6 +104,11 @@ struct AllTasksDisplay: View {
           
           Text("Progress: \(doneTasks) of \(allTasks)")
             .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
+          
+          ProgressBar(
+            width: geometry.size.width - 16*2,
+            value: taskDoneRatio
+          )
           
           List {
             ForEach(tasks, id: \.self) { task in

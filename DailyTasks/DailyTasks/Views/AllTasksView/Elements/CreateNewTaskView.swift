@@ -89,7 +89,7 @@ struct CreateNewTaskView_Previews: PreviewProvider {
   static var previews: some View {
     CreateNewTaskView(
       showCreateTaskView: .constant(false),
-      width: 350,
+      width: PreviewConstants.width,
       addNewTask: {_ in }
     )
     .previewLayout(.sizeThatFits)

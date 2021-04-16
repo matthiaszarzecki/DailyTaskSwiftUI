@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MockClasses {
+class MockClasses {
   static let task01 = Task(
     name: "Drink water",
     status: false
