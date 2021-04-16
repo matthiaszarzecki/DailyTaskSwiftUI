@@ -14,13 +14,27 @@ struct TaskCell: View {
     HStack {
       Image(systemName: "drop")
       
-      Text("\(task.name)")
+      if task.status {
+        Text("\(task.name)")
+          .strikethrough()
+      } else {
+        Text("\(task.name)")
+      }
+      
+      Spacer()
       
       if task.status {
         Image(systemName: "checkmark")
-          .foregroundColor(.green)
+          .foregroundColor(.white)
+          .padding(6)
+          .backgroundColor(.green)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
       } else {
         Image(systemName: "circle")
+          .foregroundColor(.gray)
+          .padding(6)
+          .backgroundColor(.gray)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
       }
     }
   }
@@ -29,6 +43,10 @@ struct TaskCell: View {
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
     TaskCell(task: MockClasses.task01)
+      .padding()
+      .previewLayout(.sizeThatFits)
+    
+    TaskCell(task: MockClasses.task02)
       .padding()
       .previewLayout(.sizeThatFits)
   }

@@ -82,7 +82,7 @@ struct AllTasksDisplay: View {
     GeometryReader { geometry in
       ZStack {
         VStack {
-          Text("Your Daily Tasks")
+          Text("Your Daily Habits")
             .font(.title)
             .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
           
