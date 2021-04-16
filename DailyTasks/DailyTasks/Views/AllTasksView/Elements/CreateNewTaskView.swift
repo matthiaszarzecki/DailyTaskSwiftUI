@@ -17,7 +17,9 @@ struct CreateNewTaskView: View {
   var cancelButton: some View {
     Button(
       action: {
-        showCreateTaskView = false
+        withAnimation {
+          showCreateTaskView = false
+        }
       },
       label: {
         Text("Cancel")
@@ -34,7 +36,9 @@ struct CreateNewTaskView: View {
     Button(
       action: {
         addNewTask(taskName)
-        showCreateTaskView = false
+        withAnimation {
+          showCreateTaskView = false
+        }
       },
       label: {
         Text("OK")
@@ -58,21 +62,26 @@ struct CreateNewTaskView: View {
   }
   
   var body: some View {
-    VStack {
-      Text("Create a new task!")
+    ZStack {
+      Rectangle()
+        .foregroundColor(.clear)
       
-      taskTextfield
-      
-      HStack {
-        cancelButton
-        confirmTaskButton
+      VStack {
+        Text("Create a new task!")
+        
+        taskTextfield
+        
+        HStack {
+          cancelButton
+          confirmTaskButton
+        }
       }
+      .frame(width: width - 32*2, height: 400, alignment: .center)
+      .padding()
+      .backgroundColor(.white)
+      .cornerRadius(12)
+      .shadow(radius: 10)
     }
-    .frame(width: width - 16*2, height: 400, alignment: .center)
-    .padding()
-    .backgroundColor(.white)
-    .cornerRadius(12)
-    .shadow(radius: 10)
   }
 }
 
@@ -83,7 +92,6 @@ struct CreateNewTaskView_Previews: PreviewProvider {
       width: 350,
       addNewTask: {_ in }
     )
-    .padding()
     .previewLayout(.sizeThatFits)
     .backgroundColor(.green)
   }

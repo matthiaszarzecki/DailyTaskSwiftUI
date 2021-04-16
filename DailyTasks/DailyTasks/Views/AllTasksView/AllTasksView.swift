@@ -32,6 +32,15 @@ struct AllTasksDisplay: View {
   
   @State private var showNewTaskPopover = false
   
+  private var doneTasks: Int {
+    let doneTasks = tasks.filter { $0.status }
+    return doneTasks.count
+  }
+  
+  private var allTasks: Int {
+    return tasks.count
+  }
+  
   var deleteAllTasksButton: some View {
     Button(
       action: {
@@ -66,7 +75,10 @@ struct AllTasksDisplay: View {
     Button(
       action: {
         //addNewTask()
-        showNewTaskPopover = true
+        
+        withAnimation {
+          showNewTaskPopover = true
+        }
       },
       label: {
         Text("New Task")
@@ -84,6 +96,9 @@ struct AllTasksDisplay: View {
         VStack {
           Text("Your Daily Habits")
             .font(.title)
+            .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
+          
+          Text("Progress: \(doneTasks) of \(allTasks)")
             .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
           
           List {
@@ -113,6 +128,7 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           addNewTask: addNewTask
         )
+        .transition(.move(edge: .bottom))
       }
     }
 

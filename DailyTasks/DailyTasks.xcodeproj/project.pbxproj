@@ -90,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6EB8EBCE262A4A2100E1484D /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				CC40E4D52628790400059061 /* CreateNewTaskView.swift */,
+				CC40E4DF26287D0600059061 /* TaskCell.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		CC0AD7EF2625AAC3003F9A9F = {
 			isa = PBXGroup;
 			children = (
@@ -163,8 +172,6 @@
 		CC0AD8322625AB1D003F9A9F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CC40E4D52628790400059061 /* CreateNewTaskView.swift */,
-				CC40E4DF26287D0600059061 /* TaskCell.swift */,
 				CC40E4D1262878EB00059061 /* AllTasksView */,
 			);
 			path = Views;
@@ -216,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				CC0AD7FF2625AAC3003F9A9F /* AllTasksView.swift */,
+				6EB8EBCE262A4A2100E1484D /* Elements */,
 				CC0AD85C2625C4D7003F9A9F /* ViewModel */,
 			);
 			path = AllTasksView;
