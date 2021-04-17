@@ -42,7 +42,17 @@ struct AllTasksDisplay: View {
   }
   
   private var taskDoneRatio: Double {
-    return Double(doneTasks) / Double(allTasks)
+    if tasks.isEmpty {
+      return 0.0
+    } else {
+      return Double(doneTasks) / Double(allTasks)
+    }
+  }
+  
+  private var progressDisplay: some View {
+    let displayNumber = taskDoneRatio * 100
+    let displayString = String(format: "%.0f", displayNumber)
+    return Text("Progress: \(displayString)%")
   }
   
   var deleteAllTasksButton: some View {
@@ -100,10 +110,10 @@ struct AllTasksDisplay: View {
         VStack {
           Text("Your Daily Habits")
             .font(.title)
-            .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
+            .frame(width: geometry.size.width - 16*2, height: 42, alignment: .leading)
           
-          Text("Progress: \(doneTasks) of \(allTasks)")
-            .frame(width: geometry.size.width - 16*2, height: 50, alignment: .leading)
+          progressDisplay
+            .frame(width: geometry.size.width - 16*2, height: 20, alignment: .leading)
           
           ProgressBar(
             width: geometry.size.width - 16*2,
