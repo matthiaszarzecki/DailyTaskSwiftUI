@@ -72,7 +72,10 @@ class AllTasksViewModel: ObservableObject {
   func addNewTask(name: String) {
     let task = Task(
       name: "\(name) \(Int.random(in: 0...100))",
-      status: false
+      status: false,
+      iconName: "drop",
+      currentStreak: 0,
+      highestStreak: 0
     )
     state.allTasks.append(task)
     

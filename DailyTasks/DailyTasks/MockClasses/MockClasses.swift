@@ -10,22 +10,34 @@ import Foundation
 class MockClasses {
   static let task01 = Task(
     name: "Drink water",
-    status: false
+    status: false,
+    iconName: "drop",
+    currentStreak: 2,
+    highestStreak: 4
   )
   
   static let task02 = Task(
     name: "Go for a walk",
-    status: true
+    status: true,
+    iconName: "drop",
+    currentStreak: 1,
+    highestStreak: 7
   )
   
   static let task03 = Task(
     name: "Eat an apple",
-    status: false
+    status: false,
+    iconName: "drop",
+    currentStreak: 14,
+    highestStreak: 167
   )
   
   static let task04 = Task(
     name: "Do sit-ups",
-    status: true
+    status: true,
+    iconName: "drop",
+    currentStreak: 68,
+    highestStreak: 68
   )
   
   static let tasks = [task01, task02, task03, task04]
