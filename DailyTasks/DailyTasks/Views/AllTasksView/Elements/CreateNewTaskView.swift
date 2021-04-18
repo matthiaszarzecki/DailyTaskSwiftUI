@@ -67,32 +67,37 @@ struct CreateNewTaskView: View {
         .foregroundColor(.clear)
       
       VStack {
-        Text("Create a new task!")
+        Spacer()
         
-        taskTextfield
-        
-        HStack {
-          cancelButton
-          confirmTaskButton
+        VStack {
+          Text("Create a new task!")
+          
+          taskTextfield
+          
+          HStack {
+            cancelButton
+            confirmTaskButton
+          }
         }
+        .frame(width: width - 16*2, height: 400, alignment: .center)
+        .padding()
+        .backgroundColor(.white)
+        .cornerRadius(54, corners: [.topLeft, .topRight])
+        .shadow(radius: 10)
       }
-      .frame(width: width - 32*2, height: 400, alignment: .center)
-      .padding()
-      .backgroundColor(.white)
-      .cornerRadius(12)
-      .shadow(radius: 10)
     }
   }
 }
 
 struct CreateNewTaskView_Previews: PreviewProvider {
   static var previews: some View {
-    CreateNewTaskView(
-      showCreateTaskView: .constant(false),
-      width: PreviewConstants.width,
-      addNewTask: {_ in }
-    )
-    .previewLayout(.sizeThatFits)
-    .backgroundColor(.green)
+    GeometryReader { geometry in
+      CreateNewTaskView(
+        showCreateTaskView: .constant(false),
+        width: geometry.size.width,
+        addNewTask: {_ in }
+      )
+      .backgroundColor(.green)
+    }
   }
 }

@@ -83,12 +83,14 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    SettingsView(
-      showCreateTaskView: .constant(false),
-      width: PreviewConstants.width,
-      addNewTask: {_ in }
-    )
-    .previewLayout(.sizeThatFits)
-    .backgroundColor(.green)
+    GeometryReader { geometry in
+      SettingsView(
+        showCreateTaskView: .constant(false),
+        width: geometry.size.width,
+        addNewTask: {_ in }
+      )
+      .previewLayout(.sizeThatFits)
+      .backgroundColor(.green)
+    }
   }
 }

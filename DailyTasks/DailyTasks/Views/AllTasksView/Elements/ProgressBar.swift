@@ -34,10 +34,12 @@ struct ProgressBar: View {
 
 struct ProgressBar_Previews: PreviewProvider {
   static var previews: some View {
-    ProgressBar(
-      width: PreviewConstants.width,
-      value: 0.3
-    )
-    .previewLayout(.sizeThatFits)
+    GeometryReader { geometry in
+      ProgressBar(
+        width: geometry.size.width,
+        value: 0.3
+      )
+      .previewLayout(.sizeThatFits)
+    }
   }
 }
