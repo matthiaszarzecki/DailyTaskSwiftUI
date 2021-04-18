@@ -96,11 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E9FF7AA262CBD1D00CA7743 /* ModularView */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */,
+				6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */,
+			);
+			path = ModularView;
+			sourceTree = "<group>";
+		};
 		6EB8EBCE262A4A2100E1484D /* Elements */ = {
 			isa = PBXGroup;
 			children = (
 				CC40E4D52628790400059061 /* CreateNewTaskView.swift */,
-				6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */,
 				6E170B30262AE1290074314E /* SettingsView.swift */,
 				CC40E4DF26287D0600059061 /* TaskCell.swift */,
 			);
@@ -181,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				CC40E4D1262878EB00059061 /* AllTasksView */,
-				6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */,
+				6E9FF7AA262CBD1D00CA7743 /* ModularView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

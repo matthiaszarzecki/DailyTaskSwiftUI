@@ -86,6 +86,7 @@ struct CreateNewTaskView: View {
         .shadow(radius: 10)
       }
     }
+    .transition(.move(edge: .bottom))
   }
 }
 
