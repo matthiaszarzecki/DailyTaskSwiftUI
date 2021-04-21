@@ -76,6 +76,13 @@ class AllTasksViewModel: ObservableObject {
  
   func updateTask(id: UUID) {
     if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
+      let oldState = state.allTasks[index].status
+      if !oldState {
+        state.allTasks[index].currentStreak += 1
+      } else {
+        state.allTasks[index].currentStreak -= 1
+      }
+      
       state.allTasks[index].status.toggle()
     }
     
