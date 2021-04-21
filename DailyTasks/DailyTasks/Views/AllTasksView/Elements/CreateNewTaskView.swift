@@ -14,6 +14,7 @@ struct CreateNewTaskView: View {
   
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
+  @State private var partOfDay = "1"
   
   private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
   
@@ -39,12 +40,14 @@ struct CreateNewTaskView: View {
     Button(
       action: {
         let streak = Int(startStreak) ?? 0
+        let dayPeriod = Int(partOfDay) ?? 1
         let task = Task(
           name: taskName,
           status: false,
           iconName: "drop",
           currentStreak: streak,
-          highestStreak: 0
+          highestStreak: 0,
+          partOfDay: dayPeriod
         )
         
         addNewTask(task)
@@ -87,6 +90,15 @@ struct CreateNewTaskView: View {
           taskTextfield
           
           TextField("Start Streak", text: $startStreak)
+            .keyboardType(.numberPad)
+            .frame(width: 200, height: 48, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .cornerRadius(8.0)
+            .padding(.top, 16)
+            .padding(.bottom, 16)
+          
+          TextField("Part of Day", text: $partOfDay)
             .keyboardType(.numberPad)
             .frame(width: 200, height: 48, alignment: .center)
             .backgroundColor(.gray)

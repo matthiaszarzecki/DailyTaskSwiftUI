@@ -40,7 +40,7 @@ struct TaskCell: View {
       }
       
       HStack {
-        Text("Days in a row: \(task.currentStreak) - Record: \(task.highestStreak)")
+        Text("Days in a row: \(task.currentStreak) - Record: \(task.highestStreak) - Part of day: \(task.partOfDay)")
           .font(.footnote)
         
         Spacer()

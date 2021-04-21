@@ -73,6 +73,9 @@ struct SettingsView: View {
     Button(
       action: {
         deleteAllTasks()
+        withAnimation {
+          showSettingsView = false
+        }
       },
       label: {
         Text("Confirm")
@@ -89,6 +92,9 @@ struct SettingsView: View {
     Button(
       action: {
         resetTasks()
+        withAnimation {
+          showSettingsView = false
+        }
       },
       label: {
         Text("Reset All Tasks")

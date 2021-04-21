@@ -15,4 +15,5 @@ struct Task: Codable, Identifiable, Hashable {
   var iconName: String
   var currentStreak: Int
   var highestStreak: Int
+  var partOfDay: Int
 }

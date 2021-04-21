@@ -13,7 +13,8 @@ class MockClasses {
     status: false,
     iconName: "drop",
     currentStreak: 2,
-    highestStreak: 4
+    highestStreak: 4,
+    partOfDay: 0
   )
   
   static let task02 = Task(
@@ -21,7 +22,8 @@ class MockClasses {
     status: true,
     iconName: "drop",
     currentStreak: 1,
-    highestStreak: 7
+    highestStreak: 7,
+    partOfDay: 1
   )
   
   static let task03 = Task(
@@ -29,7 +31,8 @@ class MockClasses {
     status: false,
     iconName: "drop",
     currentStreak: 14,
-    highestStreak: 167
+    highestStreak: 167,
+    partOfDay: 3
   )
   
   static let task04 = Task(
@@ -37,7 +40,8 @@ class MockClasses {
     status: true,
     iconName: "drop",
     currentStreak: 68,
-    highestStreak: 68
+    highestStreak: 68,
+    partOfDay: 4
   )
   
   static let tasks = [task01, task02, task03, task04]
