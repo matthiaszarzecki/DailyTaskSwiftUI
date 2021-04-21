@@ -69,16 +69,8 @@ class AllTasksViewModel: ObservableObject {
 
   // MARK: - Create, Update, Delete actions
   
-  func addNewTask(name: String) {
-    let task = Task(
-      name: "\(name) \(Int.random(in: 0...100))",
-      status: false,
-      iconName: "drop",
-      currentStreak: 0,
-      highestStreak: 0
-    )
+  func addNewTask(task: Task) {
     state.allTasks.append(task)
-    
     saveAllData()
   }
  

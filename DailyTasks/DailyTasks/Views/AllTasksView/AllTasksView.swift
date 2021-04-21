@@ -24,7 +24,7 @@ struct AllTasksView: View {
 
 struct AllTasksDisplay: View {
   var tasks: [Task]
-  var addNewTask: (_ name: String) -> Void
+  var addNewTask: (_ task: Task) -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void

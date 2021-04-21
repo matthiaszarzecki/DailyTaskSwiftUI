@@ -10,9 +10,10 @@ import SwiftUI
 struct CreateNewTaskView: View {
   @Binding var showCreateTaskView: Bool
   var width: CGFloat
-  var addNewTask: (_ name: String) -> Void
+  var addNewTask: (_ task: Task) -> Void
   
-  @State private var taskName = ""
+  @State private var taskName = "New Task!"
+  @State private var startStreak = "0"
   
   var cancelButton: some View {
     Button(
@@ -35,7 +36,16 @@ struct CreateNewTaskView: View {
   var confirmTaskButton: some View {
     Button(
       action: {
-        addNewTask(taskName)
+        let streak = Int(startStreak) ?? 0
+        let task = Task(
+          name: taskName,
+          status: false,
+          iconName: "drop",
+          currentStreak: streak,
+          highestStreak: 0
+        )
+        
+        addNewTask(task)
         withAnimation {
           showCreateTaskView = false
         }
@@ -73,6 +83,15 @@ struct CreateNewTaskView: View {
           Text("Create a new task!")
           
           taskTextfield
+          
+          TextField("Start Streak", text: $startStreak)
+            .keyboardType(.numberPad)
+            .frame(width: 200, height: 48, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .cornerRadius(8.0)
+            .padding(.top, 16)
+            .padding(.bottom, 16)
           
           HStack {
             cancelButton
