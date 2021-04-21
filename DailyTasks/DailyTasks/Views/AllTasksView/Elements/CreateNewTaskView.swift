@@ -23,6 +23,7 @@ struct CreateNewTaskView: View {
   private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
   
   @State private var selectedPartOfDay = 1
+  @State private var selectedIcon = "drop"
   
   var cancelButton: some View {
     Button(
@@ -43,7 +44,10 @@ struct CreateNewTaskView: View {
   }
   
   var confirmTaskButton: some View {
-    Button(
+    let disabled = taskName.isEmpty
+    let color: Color = disabled ? .gray : .green
+    
+    return Button(
       action: {
         let streak = Int(startStreak) ?? 0
 
@@ -64,22 +68,136 @@ struct CreateNewTaskView: View {
       label: {
         Text("OK")
           .padding()
-          .backgroundColor(.green)
+          .backgroundColor(color)
           .foregroundColor(.white)
           .cornerRadius(12)
           .shadow(radius: 10)
       }
     )
+    .disabled(disabled)
   }
   
   var taskTextfield: some View {
-    TextField("Your new task!", text: $taskName)
-      .frame(width: 200, height: 48, alignment: .center)
-      .backgroundColor(.gray)
-      .foregroundColor(.white)
-      .cornerRadius(8.0)
-      .padding(.top, 16)
-      .padding(.bottom, 16)
+    HStack {
+      TextField("Your new task!", text: $taskName)
+        .frame(width: 200, height: 48, alignment: .center)
+        .backgroundColor(.gray)
+        .foregroundColor(.white)
+        .cornerRadius(8.0)
+        .padding(.top, 16)
+        .padding(.bottom, 16)
+      
+      Button(
+        action: {
+          taskName = ""
+        }, label: {
+          Image(systemName: "xmark.circle.fill")
+        }
+      )
+    }
+  }
+  
+  var streakRow: some View {
+    HStack {
+      TextField("Start Streak", text: $startStreak)
+        .keyboardType(.numberPad)
+        .frame(width: 200, height: 48, alignment: .center)
+        .backgroundColor(.gray)
+        .foregroundColor(.white)
+        .cornerRadius(8.0)
+        .padding(.top, 16)
+        .padding(.bottom, 16)
+      
+      Button(
+        action: {
+          startStreak = ""
+        }, label: {
+          Image(systemName: "xmark.circle.fill")
+        }
+      )
+    }
+  }
+  
+  var partOfDayRow: some View {
+    HStack {
+      let partOfDayOptions = [
+        PartOfDayOption(index: 0, name: "Morning"),
+        PartOfDayOption(index: 1, name: "Daytime"),
+        PartOfDayOption(index: 2, name: "Evening"),
+        PartOfDayOption(index: 3, name: "All Day")
+      ]
+      let padding: CGFloat = 6
+
+      ForEach(partOfDayOptions, id: \.self) { option in
+        if selectedPartOfDay == option.index {
+          Text("\(option.name)")
+            .padding(padding)
+            .backgroundColor(.white)
+            .foregroundColor(.gray)
+            .overlay(
+              RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray, lineWidth: 2)
+            )
+        } else {
+          Button(
+            action: {
+              selectedPartOfDay = option.index
+            },
+            label: {
+              Text("\(option.name)")
+                .padding(padding)
+                .backgroundColor(.gray)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+          )
+        }
+      }
+    }
+  }
+  
+  var iconRow: some View {
+    HStack {
+      let iconOptions = [
+        "drop",
+        "applewatch",
+        "pencil",
+        "folder",
+        "eye",
+        "message",
+        "guitars",
+        "chevron.left.slash.chevron.right",
+        "hare",
+        "snow"
+      ]
+      let iconSize: CGFloat = 40
+      
+      ForEach(iconOptions, id: \.self) { option in
+        if selectedIcon == option {
+          Image(systemName: option)
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .backgroundColor(.white)
+            .foregroundColor(.gray)
+            .overlay(
+              RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray, lineWidth: 2)
+            )
+        } else {
+          Button(
+            action: {
+              selectedIcon = option
+            },
+            label: {
+              Image(systemName: option)
+                .frame(width: iconSize, height: iconSize, alignment: .center)
+                .backgroundColor(.gray)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+          )
+        }
+      }
+    }
   }
   
   var body: some View {
@@ -92,54 +210,10 @@ struct CreateNewTaskView: View {
         
         VStack {
           Text("Create a new task!")
-          
           taskTextfield
-          
-          TextField("Start Streak", text: $startStreak)
-            .keyboardType(.numberPad)
-            .frame(width: 200, height: 48, alignment: .center)
-            .backgroundColor(.gray)
-            .foregroundColor(.white)
-            .cornerRadius(8.0)
-            .padding(.top, 16)
-            .padding(.bottom, 16)
-          
-          let partOfDayOptions = [
-            PartOfDayOption(index: 0, name: "Morning"),
-            PartOfDayOption(index: 1, name: "Daytime"),
-            PartOfDayOption(index: 2, name: "Evening"),
-            PartOfDayOption(index: 3, name: "All Day")
-          ]
-          HStack {
-            let padding: CGFloat = 6
-            //Text("Part of Day:")
-            ForEach(partOfDayOptions, id: \.self) { option in
-              if selectedPartOfDay == option.index {
-                Text("\(option.name)")
-                  .padding(padding)
-                  .backgroundColor(.white)
-                  .foregroundColor(.gray)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                      .stroke(Color.gray, lineWidth: 2)
-                  )
-              } else {
-                Button(
-                  action: {
-                    selectedPartOfDay = option.index
-                  },
-                  label: {
-                    Text("\(option.name)")
-                      .padding(padding)
-                      .backgroundColor(.gray)
-                      .foregroundColor(.white)
-                      .cornerRadius(10)
-                  }
-                )
-              }
-            }
-          }
-          
+          streakRow
+          iconRow
+          partOfDayRow
           HStack {
             cancelButton
             confirmTaskButton
