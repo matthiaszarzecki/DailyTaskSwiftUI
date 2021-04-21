@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-struct PartOfDayOption: Hashable {
-  let index: Int
-  let name: String
-}
-
 struct CreateNewTaskView: View {
   @Binding var showCreateTaskView: Bool
   var width: CGFloat
@@ -50,7 +45,7 @@ struct CreateNewTaskView: View {
     return Button(
       action: {
         let streak = Int(startStreak) ?? 0
-
+        
         let task = Task(
           name: taskName,
           status: false,
@@ -127,7 +122,7 @@ struct CreateNewTaskView: View {
         PartOfDayOption(index: 3, name: "All Day")
       ]
       let padding: CGFloat = 6
-
+      
       ForEach(partOfDayOptions, id: \.self) { option in
         if selectedPartOfDay == option.index {
           Text("\(option.name)")
@@ -157,21 +152,25 @@ struct CreateNewTaskView: View {
   }
   
   var iconRow: some View {
-    HStack {
-      let iconOptions = [
-        "drop",
-        "applewatch",
-        "pencil",
-        "folder",
-        "eye",
-        "message",
-        "guitars",
-        "chevron.left.slash.chevron.right",
-        "hare",
-        "snow"
-      ]
-      let iconSize: CGFloat = 40
-      
+    let iconOptions = [
+      "drop",
+      "applewatch",
+      "pencil",
+      "folder",
+      "eye",
+      "message",
+      "guitars",
+      "chevron.left.slash.chevron.right"/*,
+      "hare",
+      "snow"*/
+    ]
+    let iconSize: CGFloat = 40
+    let padding: CGFloat = 10
+    let cellWidthSmall: CGFloat = 33
+    let column = GridItem(.fixed(cellWidthSmall), spacing: padding, alignment: .leading)
+    let gridItems = [column, column, column, column, column, column]
+    
+    return LazyVGrid(columns: gridItems, spacing: padding) {
       ForEach(iconOptions, id: \.self) { option in
         if selectedIcon == option {
           Image(systemName: option)
@@ -198,6 +197,7 @@ struct CreateNewTaskView: View {
         }
       }
     }
+    .frame(width: 330)
   }
   
   var body: some View {
