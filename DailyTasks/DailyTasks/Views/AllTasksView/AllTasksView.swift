@@ -17,7 +17,8 @@ struct AllTasksView: View {
       updateTask: viewModel.updateTask,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
-      resetTasks: viewModel.resetAllTasks
+      resetTasks: viewModel.resetAllTasks,
+      sortTasks: viewModel.sortTasks
     )
   }
 }
@@ -29,6 +30,7 @@ struct AllTasksDisplay: View {
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void
   var resetTasks: () -> Void
+  var sortTasks: () -> Void
   
   @State private var showNewTaskPopover = false
   @State private var showSettingsPopover = false
@@ -119,6 +121,19 @@ struct AllTasksDisplay: View {
             Button(
               action: {
                 withAnimation {
+                  sortTasks()
+                }
+              },
+              label: {
+                Image(systemName: "arrow.up.arrow.down")
+                  .font(.title)
+                  .padding()
+              }
+            )
+            
+            Button(
+              action: {
+                withAnimation {
                   showSettingsPopover.toggle()
                 }
               },
@@ -128,7 +143,6 @@ struct AllTasksDisplay: View {
                   .padding()
               }
             )
-            
           }
           
           progressDisplay
@@ -196,7 +210,8 @@ struct ContentView_Previews: PreviewProvider {
       updateTask: {_ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
-      resetTasks: {}
+      resetTasks: {},
+      sortTasks: {}
     )
   }
 }

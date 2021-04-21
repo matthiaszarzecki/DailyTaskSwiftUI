@@ -66,6 +66,14 @@ class AllTasksViewModel: ObservableObject {
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate
   }
+  
+  // MARK: - Sort action
+  
+  func sortTasks() {
+    state.allTasks.sort { firstTask, secondTask in
+      return !firstTask.status
+    }
+  }
 
   // MARK: - Create, Update, Delete actions
   
