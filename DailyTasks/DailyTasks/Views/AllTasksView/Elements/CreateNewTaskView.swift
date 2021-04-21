@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct PartOfDayOption: Hashable {
+  let index: Int
+  let name: String
+}
+
 struct CreateNewTaskView: View {
   @Binding var showCreateTaskView: Bool
   var width: CGFloat
@@ -14,9 +19,10 @@ struct CreateNewTaskView: View {
   
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
-  @State private var partOfDay = "1"
   
   private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
+  
+  @State private var selectedPartOfDay = 1
   
   var cancelButton: some View {
     Button(
@@ -40,14 +46,14 @@ struct CreateNewTaskView: View {
     Button(
       action: {
         let streak = Int(startStreak) ?? 0
-        let dayPeriod = Int(partOfDay) ?? 1
+
         let task = Task(
           name: taskName,
           status: false,
           iconName: "drop",
           currentStreak: streak,
           highestStreak: 0,
-          partOfDay: dayPeriod
+          partOfDay: selectedPartOfDay
         )
         
         addNewTask(task)
@@ -98,14 +104,41 @@ struct CreateNewTaskView: View {
             .padding(.top, 16)
             .padding(.bottom, 16)
           
-          TextField("Part of Day", text: $partOfDay)
-            .keyboardType(.numberPad)
-            .frame(width: 200, height: 48, alignment: .center)
-            .backgroundColor(.gray)
-            .foregroundColor(.white)
-            .cornerRadius(8.0)
-            .padding(.top, 16)
-            .padding(.bottom, 16)
+          let partOfDayOptions = [
+            PartOfDayOption(index: 0, name: "Morning"),
+            PartOfDayOption(index: 1, name: "Daytime"),
+            PartOfDayOption(index: 2, name: "Evening"),
+            PartOfDayOption(index: 3, name: "All Day")
+          ]
+          HStack {
+            let padding: CGFloat = 6
+            //Text("Part of Day:")
+            ForEach(partOfDayOptions, id: \.self) { option in
+              if selectedPartOfDay == option.index {
+                Text("\(option.name)")
+                  .padding(padding)
+                  .backgroundColor(.white)
+                  .foregroundColor(.gray)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                      .stroke(Color.gray, lineWidth: 2)
+                  )
+              } else {
+                Button(
+                  action: {
+                    selectedPartOfDay = option.index
+                  },
+                  label: {
+                    Text("\(option.name)")
+                      .padding(padding)
+                      .backgroundColor(.gray)
+                      .foregroundColor(.white)
+                      .cornerRadius(10)
+                  }
+                )
+              }
+            }
+          }
           
           HStack {
             cancelButton
