@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @Binding var showCreateTaskView: Bool
+  @Binding var showSettingsView: Bool
   var width: CGFloat
-  var addNewTask: (_ name: String) -> Void
+  var deleteAllTasks: () -> Void
+  var resetTasks: () -> Void
   
-  @State private var taskName = ""
-  
+  @State private var showActualDeleteButton = false
+
   var cancelButton: some View {
     Button(
       action: {
         withAnimation {
-          showCreateTaskView = false
+          showSettingsView = false
         }
       },
       label: {
@@ -32,12 +33,11 @@ struct SettingsView: View {
     )
   }
   
-  var confirmTaskButton: some View {
+  var GoBackButton: some View {
     Button(
       action: {
-        addNewTask(taskName)
         withAnimation {
-          showCreateTaskView = false
+          showSettingsView = false
         }
       },
       label: {
@@ -51,26 +51,76 @@ struct SettingsView: View {
     )
   }
   
-  var taskTextfield: some View {
-    TextField("Your new task!", text: $taskName)
-      .frame(width: 200, height: 48, alignment: .center)
-      .backgroundColor(.gray)
-      .foregroundColor(.white)
-      .cornerRadius(8.0)
-      .padding(.top, 16)
-      .padding(.bottom, 16)
+  var safeDeleteAllTasksButton: some View {
+    Button(
+      action: {
+        withAnimation {
+          showActualDeleteButton = true
+        }
+      },
+      label: {
+        Text("Delete All Tasks")
+          .padding()
+          .backgroundColor(.red)
+          .foregroundColor(.white)
+          .cornerRadius(12)
+          .shadow(radius: 10)
+      }
+    )
   }
   
+  var actualDeleteAllTasksButton: some View {
+    Button(
+      action: {
+        deleteAllTasks()
+      },
+      label: {
+        Text("Confirm")
+          .padding()
+          .backgroundColor(.red)
+          .foregroundColor(.white)
+          .cornerRadius(12)
+          .shadow(radius: 10)
+      }
+    )
+  }
+  
+  var resetTasksButton: some View {
+    Button(
+      action: {
+        resetTasks()
+      },
+      label: {
+        Text("Reset All Tasks")
+          .padding()
+          .backgroundColor(.blue)
+          .foregroundColor(.white)
+          .cornerRadius(12)
+          .shadow(radius: 10)
+      }
+    )
+  }
+
   var body: some View {
     ZStack {
       Rectangle()
         .foregroundColor(.clear)
       
       VStack {
+        Spacer()
         Text("Actions")
-        Text("Delete All Tasks")
-        Text("Reset All Tasks")
-        confirmTaskButton
+          .font(.largeTitle)
+        HStack {
+          safeDeleteAllTasksButton
+          if showActualDeleteButton {
+            actualDeleteAllTasksButton
+          }
+        }
+        
+        resetTasksButton
+        Spacer()
+        GoBackButton
+        Spacer()
       }
       .frame(width: width - 32*2, height: 400, alignment: .center)
       .padding()
@@ -85,9 +135,10 @@ struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
     GeometryReader { geometry in
       SettingsView(
-        showCreateTaskView: .constant(false),
+        showSettingsView: .constant(false),
         width: geometry.size.width,
-        addNewTask: {_ in }
+        deleteAllTasks: {},
+        resetTasks: {}
       )
       .previewLayout(.sizeThatFits)
       .backgroundColor(.green)

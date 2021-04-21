@@ -31,6 +31,7 @@ struct AllTasksDisplay: View {
   var resetTasks: () -> Void
   
   @State private var showNewTaskPopover = false
+  @State private var showSettingsPopover = false
   
   private var doneTasks: Int {
     let doneTasks = tasks.filter { $0.status }
@@ -88,18 +89,18 @@ struct AllTasksDisplay: View {
   var newTaskButton: some View {
     Button(
       action: {
-        //addNewTask()
-        
         withAnimation {
           showNewTaskPopover = true
         }
       },
       label: {
         Text("New Task")
+          .frame(width: 250, height: 20, alignment: .center)
           .padding()
           .backgroundColor(.blue)
           .foregroundColor(.white)
           .cornerRadius(12)
+          
       }
     )
   }
@@ -108,9 +109,27 @@ struct AllTasksDisplay: View {
     GeometryReader { geometry in
       ZStack {
         VStack {
-          Text("Your Daily Habits")
-            .font(.title)
-            .frame(width: geometry.size.width - 16*2, height: 42, alignment: .leading)
+          HStack {
+            Text("Your Daily Habits")
+              .font(.title)
+              .padding()
+            
+            Spacer()
+            
+            Button(
+              action: {
+                withAnimation {
+                  showSettingsPopover.toggle()
+                }
+              },
+              label: {
+                Image(systemName: "gear")
+                  .font(.title)
+                  .padding()
+              }
+            )
+            
+          }
           
           progressDisplay
             .frame(width: geometry.size.width - 16*2, height: 20, alignment: .leading)
@@ -133,11 +152,7 @@ struct AllTasksDisplay: View {
             }
           }
           
-          HStack {
-            deleteAllTasksButton
-            resetAllTasksButton
-            newTaskButton
-          }
+          newTaskButton
         }
       }
       
@@ -146,6 +161,16 @@ struct AllTasksDisplay: View {
           showCreateTaskView: $showNewTaskPopover,
           width: geometry.size.width,
           addNewTask: addNewTask
+        )
+        .transition(.move(edge: .bottom))
+      }
+      
+      if showSettingsPopover {
+        SettingsView(
+          showSettingsView: $showSettingsPopover,
+          width: geometry.size.width,
+          deleteAllTasks: deleteAllTasks,
+          resetTasks: resetTasks
         )
         .transition(.move(edge: .bottom))
       }
