@@ -73,23 +73,28 @@ struct CreateNewTaskView: View {
   }
   
   var taskTextfield: some View {
-    HStack {
+    ZStack {
       TextField("Your new task!", text: $taskName)
-        .frame(width: 200, height: 48, alignment: .center)
+        .frame(width: width - 16*2, height: 48, alignment: .center)
         .backgroundColor(.gray)
         .foregroundColor(.white)
         .cornerRadius(8.0)
-        .padding(.top, 16)
-        .padding(.bottom, 16)
       
-      Button(
-        action: {
-          taskName = ""
-        }, label: {
-          Image(systemName: "xmark.circle.fill")
-        }
-      )
+      HStack {
+        Spacer()
+        Button(
+          action: {
+            taskName = ""
+          }, label: {
+            Image(systemName: "xmark.circle.fill")
+              .foregroundColor(.white)
+              .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8))
+          }
+        )
+      }
     }
+    .padding()
+    .frame(width: width - 16*2, height: 48, alignment: .center)
   }
   
   var streakRow: some View {
@@ -149,84 +154,42 @@ struct CreateNewTaskView: View {
         }
       }
     }
-  }
-  
-  var iconRow: some View {
-    let iconOptions = [
-      "drop",
-      "applewatch",
-      "pencil",
-      "folder",
-      "eye",
-      "message",
-      "guitars",
-      "chevron.left.slash.chevron.right"/*,
-      "hare",
-      "snow"*/
-    ]
-    let iconSize: CGFloat = 40
-    let padding: CGFloat = 10
-    let cellWidthSmall: CGFloat = 33
-    let column = GridItem(.fixed(cellWidthSmall), spacing: padding, alignment: .leading)
-    let gridItems = [column, column, column, column, column, column]
-    
-    return LazyVGrid(columns: gridItems, spacing: padding) {
-      ForEach(iconOptions, id: \.self) { option in
-        if selectedIcon == option {
-          Image(systemName: option)
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.white)
-            .foregroundColor(.gray)
-            .overlay(
-              RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 2)
-            )
-        } else {
-          Button(
-            action: {
-              selectedIcon = option
-            },
-            label: {
-              Image(systemName: option)
-                .frame(width: iconSize, height: iconSize, alignment: .center)
-                .backgroundColor(.gray)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            }
-          )
-        }
-      }
-    }
-    .frame(width: 330)
+    .padding()
   }
   
   var body: some View {
     ZStack {
+      // Background Part
       Rectangle()
         .foregroundColor(.clear)
+        .edgesIgnoringSafeArea(.all)
       
       VStack {
+        // Upper "empty" part
         Spacer()
         
+        // Actual popover part
         VStack {
           Text("Create a new task!")
+            .font(.largeTitle)
+            .padding()
           taskTextfield
-          streakRow
-          iconRow
+          //streakRow
+          IconGrid(selectedIcon: $selectedIcon, width: width)
           partOfDayRow
           HStack {
             cancelButton
             confirmTaskButton
           }
+          .padding()
         }
-        
-        .frame(width: width - 16*2, height: 400, alignment: .center)
-        .padding()
+        .frame(width: width - 6, height: UIScreen.main.bounds.size.height * 0.7, alignment: .center)
         .backgroundColor(.white)
         .cornerRadius(54, corners: [.topLeft, .topRight])
-        .shadow(radius: 10)
+        .shadow(radius: 6)
       }
       .edgesIgnoringSafeArea(.all)
+      
     }
     .transition(.move(edge: .bottom))
     .onAppear {
