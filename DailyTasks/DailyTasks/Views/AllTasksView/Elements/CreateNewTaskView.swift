@@ -219,12 +219,14 @@ struct CreateNewTaskView: View {
             confirmTaskButton
           }
         }
+        
         .frame(width: width - 16*2, height: 400, alignment: .center)
         .padding()
         .backgroundColor(.white)
         .cornerRadius(54, corners: [.topLeft, .topRight])
         .shadow(radius: 10)
       }
+      .edgesIgnoringSafeArea(.all)
     }
     .transition(.move(edge: .bottom))
     .onAppear {

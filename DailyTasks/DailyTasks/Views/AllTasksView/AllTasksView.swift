@@ -58,36 +58,6 @@ struct AllTasksDisplay: View {
     return Text("Progress: \(displayString)%")
   }
   
-  var deleteAllTasksButton: some View {
-    Button(
-      action: {
-        deleteAllTasks()
-      },
-      label: {
-        Text("Delete All Tasks")
-          .padding()
-          .backgroundColor(.red)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-      }
-    )
-  }
-  
-  var resetAllTasksButton: some View {
-    Button(
-      action: {
-        resetTasks()
-      },
-      label: {
-        Text("Reset All Tasks")
-          .padding()
-          .backgroundColor(.green)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-      }
-    )
-  }
-  
   var newTaskButton: some View {
     Button(
       action: {
@@ -96,13 +66,35 @@ struct AllTasksDisplay: View {
         }
       },
       label: {
-        Text("New Task")
-          .frame(width: 250, height: 20, alignment: .center)
-          .padding()
-          .backgroundColor(.blue)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-          
+        HStack {
+          Text("New Task")
+          Image(systemName: "plus")
+        }
+        .frame(width: 100, height: 20, alignment: .center)
+        .padding()
+        .backgroundColor(.blue)
+        .foregroundColor(.white)
+        .cornerRadius(12)
+      }
+    )
+  }
+  
+  var sortButton: some View {
+    Button(
+      action: {
+        withAnimation {
+          sortTasks()
+        }
+      },
+      label: {
+        HStack {
+          Text("Sort")
+          Image(systemName: "arrow.up.arrow.down")
+        }
+        .padding()
+        .backgroundColor(.blue)
+        .foregroundColor(.white)
+        .cornerRadius(12)
       }
     )
   }
@@ -117,20 +109,7 @@ struct AllTasksDisplay: View {
               .padding()
             
             Spacer()
-            
-            Button(
-              action: {
-                withAnimation {
-                  sortTasks()
-                }
-              },
-              label: {
-                Image(systemName: "arrow.up.arrow.down")
-                  .font(.title)
-                  .padding()
-              }
-            )
-            
+
             Button(
               action: {
                 withAnimation {
@@ -138,7 +117,7 @@ struct AllTasksDisplay: View {
                 }
               },
               label: {
-                Image(systemName: "gear")
+                Image(systemName: "person.crop.circle")
                   .font(.title)
                   .padding()
               }
@@ -166,7 +145,18 @@ struct AllTasksDisplay: View {
             }
           }
           
-          newTaskButton
+          ZStack {
+            Rectangle()
+              .edgesIgnoringSafeArea(.all)
+              .foregroundColor(.white)
+              .shadow(radius: 12)
+              .frame(width: geometry.size.width, height: 72, alignment: .center)
+            
+            HStack {
+              newTaskButton
+              sortButton
+            }
+          }
         }
       }
       
