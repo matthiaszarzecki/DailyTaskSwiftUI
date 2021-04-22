@@ -49,7 +49,7 @@ struct CreateNewTaskView: View {
         let task = Task(
           name: taskName,
           status: false,
-          iconName: "drop",
+          iconName: selectedIcon,
           currentStreak: streak,
           highestStreak: 0,
           partOfDay: selectedPartOfDay
