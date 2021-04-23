@@ -112,6 +112,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E89A04A2633045700586C1D /* CreateNewTaskView */ = {
+			isa = PBXGroup;
+			children = (
+				CC40E4D52628790400059061 /* CreateNewTaskView.swift */,
+				6E89A04E2633047700586C1D /* Elements */,
+			);
+			path = CreateNewTaskView;
+			sourceTree = "<group>";
+		};
+		6E89A04E2633047700586C1D /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				6E89A045263302CF00586C1D /* CancelButton.swift */,
+				6E89A040263300C700586C1D /* ConfirmTaskButton.swift */,
+				CCC5530726306F3F003C7DBC /* IconGrid.swift */,
+				6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */,
+				6E89A0332632FD8E00586C1D /* StreakRow.swift */,
+				6E89A03B2632FFC700586C1D /* TaskNameTextField.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		6E89A0522633048E00586C1D /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				6E170B30262AE1290074314E /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		6E9FF7AA262CBD1D00CA7743 /* ModularViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,15 +154,7 @@
 		6EB8EBCE262A4A2100E1484D /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				6E89A045263302CF00586C1D /* CancelButton.swift */,
-				6E89A040263300C700586C1D /* ConfirmTaskButton.swift */,
-				CC40E4D52628790400059061 /* CreateNewTaskView.swift */,
-				CCC5530726306F3F003C7DBC /* IconGrid.swift */,
-				6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */,
-				6E170B30262AE1290074314E /* SettingsView.swift */,
-				6E89A0332632FD8E00586C1D /* StreakRow.swift */,
 				CC40E4DF26287D0600059061 /* TaskCell.swift */,
-				6E89A03B2632FFC700586C1D /* TaskNameTextField.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -211,7 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				CC40E4D1262878EB00059061 /* AllTasksView */,
+				6E89A04A2633045700586C1D /* CreateNewTaskView */,
 				6E9FF7AA262CBD1D00CA7743 /* ModularViews */,
+				6E89A0522633048E00586C1D /* SettingsView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

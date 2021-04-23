@@ -14,11 +14,10 @@ struct CreateNewTaskView: View {
   
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
-  
-  private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
-  
   @State private var selectedPartOfDay = 1
   @State private var selectedIcon = "drop"
+  
+  private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
   
   var body: some View {
     ZStack {
@@ -79,7 +78,7 @@ struct CreateNewTaskView_Previews: PreviewProvider {
       CreateNewTaskView(
         showCreateTaskView: .constant(false),
         width: PreviewConstants.width,
-        addNewTask: {_ in }
+        addNewTask: { _ in }
       )
     }
   }
