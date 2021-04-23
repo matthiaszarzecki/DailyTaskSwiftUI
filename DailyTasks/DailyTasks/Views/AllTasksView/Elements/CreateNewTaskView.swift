@@ -20,24 +20,6 @@ struct CreateNewTaskView: View {
   @State private var selectedPartOfDay = 1
   @State private var selectedIcon = "drop"
   
-  var cancelButton: some View {
-    Button(
-      action: {
-        withAnimation {
-          showCreateTaskView = false
-        }
-      },
-      label: {
-        Text("Cancel")
-          .padding()
-          .backgroundColor(.red)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-          .shadow(radius: 10)
-      }
-    )
-  }
-
   var body: some View {
     ZStack {
       // Background Part
@@ -58,7 +40,9 @@ struct CreateNewTaskView: View {
           IconGrid(selectedIcon: $selectedIcon, width: width)
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
           HStack {
-            cancelButton
+            CancelButton(
+              showCreateTaskView: $showCreateTaskView
+            )
             ConfirmTaskButton(
               taskName: taskName,
               startStreak: startStreak,
