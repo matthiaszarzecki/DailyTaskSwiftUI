@@ -37,65 +37,6 @@ struct CreateNewTaskView: View {
       }
     )
   }
-  
-  var confirmTaskButton: some View {
-    let disabled = taskName.isEmpty
-    let color: Color = disabled ? .gray : .green
-    
-    return Button(
-      action: {
-        let streak = Int(startStreak) ?? 0
-        
-        let task = Task(
-          name: taskName,
-          status: false,
-          iconName: selectedIcon,
-          currentStreak: streak,
-          highestStreak: 0,
-          partOfDay: selectedPartOfDay
-        )
-        
-        addNewTask(task)
-        withAnimation {
-          showCreateTaskView = false
-        }
-      },
-      label: {
-        Text("OK")
-          .padding()
-          .backgroundColor(color)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-          .shadow(radius: 10)
-      }
-    )
-    .disabled(disabled)
-  }
-  
-  var taskTextfield: some View {
-    ZStack {
-      TextField("Your new task!", text: $taskName)
-        .frame(width: width - 16*2, height: 48, alignment: .center)
-        .backgroundColor(.gray)
-        .foregroundColor(.white)
-        .cornerRadius(8.0)
-      
-      HStack {
-        Spacer()
-        Button(
-          action: {
-            taskName = ""
-          }, label: {
-            Image(systemName: "xmark.circle.fill")
-              .foregroundColor(.white)
-              .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8))
-          }
-        )
-      }
-    }
-    .padding()
-    .frame(width: width - 16*2, height: 48, alignment: .center)
-  }
 
   var body: some View {
     ZStack {
@@ -113,12 +54,19 @@ struct CreateNewTaskView: View {
           Text("Create a new task!")
             .font(.largeTitle)
             .padding()
-          taskTextfield
+          TaskNameTextField(taskName: $taskName, width: width)
           IconGrid(selectedIcon: $selectedIcon, width: width)
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
           HStack {
             cancelButton
-            confirmTaskButton
+            ConfirmTaskButton(
+              taskName: taskName,
+              startStreak: startStreak,
+              selectedIcon: selectedIcon,
+              selectedPartOfDay: selectedPartOfDay,
+              showCreateTaskView: $showCreateTaskView,
+              addNewTask: addNewTask
+            )
           }
           .padding()
         }
