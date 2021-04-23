@@ -96,27 +96,6 @@ struct CreateNewTaskView: View {
     .padding()
     .frame(width: width - 16*2, height: 48, alignment: .center)
   }
-  
-  var streakRow: some View {
-    HStack {
-      TextField("Start Streak", text: $startStreak)
-        .keyboardType(.numberPad)
-        .frame(width: 200, height: 48, alignment: .center)
-        .backgroundColor(.gray)
-        .foregroundColor(.white)
-        .cornerRadius(8.0)
-        .padding(.top, 16)
-        .padding(.bottom, 16)
-      
-      Button(
-        action: {
-          startStreak = ""
-        }, label: {
-          Image(systemName: "xmark.circle.fill")
-        }
-      )
-    }
-  }
 
   var body: some View {
     ZStack {
@@ -135,7 +114,6 @@ struct CreateNewTaskView: View {
             .font(.largeTitle)
             .padding()
           taskTextfield
-          //streakRow
           IconGrid(selectedIcon: $selectedIcon, width: width)
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
           HStack {
