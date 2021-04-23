@@ -53,7 +53,7 @@ struct IconGrid: View {
                 .frame(width: iconSize, height: iconSize, alignment: .center)
                 .backgroundColor(.gray)
                 .foregroundColor(.white)
-                .cornerRadius(10)
+                .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
           )
         }
@@ -67,8 +67,8 @@ struct IconGrid: View {
 struct IconGrid_Previews: PreviewProvider {
   static var previews: some View {
     IconGrid(
-      selectedIcon: .constant(""),
-      width: 350
+      selectedIcon: .constant("folder"),
+      width: PreviewConstants.width
     )
     .previewLayout(.sizeThatFits)
   }
