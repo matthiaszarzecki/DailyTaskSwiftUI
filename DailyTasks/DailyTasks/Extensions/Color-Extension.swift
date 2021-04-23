@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
-  static let dailyHabitsColor = Color(hex: "b6d7a8")
+  static let dailyHabitsGreen = Color(hex: "93c47d")
   
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {

@@ -17,7 +17,7 @@ struct ConfirmTaskButton: View {
   
   var body: some View {
     let disabled = taskName.isEmpty
-    let color: Color = disabled ? .gray : .green
+    let color: Color = disabled ? .gray : .dailyHabitsGreen
     
     return Button(
       action: {

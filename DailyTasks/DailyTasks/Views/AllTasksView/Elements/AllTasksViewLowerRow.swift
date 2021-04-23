@@ -34,7 +34,7 @@ struct AllTasksViewLowerRow: View {
             }
             .frame(width: 100, height: 20, alignment: .center)
             .padding()
-            .backgroundColor(.blue)
+            .backgroundColor(.dailyHabitsGreen)
             .foregroundColor(.white)
             .cornerRadius(12)
           }
@@ -52,7 +52,7 @@ struct AllTasksViewLowerRow: View {
               Image(systemName: "arrow.up.arrow.down")
             }
             .padding()
-            .backgroundColor(.blue)
+            .backgroundColor(.dailyHabitsGreen)
             .foregroundColor(.white)
             .cornerRadius(12)
           }

@@ -28,7 +28,7 @@ struct TaskCell: View {
           Image(systemName: "checkmark")
             .foregroundColor(.white)
             .padding(6)
-            .backgroundColor(.green)
+            .backgroundColor(.dailyHabitsGreen)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         } else {
           Image(systemName: "circle")

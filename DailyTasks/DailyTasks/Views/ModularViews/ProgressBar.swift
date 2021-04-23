@@ -25,7 +25,7 @@ struct ProgressBar: View {
           width: min(CGFloat(self.value) * width, width),
           height: height
         )
-        .foregroundColor(.green)
+        .foregroundColor(.dailyHabitsGreen)
         .animation(.linear)
     }
     .cornerRadius(height / 2)
