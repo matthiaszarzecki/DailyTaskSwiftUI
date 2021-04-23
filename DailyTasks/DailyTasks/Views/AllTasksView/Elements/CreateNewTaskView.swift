@@ -125,10 +125,10 @@ struct CreateNewTaskView: View {
         .frame(width: width - 6, height: UIScreen.main.bounds.size.height * 0.7, alignment: .center)
         .backgroundColor(.white)
         .cornerRadius(54, corners: [.topLeft, .topRight])
+        .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
         .shadow(radius: 6)
       }
       .edgesIgnoringSafeArea(.all)
-      
     }
     .transition(.move(edge: .bottom))
     .onAppear {
@@ -139,13 +139,16 @@ struct CreateNewTaskView: View {
 
 struct CreateNewTaskView_Previews: PreviewProvider {
   static var previews: some View {
-    GeometryReader { geometry in
+    ZStack {
+      Rectangle()
+        .foregroundColor(.green)
+        .edgesIgnoringSafeArea(.all)
+      
       CreateNewTaskView(
         showCreateTaskView: .constant(false),
-        width: geometry.size.width,
+        width: PreviewConstants.width,
         addNewTask: {_ in }
       )
-      .backgroundColor(.green)
     }
   }
 }
