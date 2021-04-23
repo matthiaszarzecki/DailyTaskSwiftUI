@@ -34,7 +34,9 @@ struct StreakRow: View {
 
 struct StreakRow_Previews: PreviewProvider {
   static var previews: some View {
-    StreakRow(startStreak: .constant(""))
-      .previewLayout(.sizeThatFits)
+    StreakRow(
+      startStreak: .constant("")
+    )
+    .previewLayout(.sizeThatFits)
   }
 }
