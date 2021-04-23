@@ -14,7 +14,7 @@ struct SettingsView: View {
   var resetTasks: () -> Void
   
   @State private var showActualDeleteButton = false
-
+  
   var cancelButton: some View {
     Button(
       action: {
@@ -106,33 +106,42 @@ struct SettingsView: View {
       }
     )
   }
-
+  
   var body: some View {
     ZStack {
+      // Background Part
       Rectangle()
         .foregroundColor(.clear)
+        .edgesIgnoringSafeArea(.all)
+      
       
       VStack {
+        // Upper "empty" part
         Spacer()
-        Text("Actions")
-          .font(.largeTitle)
-        HStack {
-          safeDeleteAllTasksButton
-          if showActualDeleteButton {
-            actualDeleteAllTasksButton
-          }
-        }
         
-        resetTasksButton
-        Spacer()
-        GoBackButton
-        Spacer()
+        // The actual view
+        VStack {
+          Text("Actions")
+            .font(.largeTitle)
+          
+          HStack {
+            safeDeleteAllTasksButton
+            if showActualDeleteButton {
+              actualDeleteAllTasksButton
+            }
+          }
+          
+          resetTasksButton
+          Spacer()
+          GoBackButton
+          Spacer()
+        }
+        .frame(width: width - 32*2, height: 400, alignment: .center)
+        .padding()
+        .backgroundColor(.white)
+        .cornerRadius(12)
+        .shadow(radius: 10)
       }
-      .frame(width: width - 32*2, height: 400, alignment: .center)
-      .padding()
-      .backgroundColor(.white)
-      .cornerRadius(12)
-      .shadow(radius: 10)
     }
   }
 }
