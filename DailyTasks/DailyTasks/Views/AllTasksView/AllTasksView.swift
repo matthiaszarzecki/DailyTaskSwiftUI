@@ -58,105 +58,70 @@ struct AllTasksDisplay: View {
     return Text("Progress: \(displayString)%")
   }
   
-  var newTaskButton: some View {
-    Button(
-      action: {
-        withAnimation {
-          showNewTaskPopover = true
-        }
-      },
-      label: {
-        HStack {
-          Text("New Task")
-          Image(systemName: "plus")
-        }
-        .frame(width: 100, height: 20, alignment: .center)
-        .padding()
-        .backgroundColor(.blue)
-        .foregroundColor(.white)
-        .cornerRadius(12)
-      }
-    )
-  }
   
-  var sortButton: some View {
-    Button(
-      action: {
-        withAnimation {
-          sortTasks()
-        }
-      },
-      label: {
-        HStack {
-          Text("Sort")
-          Image(systemName: "arrow.up.arrow.down")
-        }
-        .padding()
-        .backgroundColor(.blue)
-        .foregroundColor(.white)
-        .cornerRadius(12)
-      }
-    )
-  }
   
   var body: some View {
     GeometryReader { geometry in
       ZStack {
-        VStack {
-          HStack {
-            Text("Your Daily Habits")
-              .font(.title)
-              .padding()
-            
-            Spacer()
-
+        // Actual Task List
+        List {
+          ForEach(tasks, id: \.self) { task in
             Button(
               action: {
-                withAnimation {
-                  showSettingsPopover.toggle()
-                }
+                updateTask(task.id)
               },
               label: {
-                Image(systemName: "person.crop.circle")
-                  .font(.title)
-                  .padding()
+                TaskCell(task: task)
               }
             )
           }
-          
-          progressDisplay
-            .frame(width: geometry.size.width - 16*2, height: 20, alignment: .leading)
-          
-          ProgressBar(
-            width: geometry.size.width - 16*2,
-            value: taskDoneRatio
-          )
-          
-          List {
-            ForEach(tasks, id: \.self) { task in
+        }
+        .offset(y: 130)
+        
+        VStack {
+          // Upper Part
+          VStack {
+            HStack {
+              Text("Your Daily Habits")
+                .font(.title)
+                .padding()
+              
+              Spacer()
+
               Button(
                 action: {
-                  updateTask(task.id)
+                  withAnimation {
+                    showSettingsPopover.toggle()
+                  }
                 },
                 label: {
-                  TaskCell(task: task)
+                  Image(systemName: "person.crop.circle")
+                    .font(.title)
+                    .padding()
                 }
               )
             }
-          }
-          
-          ZStack {
-            Rectangle()
-              .edgesIgnoringSafeArea(.all)
-              .foregroundColor(.white)
-              .shadow(radius: 12)
-              .frame(width: geometry.size.width, height: 72, alignment: .center)
             
-            HStack {
-              newTaskButton
-              sortButton
-            }
+            progressDisplay
+              .frame(width: geometry.size.width - 16*2, height: 20, alignment: .leading)
+            
+            ProgressBar(
+              width: geometry.size.width - 16*2,
+              value: taskDoneRatio
+            )
+            .padding(.bottom, 12)
           }
+          .backgroundColor(.white)
+          .shadow(radius: 12)
+          
+          Spacer()
+          
+          // Lower Part
+          AllTasksViewLowerRow(
+            showNewTaskPopover: $showNewTaskPopover,
+            width: geometry.size.width,
+            sortTasks: sortTasks
+          )
         }
       }
       
