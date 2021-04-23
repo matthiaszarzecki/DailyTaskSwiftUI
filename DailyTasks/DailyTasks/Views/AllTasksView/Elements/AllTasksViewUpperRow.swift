@@ -10,6 +10,7 @@ import SwiftUI
 struct AllTasksViewUpperRow: View {
   var tasks: [Task]
   var width: CGFloat
+  var height: CGFloat = 128
   @Binding var showSettingsPopover: Bool
   
   private var doneTasks: Int {
@@ -36,40 +37,46 @@ struct AllTasksViewUpperRow: View {
   }
   
   var body: some View {
-    VStack {
-      HStack {
-        Text("Your Daily Habits")
-          .font(.title)
-          .padding()
-        
-        Spacer()
-        
-        Button(
-          action: {
-            withAnimation {
-              showSettingsPopover.toggle()
+    ZStack {
+      Rectangle()
+        .edgesIgnoringSafeArea(.all)
+        .foregroundColor(.white)
+        .shadow(radius: 12)
+        .frame(width: width, height: height, alignment: .center)
+      
+      VStack {
+        HStack {
+          Text("Your Daily Habits")
+            .font(.title)
+            .padding()
+          
+          Spacer()
+          
+          Button(
+            action: {
+              withAnimation {
+                showSettingsPopover.toggle()
+              }
+            },
+            label: {
+              Image(systemName: "person.crop.circle")
+                .foregroundColor(.dailyHabitsGreen)
+                .font(.title)
+                .padding()
             }
-          },
-          label: {
-            Image(systemName: "person.crop.circle")
-              .foregroundColor(.dailyHabitsGreen)
-              .font(.title)
-              .padding()
-          }
+          )
+        }
+        
+        progressDisplay
+          .frame(width: width - 16*2, height: 20, alignment: .leading)
+        
+        ProgressBar(
+          width: width - 16*2,
+          value: taskDoneRatio
         )
+        .padding(.bottom, 12)
       }
-      
-      progressDisplay
-        .frame(width: width - 16*2, height: 20, alignment: .leading)
-      
-      ProgressBar(
-        width: width - 16*2,
-        value: taskDoneRatio
-      )
-      .padding(.bottom, 12)
     }
-    .backgroundColor(.white)
-    .shadow(radius: 12)
   }
 }
 

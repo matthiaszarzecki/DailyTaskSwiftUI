@@ -15,24 +15,6 @@ struct SettingsView: View {
   
   @State private var showActualDeleteButton = false
   
-  var cancelButton: some View {
-    Button(
-      action: {
-        withAnimation {
-          showSettingsView = false
-        }
-      },
-      label: {
-        Text("Cancel")
-          .padding()
-          .backgroundColor(.red)
-          .foregroundColor(.white)
-          .cornerRadius(12)
-          .shadow(radius: 10)
-      }
-    )
-  }
-  
   var GoBackButton: some View {
     Button(
       action: {
@@ -43,9 +25,9 @@ struct SettingsView: View {
       label: {
         Text("Go Back")
           .padding()
-          .backgroundColor(.green)
+          .backgroundColor(.dailyHabitsGreen)
           .foregroundColor(.white)
-          .cornerRadius(12)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           .shadow(radius: 10)
       }
     )
@@ -63,7 +45,7 @@ struct SettingsView: View {
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
-          .cornerRadius(12)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           .shadow(radius: 10)
       }
     )
@@ -82,7 +64,7 @@ struct SettingsView: View {
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
-          .cornerRadius(12)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           .shadow(radius: 10)
       }
     )
@@ -99,21 +81,54 @@ struct SettingsView: View {
       label: {
         Text("Reset All Tasks")
           .padding()
-          .backgroundColor(.blue)
+          .backgroundColor(.red)
           .foregroundColor(.white)
-          .cornerRadius(12)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           .shadow(radius: 10)
       }
     )
   }
   
+  var debugActions: some View {
+    VStack {
+      Text("Debug Actions")
+        .font(.title)
+      
+      HStack {
+        safeDeleteAllTasksButton
+        if showActualDeleteButton {
+          actualDeleteAllTasksButton
+        }
+      }
+      resetTasksButton
+    }
+    .frame(width: width - 32*2, height: 150, alignment: .center)
+    .padding()
+    .backgroundColor(.dailyHabitsGray)
+    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+  }
+  
+  var profileNameAndImage: some View {
+    HStack {
+      Text("What's your name?")
+        .font(.title)
+      
+      Spacer()
+      
+      Image(systemName: "person.crop.circle")
+        .foregroundColor(.dailyHabitsGreen)
+        .font(.title)
+        .padding()
+    }
+    .padding()
+  }
+  
   var body: some View {
     ZStack {
-      // Background Part
+      // Empty background
       Rectangle()
         .foregroundColor(.clear)
         .edgesIgnoringSafeArea(.all)
-      
       
       VStack {
         // Upper "empty" part
@@ -121,42 +136,38 @@ struct SettingsView: View {
         
         // The actual view
         VStack {
-          Text("Actions")
-            .font(.largeTitle)
-          
-          HStack {
-            safeDeleteAllTasksButton
-            if showActualDeleteButton {
-              actualDeleteAllTasksButton
-            }
-          }
-          
-          resetTasksButton
-          Spacer()
+          profileNameAndImage
+          debugActions
           GoBackButton
-          Spacer()
         }
-        .frame(width: width - 32*2, height: 400, alignment: .center)
-        .padding()
+        .frame(width: width - 8, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
         .backgroundColor(.white)
-        .cornerRadius(12)
-        .shadow(radius: 10)
+        .cornerRadius(54, corners: [.topLeft, .topRight])
+        .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
+        .shadow(color: .black, radius: 6)
       }
+      // Move everything up a bit for
+      // the line between the view at
+      // the bottom of the screen.
+      .offset(y: -4)
+      .edgesIgnoringSafeArea(.all)
     }
   }
 }
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    GeometryReader { geometry in
+    ZStack {
+      Rectangle()
+        .edgesIgnoringSafeArea(.all)
+        .foregroundColor(.green)
+      
       SettingsView(
         showSettingsView: .constant(false),
-        width: geometry.size.width,
+        width: PreviewConstants.width,
         deleteAllTasks: {},
         resetTasks: {}
       )
-      .previewLayout(.sizeThatFits)
-      .backgroundColor(.green)
     }
   }
 }

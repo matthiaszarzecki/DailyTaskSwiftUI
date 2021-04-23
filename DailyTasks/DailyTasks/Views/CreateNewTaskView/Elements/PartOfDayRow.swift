@@ -46,7 +46,7 @@ struct PartOfDayRow: View {
         }
       }
     }
-    .padding()
+    .padding(EdgeInsets(top: 12, leading: 6, bottom: 12, trailing: 6))
   }
 }
 

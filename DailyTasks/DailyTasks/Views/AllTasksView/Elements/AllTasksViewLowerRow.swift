@@ -10,6 +10,7 @@ import SwiftUI
 struct AllTasksViewLowerRow: View {
   @Binding var showNewTaskPopover: Bool
   var width: CGFloat
+  var height: CGFloat = 72
   var sortTasks: () -> Void
   
   var body: some View {
@@ -18,7 +19,7 @@ struct AllTasksViewLowerRow: View {
         .edgesIgnoringSafeArea(.all)
         .foregroundColor(.white)
         .shadow(radius: 12)
-        .frame(width: width, height: 72, alignment: .center)
+        .frame(width: width, height: height, alignment: .center)
       
       HStack {
         Button(
@@ -36,7 +37,7 @@ struct AllTasksViewLowerRow: View {
             .padding()
             .backgroundColor(.dailyHabitsGreen)
             .foregroundColor(.white)
-            .cornerRadius(12)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           }
         )
         
@@ -54,7 +55,7 @@ struct AllTasksViewLowerRow: View {
             .padding()
             .backgroundColor(.dailyHabitsGreen)
             .foregroundColor(.white)
-            .cornerRadius(12)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           }
         )
       }
@@ -70,7 +71,7 @@ struct AllTasksViewLowerRow_Previews: PreviewProvider {
       sortTasks: {}
     )
     .padding()
-    .backgroundColor(.green)
+    .backgroundColor(.blue)
     .previewLayout(.sizeThatFits)
   }
 }

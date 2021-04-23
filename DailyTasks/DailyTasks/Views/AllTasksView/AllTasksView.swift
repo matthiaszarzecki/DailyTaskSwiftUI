@@ -50,17 +50,30 @@ struct AllTasksDisplay: View {
     }
   }
   
+  let upperPartHeight: CGFloat = 128
+  let lowerPartHeight: CGFloat = 72
+  var upperAndLowerPartHeight: CGFloat {
+    return upperPartHeight + lowerPartHeight
+  }
+  
   var body: some View {
     GeometryReader { geometry in
       ZStack {
         // Actual Task List
-        taskList
-          .offset(y: 130)
-        
+        VStack {
+          Rectangle()
+            .foregroundColor(.clear)
+            .frame(width: geometry.size.width, height: 52, alignment: .center)
+          
+          taskList
+            .frame(width: geometry.size.width, height: geometry.size.height - upperAndLowerPartHeight, alignment: .top)
+        }
+ 
         VStack {
           AllTasksViewUpperRow(
             tasks: tasks,
             width: geometry.size.width,
+            height: upperPartHeight,
             showSettingsPopover: $showSettingsPopover
           )
           
@@ -69,6 +82,7 @@ struct AllTasksDisplay: View {
           AllTasksViewLowerRow(
             showNewTaskPopover: $showNewTaskPopover,
             width: geometry.size.width,
+            height: lowerPartHeight,
             sortTasks: sortTasks
           )
         }

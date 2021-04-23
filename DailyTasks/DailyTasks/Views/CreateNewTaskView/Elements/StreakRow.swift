@@ -17,7 +17,7 @@ struct StreakRow: View {
         .frame(width: 200, height: 48, alignment: .center)
         .backgroundColor(.gray)
         .foregroundColor(.white)
-        .cornerRadius(8.0)
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(.top, 16)
         .padding(.bottom, 16)
       

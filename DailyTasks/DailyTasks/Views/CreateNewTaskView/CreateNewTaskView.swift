@@ -53,12 +53,16 @@ struct CreateNewTaskView: View {
           }
           .padding()
         }
-        .frame(width: width - 6, height: UIScreen.main.bounds.size.height * 0.7, alignment: .center)
+        .frame(width: width - 8, height: UIScreen.main.bounds.size.height * 0.6, alignment: .center)
         .backgroundColor(.white)
         .cornerRadius(54, corners: [.topLeft, .topRight])
         .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
-        .shadow(radius: 6)
+        .shadow(color: .black, radius: 10)
       }
+      // Move everything up a bit for
+      // the line between the view at
+      // the bottom of the screen.
+      .offset(y: -4)
       .edgesIgnoringSafeArea(.all)
     }
     .transition(.move(edge: .bottom))

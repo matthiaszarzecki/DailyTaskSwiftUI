@@ -22,7 +22,7 @@ struct CancelButton: View {
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
-          .cornerRadius(12)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
           .shadow(radius: 10)
       }
     )

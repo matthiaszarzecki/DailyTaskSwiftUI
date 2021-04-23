@@ -17,7 +17,7 @@ struct TaskNameTextField: View {
         .frame(width: width - 16*2, height: 48, alignment: .center)
         .backgroundColor(.gray)
         .foregroundColor(.white)
-        .cornerRadius(8.0)
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
       
       HStack {
         Spacer()
