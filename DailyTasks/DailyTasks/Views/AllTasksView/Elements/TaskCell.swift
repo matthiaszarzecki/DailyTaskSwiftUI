@@ -10,6 +10,8 @@ import SwiftUI
 struct TaskCell: View {
   let task: Task
   
+  private let iconSize: CGFloat = 30
+  
   var body: some View {
     VStack {
       HStack {
@@ -26,17 +28,16 @@ struct TaskCell: View {
         
         if task.status {
           Image(systemName: "checkmark")
+            .frame(width: iconSize, height: iconSize, alignment: .center)
             .foregroundColor(.white)
-            .padding(6)
             .backgroundColor(.dailyHabitsGreen)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         } else {
-          Image(systemName: "circle")
-            .foregroundColor(.gray)
-            .padding(6)
-            .backgroundColor(.gray)
+          Rectangle()
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .foregroundColor(.dailyHabitsGray)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        }
+        } 
       }
       
       HStack {
