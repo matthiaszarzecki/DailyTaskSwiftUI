@@ -114,7 +114,7 @@ struct AllTasksDisplay: View {
       NotificationCenter.default.publisher(
         for: UIApplication.willEnterForegroundNotification)
     ) { _ in
-      print("Updating!")
+      print("### Checking for update after putting app into foreground")
       checkIfTasksNeedResetting()
     }
   }

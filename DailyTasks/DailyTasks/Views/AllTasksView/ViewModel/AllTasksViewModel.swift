@@ -16,7 +16,7 @@ class AllTasksViewModel: ObservableObject {
   init() {
     loadAllTasks()
     
-    print("Updating as!")
+    print("### Checking for update after starting app")
     checkIfTasksNeedResetting()
   }
   
@@ -24,7 +24,7 @@ class AllTasksViewModel: ObservableObject {
     loadAllTasks()
     if let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
        Date() > expiryDateParsed {
-      print("RESET")
+      print("### Resetting Tasks")
       
       // Set new reset date
       resetDate = getResetDate()
@@ -32,8 +32,11 @@ class AllTasksViewModel: ObservableObject {
       
       resetAllTasks()
     } else {
-      print("NO RESET")
+      print("### Not Resetting Tasks")
     }
+    
+    sortTasks()
+    saveAllData()
   }
   
   func resetAllTasks() {
@@ -92,6 +95,8 @@ class AllTasksViewModel: ObservableObject {
   // MARK: - Sort action
   
   func sortTasks() {
+    print("### Sorting Tasks")
+    
     state.allTasks.sort { firstTask, secondTask in
       if firstTask.status && secondTask.status {
         // Tasks are done, do not order them
