@@ -37,11 +37,33 @@ class AllTasksViewModel: ObservableObject {
   }
   
   func resetAllTasks() {
+    // Counter for counting how many tasks have
+    // been reset (only done tasks get reset).
     var counter = 0
+    
     for index in 0..<state.allTasks.count {
-      if state.allTasks[index].status == true {
+      // Assigning current task to constant
+      // for easier reading (not setting).
+      let currentTask = state.allTasks[index]
+      
+      if currentTask.status {
+        // If task is done...
+        
+        // Set task status to false
         state.allTasks[index].status = false
+        
+        // Set highestStreak if higher than before.
+        if currentTask.currentStreak > currentTask.highestStreak {
+          state.allTasks[index].highestStreak = currentTask.currentStreak
+        }
+        
+        // Increase debug counter
         counter += 1
+      } else {
+        // If task is NOT done...
+        
+        // Reset current streak to zero.
+        state.allTasks[index].currentStreak = 0
       }
     }
     saveAllData()
@@ -97,6 +119,8 @@ class AllTasksViewModel: ObservableObject {
     saveAllData()
   }
  
+  /// Updates single task to increase of decrease
+  /// current streak and toggle done status.
   func updateTask(id: UUID) {
     if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
       let oldState = state.allTasks[index].status
