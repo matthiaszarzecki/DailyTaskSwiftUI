@@ -22,10 +22,8 @@ struct CreateNewTaskView: View {
   var body: some View {
     ZStack {
       // Background Part
-      Rectangle()
-        .foregroundColor(.clear)
-        .edgesIgnoringSafeArea(.all)
-      
+      OverlayBackground(showParentView: $showCreateTaskView)
+
       VStack {
         // Upper "empty" part
         Spacer()
@@ -35,9 +33,11 @@ struct CreateNewTaskView: View {
           Text("Create a new task!")
             .font(.largeTitle)
             .padding()
+          
           TaskNameTextField(taskName: $taskName, width: width)
           IconGrid(selectedIcon: $selectedIcon, width: width)
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
+          
           HStack {
             CancelButton(
               showCreateTaskView: $showCreateTaskView
@@ -58,6 +58,10 @@ struct CreateNewTaskView: View {
         .cornerRadius(54, corners: [.topLeft, .topRight])
         .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 10)
+        .overlay(
+          HandleForOverlay(showParentView: $showCreateTaskView),
+          alignment: .top
+        )
       }
       // Move everything up a bit for
       // the line between the view at

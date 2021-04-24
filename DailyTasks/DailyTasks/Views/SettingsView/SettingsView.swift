@@ -126,9 +126,7 @@ struct SettingsView: View {
   var body: some View {
     ZStack {
       // Empty background
-      Rectangle()
-        .foregroundColor(.clear)
-        .edgesIgnoringSafeArea(.all)
+      OverlayBackground(showParentView: $showSettingsView)
       
       VStack {
         // Upper "empty" part
@@ -145,6 +143,10 @@ struct SettingsView: View {
         .cornerRadius(54, corners: [.topLeft, .topRight])
         .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 6)
+        .overlay(
+          HandleForOverlay(showParentView: $showSettingsView),
+          alignment: .top
+        )
       }
       // Move everything up a bit for
       // the line between the view at
