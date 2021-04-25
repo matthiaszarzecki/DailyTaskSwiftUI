@@ -21,7 +21,8 @@ struct OverlayBackground: View {
       },
       label: {
         Rectangle()
-          .foregroundColor(.clear)
+          .foregroundColor(.black)
+          .opacity(0.6)
           .edgesIgnoringSafeArea(.all)
       }
     )
