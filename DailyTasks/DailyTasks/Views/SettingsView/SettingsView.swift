@@ -138,10 +138,10 @@ struct SettingsView: View {
           debugActions
           GoBackButton
         }
-        .frame(width: width - 8, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
+        .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
-        .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
+        .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 6)
         .overlay(
           HandleForOverlay(showParentView: $showSettingsView),

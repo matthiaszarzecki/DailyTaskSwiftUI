@@ -53,10 +53,10 @@ struct CreateNewTaskView: View {
           }
           .padding()
         }
-        .frame(width: width - 8, height: UIScreen.main.bounds.size.height * 0.6, alignment: .center)
+        .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.6, alignment: .center)
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
-        .cornerRadius(46, corners: [.bottomLeft, .bottomRight])
+        .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 10)
         .overlay(
           HandleForOverlay(showParentView: $showCreateTaskView),
