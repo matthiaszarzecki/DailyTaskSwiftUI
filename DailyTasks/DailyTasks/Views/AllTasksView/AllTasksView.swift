@@ -18,7 +18,8 @@ struct AllTasksView: View {
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
       resetTasks: viewModel.resetAllTasks,
-      sortTasks: viewModel.sortTasks
+      sortTasks: viewModel.sortTasks,
+      deleteSingleTask: viewModel.deleteSingleTask
     )
   }
 }
@@ -31,6 +32,7 @@ struct AllTasksDisplay: View {
   var checkIfTasksNeedResetting: () -> Void
   var resetTasks: () -> Void
   var sortTasks: () -> Void
+  var deleteSingleTask: (_ id: UUID) -> Void
   
   @State private var showNewTaskPopover = false
   @State private var showSettingsPopover = false
@@ -47,6 +49,19 @@ struct AllTasksDisplay: View {
           }
         )
       }
+      .onDelete(
+        perform: { indexSet in
+          // Get Item at index
+          let index = indexSet.first!
+          let item = tasks[index]
+          
+          // Get ID of item
+          let id = item.id
+          
+          // Send delete command to viewModel
+          deleteSingleTask(id)
+        }
+      )
     }
   }
   
@@ -129,7 +144,8 @@ struct ContentView_Previews: PreviewProvider {
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
       resetTasks: {},
-      sortTasks: {}
+      sortTasks: {},
+      deleteSingleTask: {_ in }
     )
   }
 }
