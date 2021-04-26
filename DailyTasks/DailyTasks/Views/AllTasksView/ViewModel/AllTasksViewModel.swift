@@ -92,6 +92,10 @@ class AllTasksViewModel: ObservableObject {
     return stringDate
   }
   
+  func setOffset(index: Int, offset: CGFloat) {
+    state.offsets[index] = offset
+  }
+  
   // MARK: - Sort action
   
   func sortTasks() {
@@ -121,6 +125,7 @@ class AllTasksViewModel: ObservableObject {
   
   func addNewTask(task: Task) {
     state.allTasks.append(task)
+    state.offsets.append(0)
     saveAllData()
   }
  
@@ -144,6 +149,7 @@ class AllTasksViewModel: ObservableObject {
   func deleteSingleTask(id: UUID) {
     if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
       state.allTasks.remove(at: index)
+      state.offsets.remove(at: index)
     }
     
     saveAllData()
@@ -152,6 +158,7 @@ class AllTasksViewModel: ObservableObject {
   func deleteAllTasks() {
     self.allTasksData = Data()
     state.allTasks = [Task]()
+    state.offsets = [CGFloat]()
   }
   
   // MARK: - Loading & Saving
@@ -161,6 +168,7 @@ class AllTasksViewModel: ObservableObject {
       return
     }
     state.allTasks = decodedTasks
+    state.offsets = Array(repeating: 0, count: state.allTasks.count)
   }
   
   private func saveAllData() {
@@ -174,5 +182,6 @@ class AllTasksViewModel: ObservableObject {
   
   struct AllTasksViewState {
     var allTasks = [Task]()
+    var offsets = [CGFloat]()
   }
 }

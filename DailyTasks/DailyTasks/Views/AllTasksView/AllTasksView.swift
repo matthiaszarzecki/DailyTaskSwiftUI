@@ -13,19 +13,22 @@ struct AllTasksView: View {
   var body: some View {
     AllTasksDisplay(
       tasks: viewModel.state.allTasks,
+      offsets: viewModel.state.offsets,
       addNewTask: viewModel.addNewTask,
       updateTask: viewModel.updateTask,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
       resetTasks: viewModel.resetAllTasks,
       sortTasks: viewModel.sortTasks,
-      deleteSingleTask: viewModel.deleteSingleTask
+      deleteSingleTask: viewModel.deleteSingleTask,
+      setOffset: viewModel.setOffset
     )
   }
 }
 
 struct AllTasksDisplay: View {
   var tasks: [Task]
+  var offsets: [CGFloat]
   var addNewTask: (_ task: Task) -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
@@ -33,23 +36,49 @@ struct AllTasksDisplay: View {
   var resetTasks: () -> Void
   var sortTasks: () -> Void
   var deleteSingleTask: (_ id: UUID) -> Void
+  var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   
   @State private var showNewTaskPopover = false
   @State private var showSettingsPopover = false
   
+  @GestureState var isDragging = false
+  
   var taskList: some View {
-    List {
-      ForEach(tasks, id: \.self) { task in
-        Button(
-          action: {
-            updateTask(task.id)
-          },
-          label: {
-            TaskCell(task: task)
-          }
-        )
+    return List {
+      ForEach(tasks.indices, id: \.self) { index in
+        ZStack {
+          Color(.red)
+          
+          Color(.green)
+            .padding(.trailing, 65)
+          
+          Button(
+            action: {
+              updateTask(tasks[index].id)
+            },
+            label: {
+              TaskCell(task: tasks[index])
+            }
+          )
+          .backgroundColor(.white)
+          .offset(x: offsets[index])
+          .gesture(
+            DragGesture()
+              .onChanged(
+                { value in
+                  onChanged(value: value, index: index)
+                }
+              )
+              .onEnded(
+                { value in
+                  onEnded(value: value, index: index)
+                }
+              )
+          )
+        }
+        
       }
-      .onDelete(
+      /*.onDelete(
         perform: { indexSet in
           // Get Item at index
           let index = indexSet.first!
@@ -61,7 +90,18 @@ struct AllTasksDisplay: View {
           // Send delete command to viewModel
           deleteSingleTask(id)
         }
-      )
+      )*/
+    }
+  }
+  
+  func onChanged(value: DragGesture.Value, index: Int) {
+    if value.translation.width < 0 {
+      setOffset(index, value.translation.width)
+    }
+  }
+  func onEnded(value: DragGesture.Value, index: Int) {
+    withAnimation {
+      setOffset(index, 0)
     }
   }
   
@@ -139,13 +179,15 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
+      offsets: Array.init(repeating: 0, count: 4),
       addNewTask: {_ in },
       updateTask: {_ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
       resetTasks: {},
       sortTasks: {},
-      deleteSingleTask: {_ in }
+      deleteSingleTask: {_ in },
+      setOffset: {_, _ in }
     )
   }
 }
