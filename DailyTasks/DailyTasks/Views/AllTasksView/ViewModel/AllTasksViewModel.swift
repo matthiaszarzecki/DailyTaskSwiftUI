@@ -99,17 +99,17 @@ class AllTasksViewModel: ObservableObject {
     
     state.allTasks.sort { firstTask, secondTask in
       if firstTask.status && secondTask.status {
-        // Tasks are done, do not order them
+        // Tasks are done, do not order them.
         return false
       }
       
       if !firstTask.status && !secondTask.status {
-        // Tasks are not done, sort by partOfDay
+        // Tasks are not done, sort by partOfDay.
         return firstTask.partOfDay < secondTask.partOfDay
       }
       
       if !firstTask.status && secondTask.status {
-        // First task is todo and second is done, prefer not done
+        // First task is todo and second is done, prefer not done.
         return true
       }
       
