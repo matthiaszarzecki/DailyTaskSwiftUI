@@ -35,6 +35,7 @@ struct CreateNewTaskView: View {
             .padding()
           
           TaskNameTextField(taskName: $taskName, width: width)
+          
           IconGrid(selectedIcon: $selectedIcon, width: width)
 
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
