@@ -16,13 +16,15 @@ struct IconGrid: View {
     "applewatch",
     "pencil",
     "folder",
-    "eye"/*,
+    "eye",
     "message",
     "guitars",
     "chevron.left.slash.chevron.right",
     "hare",
-    "snow",
-    "figure.walk"*/
+    //"snow",
+    //"figure.walk",
+    //"snow",
+    //"snow"
   ]
   private let iconSize: CGFloat = 40
   private let padding: CGFloat = 10
