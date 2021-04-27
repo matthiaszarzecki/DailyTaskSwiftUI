@@ -21,15 +21,16 @@ struct IconGrid: View {
     "guitars",
     "chevron.left.slash.chevron.right",
     "hare",
-    //"snow",
-    //"figure.walk",
-    //"snow",
-    //"snow"
+    "snow",
+    "figure.walk",
+    "trash",
+    "tray.fill",
+    "doc"
   ]
   private let iconSize: CGFloat = 40
   private let padding: CGFloat = 10
   private let cellWidthSmall: CGFloat = 33
-
+  
   var body: some View {
     let column = GridItem(.fixed(cellWidthSmall), spacing: padding, alignment: .leading)
     let gridItems = [column, column, column, column, column, column, column]
