@@ -36,6 +36,7 @@ struct CreateNewTaskView: View {
           
           TaskNameTextField(taskName: $taskName, width: width)
           IconGrid(selectedIcon: $selectedIcon, width: width)
+
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
           
           HStack {
@@ -63,16 +64,17 @@ struct CreateNewTaskView: View {
           alignment: .top
         )
       }
+      
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
       .offset(y: -4)
       .edgesIgnoringSafeArea(.all)
     }
-    .transition(.move(edge: .bottom))
     .onAppear {
       taskName = exampleTasks.randomElement() ?? ""
     }
+    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
   }
 }
 

@@ -24,6 +24,7 @@ struct OverlayBackground: View {
           .foregroundColor(.black)
           .opacity(0.6)
           .edgesIgnoringSafeArea(.all)
+          
       }
     )
   }

@@ -154,6 +154,7 @@ struct SettingsView: View {
       .offset(y: -4)
       .edgesIgnoringSafeArea(.all)
     }
+    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
   }
 }
 

@@ -149,7 +149,6 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           addNewTask: addNewTask
         )
-        .transition(.move(edge: .bottom))
       }
       
       if showSettingsPopover {
