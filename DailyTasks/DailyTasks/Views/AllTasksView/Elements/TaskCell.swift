@@ -12,11 +12,38 @@ struct TaskCell: View {
   
   private let iconSize: CGFloat = 30
   
+  var taskIcon: some View {
+    Image(systemName: task.iconName)
+      .frame(width: iconSize, height: iconSize, alignment: .center)
+      .backgroundColor(.gray)
+      .foregroundColor(.white)
+      .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+  }
+  
+  var statusIcon: some View {
+    if task.status {
+      return AnyView(Image(systemName: "checkmark")
+        .frame(width: iconSize, height: iconSize, alignment: .center)
+        .foregroundColor(.white)
+        .backgroundColor(.dailyHabitsGreen)
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+    } else {
+      return AnyView(Rectangle()
+        .frame(width: iconSize, height: iconSize, alignment: .center)
+        .foregroundColor(.dailyHabitsGray)
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+    }
+  }
+  
   var body: some View {
     VStack {
       HStack {
-        Image(systemName: task.iconName)
+        // Empty Placeholder to anchor overlay image on
+        Rectangle()
+          .frame(width: iconSize, height: iconSize, alignment: .center)
+          .foregroundColor(.clear)
         
+
         if task.status {
           Text("\(task.name)")
             .strikethrough()
@@ -26,27 +53,43 @@ struct TaskCell: View {
         
         Spacer()
         
-        if task.status {
-          Image(systemName: "checkmark")
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .foregroundColor(.white)
-            .backgroundColor(.dailyHabitsGreen)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        } else {
-          Rectangle()
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .foregroundColor(.dailyHabitsGray)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        } 
+        // Empty Placeholder to anchor overlay image on
+        Rectangle()
+          .frame(width: iconSize, height: iconSize, alignment: .center)
+          .foregroundColor(.clear)
       }
+      .overlay(
+        taskIcon,
+        alignment: .topLeading
+      )
+      .overlay(
+        statusIcon,
+        alignment: .topTrailing
+      )
+      .padding(.bottom, 4)
       
       HStack {
-        Text("Days in a row: \(task.currentStreak) - Record: \(task.highestStreak) - Part of day: \(task.partOfDay)")
+        let daysInARow = Text("Days in a row: \(task.currentStreak)")
+        
+        let record = Text(getRecordText(highestStreak: task.highestStreak))
+        
+        let partOfDay = Text(" - \(PartOfDayOption.displayString(id: task.partOfDay))")
+        
+        let fullText: Text = daysInARow + record + partOfDay
+        fullText
           .font(.footnote)
         
         Spacer()
       }
     }
+  }
+
+  func getRecordText(highestStreak: Int) -> String {
+    var recordText = ""
+    if task.highestStreak > 0 {
+      recordText = " - Record: \(highestStreak)"
+    }
+    return recordText
   }
 }
 
@@ -57,6 +100,10 @@ struct TaskCell_Previews: PreviewProvider {
       .previewLayout(.sizeThatFits)
     
     TaskCell(task: MockClasses.task02)
+      .padding()
+      .previewLayout(.sizeThatFits)
+    
+    TaskCell(task: MockClasses.task05)
       .padding()
       .previewLayout(.sizeThatFits)
   }

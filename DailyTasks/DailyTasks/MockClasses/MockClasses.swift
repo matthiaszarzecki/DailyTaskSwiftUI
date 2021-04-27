@@ -22,7 +22,7 @@ class MockClasses {
     status: true,
     iconName: "drop",
     currentStreak: 1,
-    highestStreak: 7,
+    highestStreak: 0,
     partOfDay: 1
   )
   
@@ -44,5 +44,14 @@ class MockClasses {
     partOfDay: 4
   )
   
-  static let tasks = [task01, task02, task03, task04]
+  static let task05 = Task(
+    name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+    status: true,
+    iconName: "drop",
+    currentStreak: 68,
+    highestStreak: 68,
+    partOfDay: 4
+  )
+  
+  static let tasks = [task01, task02, task03, task04, task05]
 }

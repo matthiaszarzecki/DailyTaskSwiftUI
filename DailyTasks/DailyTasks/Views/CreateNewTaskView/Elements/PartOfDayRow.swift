@@ -9,18 +9,12 @@ import SwiftUI
 
 struct PartOfDayRow: View {
   @Binding var selectedPartOfDay: Int
-  
-  private let partOfDayOptions = [
-    PartOfDayOption(index: 0, name: "Morning"),
-    PartOfDayOption(index: 1, name: "Daytime"),
-    PartOfDayOption(index: 2, name: "Evening"),
-    PartOfDayOption(index: 3, name: "All Day")
-  ]
+
   private let padding: CGFloat = 6
   
   var body: some View {
     HStack {
-      ForEach(partOfDayOptions, id: \.self) { option in
+      ForEach(PartOfDayOption.options, id: \.self) { option in
         if selectedPartOfDay == option.index {
           Text("\(option.name)")
             .padding(padding)
