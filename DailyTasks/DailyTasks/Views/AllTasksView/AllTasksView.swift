@@ -62,7 +62,7 @@ struct AllTasksDisplay: View {
           )
           .backgroundColor(.white)
           .offset(x: offsets[index])
-          .gesture(
+          /*.gesture(
             DragGesture()
               .onChanged(
                 { value in
@@ -74,7 +74,7 @@ struct AllTasksDisplay: View {
                   onEnded(value: value, index: index)
                 }
               )
-          )
+          )*/
         }
         
       }
