@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct CancelButton: View {
-  @Binding var showCreateTaskView: Bool
+  var closeOverlay: () -> Void
   
   var body: some View {
     Button(
       action: {
-        withAnimation {
-          showCreateTaskView = false
-        }
+        closeOverlay()
       },
       label: {
         Text("Cancel")
@@ -31,7 +29,7 @@ struct CancelButton: View {
 
 struct CancelButton_Previews: PreviewProvider {
   static var previews: some View {
-    CancelButton(showCreateTaskView: .constant(false))
+    CancelButton(closeOverlay: {})
       .padding()
       .previewLayout(.sizeThatFits)
   }

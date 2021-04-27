@@ -145,18 +145,18 @@ struct AllTasksDisplay: View {
       
       if showNewTaskPopover {
         CreateNewTaskView(
-          showCreateTaskView: $showNewTaskPopover,
           width: geometry.size.width,
-          addNewTask: addNewTask
+          addNewTask: addNewTask,
+          closeOverlay: CloseCreateTaskView
         )
       }
       
       if showSettingsPopover {
         SettingsView(
-          showSettingsView: $showSettingsPopover,
           width: geometry.size.width,
           deleteAllTasks: deleteAllTasks,
-          resetTasks: resetTasks
+          resetTasks: resetTasks,
+          closeOverlay: CloseSettingsView
         )
         .transition(.move(edge: .bottom))
       }
@@ -170,6 +170,18 @@ struct AllTasksDisplay: View {
     ) { _ in
       print("### Checking for update after putting app into foreground")
       checkIfTasksNeedResetting()
+    }
+  }
+  
+  func CloseCreateTaskView() {
+    withAnimation {
+      showNewTaskPopover = false
+    }
+  }
+  
+  func CloseSettingsView() {
+    withAnimation {
+      showSettingsPopover = false
     }
   }
 }

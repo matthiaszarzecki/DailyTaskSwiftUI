@@ -12,8 +12,8 @@ struct ConfirmTaskButton: View {
   var startStreak: String
   var selectedIcon: String
   var selectedPartOfDay: Int
-  @Binding var showCreateTaskView: Bool
   var addNewTask: (_ task: Task) -> Void
+  var closeOverlay: () -> Void
   
   var body: some View {
     let disabled = taskName.isEmpty
@@ -33,9 +33,7 @@ struct ConfirmTaskButton: View {
         )
         
         addNewTask(task)
-        withAnimation {
-          showCreateTaskView = false
-        }
+        closeOverlay()
       },
       label: {
         Text("OK")
@@ -57,8 +55,8 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
-      showCreateTaskView: .constant(false),
-      addNewTask: { _ in }
+      addNewTask: {_ in },
+      closeOverlay: {}
     )
     .padding()
     .previewLayout(.sizeThatFits)
@@ -68,8 +66,8 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
-      showCreateTaskView: .constant(false),
-      addNewTask: { _ in }
+      addNewTask: {_ in },
+      closeOverlay: {}
     )
     .padding()
     .previewLayout(.sizeThatFits)

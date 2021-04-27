@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct HandleForOverlay: View {
-  @Binding var showParentView: Bool
+  var closeOverlay: () -> Void
   
   var body: some View {
     Button(
       action: {
-        withAnimation {
-          showParentView = false
-        }
+        closeOverlay()
       },
       label: {
         Rectangle()
@@ -30,7 +28,7 @@ struct HandleForOverlay: View {
 
 struct HandleForOverlay_Previews: PreviewProvider {
   static var previews: some View {
-    HandleForOverlay(showParentView: .constant(false))
+    HandleForOverlay(closeOverlay: {})
       .padding()
       .previewLayout(.sizeThatFits)
   }

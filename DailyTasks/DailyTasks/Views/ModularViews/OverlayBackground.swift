@@ -10,21 +10,18 @@ import SwiftUI
 /// A Rectangle the size of the entire screen that
 /// on tap sets showParentView to false.
 struct OverlayBackground: View {
-  @Binding var showParentView: Bool
+  var closeOverlay: () -> Void
   
   var body: some View {
     Button(
       action: {
-        withAnimation {
-          showParentView = false
-        }
+        closeOverlay()
       },
       label: {
         Rectangle()
           .foregroundColor(.black)
           .opacity(0.6)
           .edgesIgnoringSafeArea(.all)
-          
       }
     )
   }
@@ -37,9 +34,7 @@ struct OverlayBackground_Previews: PreviewProvider {
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
       
-      OverlayBackground(
-        showParentView: .constant(false)
-      )
+      OverlayBackground(closeOverlay: {})
     }
   }
 }

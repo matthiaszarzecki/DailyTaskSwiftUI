@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CreateNewTaskView: View {
-  @Binding var showCreateTaskView: Bool
   var width: CGFloat
   var addNewTask: (_ task: Task) -> Void
-  
+  var closeOverlay: () -> Void
+
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
@@ -22,7 +22,7 @@ struct CreateNewTaskView: View {
   var body: some View {
     ZStack {
       // Background Part
-      OverlayBackground(showParentView: $showCreateTaskView)
+      OverlayBackground(closeOverlay: closeOverlay)
 
       VStack {
         // Upper "empty" part
@@ -41,15 +41,15 @@ struct CreateNewTaskView: View {
           
           HStack {
             CancelButton(
-              showCreateTaskView: $showCreateTaskView
+              closeOverlay: closeOverlay
             )
             ConfirmTaskButton(
               taskName: taskName,
               startStreak: startStreak,
               selectedIcon: selectedIcon,
               selectedPartOfDay: selectedPartOfDay,
-              showCreateTaskView: $showCreateTaskView,
-              addNewTask: addNewTask
+              addNewTask: addNewTask,
+              closeOverlay: closeOverlay
             )
           }
           .padding()
@@ -60,7 +60,7 @@ struct CreateNewTaskView: View {
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 10)
         .overlay(
-          HandleForOverlay(showParentView: $showCreateTaskView),
+          HandleForOverlay(closeOverlay: closeOverlay),
           alignment: .top
         )
       }
@@ -86,9 +86,9 @@ struct CreateNewTaskView_Previews: PreviewProvider {
         .edgesIgnoringSafeArea(.all)
       
       CreateNewTaskView(
-        showCreateTaskView: .constant(false),
         width: PreviewConstants.width,
-        addNewTask: { _ in }
+        addNewTask: { _ in },
+        closeOverlay: {}
       )
     }
   }

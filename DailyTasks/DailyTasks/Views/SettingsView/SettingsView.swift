@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @Binding var showSettingsView: Bool
   var width: CGFloat
   var deleteAllTasks: () -> Void
   var resetTasks: () -> Void
+  var closeOverlay: () -> Void
   
   @State private var showActualDeleteButton = false
   
   var GoBackButton: some View {
     Button(
       action: {
-        withAnimation {
-          showSettingsView = false
-        }
+        closeOverlay()
       },
       label: {
         Text("Go Back")
@@ -55,9 +53,7 @@ struct SettingsView: View {
     Button(
       action: {
         deleteAllTasks()
-        withAnimation {
-          showSettingsView = false
-        }
+        closeOverlay()
       },
       label: {
         Text("Confirm")
@@ -74,9 +70,7 @@ struct SettingsView: View {
     Button(
       action: {
         resetTasks()
-        withAnimation {
-          showSettingsView = false
-        }
+        closeOverlay()
       },
       label: {
         Text("Reset All Tasks")
@@ -126,7 +120,7 @@ struct SettingsView: View {
   var body: some View {
     ZStack {
       // Empty background
-      OverlayBackground(showParentView: $showSettingsView)
+      OverlayBackground(closeOverlay: closeOverlay)
       
       VStack {
         // Upper "empty" part
@@ -144,7 +138,7 @@ struct SettingsView: View {
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
         .shadow(color: .black, radius: 6)
         .overlay(
-          HandleForOverlay(showParentView: $showSettingsView),
+          HandleForOverlay(closeOverlay: closeOverlay),
           alignment: .top
         )
       }
@@ -166,10 +160,10 @@ struct SettingsView_Previews: PreviewProvider {
         .foregroundColor(.green)
       
       SettingsView(
-        showSettingsView: .constant(false),
         width: PreviewConstants.width,
         deleteAllTasks: {},
-        resetTasks: {}
+        resetTasks: {},
+        closeOverlay: {}
       )
     }
   }
