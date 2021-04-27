@@ -35,14 +35,16 @@ struct TaskCell: View {
     }
   }
   
+  var emptyPlaceholderToAnchorOverlaysOn: some View {
+    Rectangle()
+      .frame(width: iconSize, height: iconSize, alignment: .center)
+      .foregroundColor(.clear)
+  }
+  
   var body: some View {
     VStack {
       HStack {
-        // Empty Placeholder to anchor overlay image on
-        Rectangle()
-          .frame(width: iconSize, height: iconSize, alignment: .center)
-          .foregroundColor(.clear)
-        
+        emptyPlaceholderToAnchorOverlaysOn
 
         if task.status {
           Text("\(task.name)")
@@ -53,10 +55,7 @@ struct TaskCell: View {
         
         Spacer()
         
-        // Empty Placeholder to anchor overlay image on
-        Rectangle()
-          .frame(width: iconSize, height: iconSize, alignment: .center)
-          .foregroundColor(.clear)
+        emptyPlaceholderToAnchorOverlaysOn
       }
       .overlay(
         taskIcon,
@@ -68,28 +67,8 @@ struct TaskCell: View {
       )
       .padding(.bottom, 4)
       
-      HStack {
-        let daysInARow = Text("Days in a row: \(task.currentStreak)")
-        
-        let record = Text(getRecordText(highestStreak: task.highestStreak))
-        
-        let partOfDay = Text(" - \(PartOfDayOption.displayString(id: task.partOfDay))")
-        
-        let fullText: Text = daysInARow + record + partOfDay
-        fullText
-          .font(.footnote)
-        
-        Spacer()
-      }
+      TaskStatistics(task: task)
     }
-  }
-
-  func getRecordText(highestStreak: Int) -> String {
-    var recordText = ""
-    if task.highestStreak > 0 {
-      recordText = " - Record: \(highestStreak)"
-    }
-    return recordText
   }
 }
 

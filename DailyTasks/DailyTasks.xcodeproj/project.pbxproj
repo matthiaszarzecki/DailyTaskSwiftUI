@@ -19,6 +19,7 @@
 		6E89A05A263307ED00586C1D /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A059263307ED00586C1D /* Color-Extension.swift */; };
 		6E89A06226330DEE00586C1D /* AllTasksViewLowerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A06126330DEE00586C1D /* AllTasksViewLowerRow.swift */; };
 		6E89A06726330F5E00586C1D /* AllTasksViewUpperRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A06626330F5E00586C1D /* AllTasksViewUpperRow.swift */; };
+		6E981B822638BC5700A21B2C /* TaskStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E981B812638BC5700A21B2C /* TaskStatistics.swift */; };
 		6E9FF7A3262CBAB800CA7743 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */; };
 		6EB12ECD26261394001065C8 /* AllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB12ECC26261394001065C8 /* AllTasksViewModel.swift */; };
 		6EB8EBDC262A4EDD00E1484D /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */; };
@@ -70,6 +71,7 @@
 		6E89A059263307ED00586C1D /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		6E89A06126330DEE00586C1D /* AllTasksViewLowerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewLowerRow.swift; sourceTree = "<group>"; };
 		6E89A06626330F5E00586C1D /* AllTasksViewUpperRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewUpperRow.swift; sourceTree = "<group>"; };
+		6E981B812638BC5700A21B2C /* TaskStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatistics.swift; sourceTree = "<group>"; };
 		6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		6EB12ECC26261394001065C8 /* AllTasksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllTasksViewModel.swift; sourceTree = "<group>"; };
 		6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				6E89A06126330DEE00586C1D /* AllTasksViewLowerRow.swift */,
 				6E89A06626330F5E00586C1D /* AllTasksViewUpperRow.swift */,
 				CC40E4DF26287D0600059061 /* TaskCell.swift */,
+				6E981B812638BC5700A21B2C /* TaskStatistics.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				CC0AD83C2625BE15003F9A9F /* Task.swift in Sources */,
 				CC40E4D62628790400059061 /* CreateNewTaskView.swift in Sources */,
 				6E89A0342632FD8E00586C1D /* StreakRow.swift in Sources */,
+				6E981B822638BC5700A21B2C /* TaskStatistics.swift in Sources */,
 				6E1DE0E526341F3800222676 /* HandleForOverlay.swift in Sources */,
 				CC0AD7FC2625AAC3003F9A9F /* AppDelegate.swift in Sources */,
 				6E89A046263302CF00586C1D /* CancelButton.swift in Sources */,
