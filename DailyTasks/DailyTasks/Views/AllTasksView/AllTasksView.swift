@@ -147,7 +147,7 @@ struct AllTasksDisplay: View {
         CreateNewTaskView(
           width: geometry.size.width,
           addNewTask: addNewTask,
-          closeOverlay: CloseCreateTaskView
+          closeOverlay: closeCreateTaskView
         )
       }
       
@@ -156,7 +156,7 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           deleteAllTasks: deleteAllTasks,
           resetTasks: resetTasks,
-          closeOverlay: CloseSettingsView
+          closeOverlay: closeSettingsView
         )
         .transition(.move(edge: .bottom))
       }
@@ -173,13 +173,13 @@ struct AllTasksDisplay: View {
     }
   }
   
-  func CloseCreateTaskView() {
+  func closeCreateTaskView() {
     withAnimation {
       showNewTaskPopover = false
     }
   }
   
-  func CloseSettingsView() {
+  func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false
     }
