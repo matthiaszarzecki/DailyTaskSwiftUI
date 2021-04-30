@@ -31,7 +31,7 @@ struct CreateNewTaskView: View {
         
         // Actual popover part
         VStack {
-          Text("Create a new task!")
+          Text("Start a new habit!")
             .font(.largeTitle)
             .padding()
           
