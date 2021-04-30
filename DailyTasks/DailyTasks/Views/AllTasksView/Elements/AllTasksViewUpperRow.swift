@@ -12,6 +12,7 @@ struct AllTasksViewUpperRow: View {
   var width: CGFloat
   var height: CGFloat = 128
   @Binding var showSettingsPopover: Bool
+  @Binding var userName: String
   
   private var doneTasks: Int {
     let doneTasks = tasks.filter { $0.status }
@@ -36,6 +37,14 @@ struct AllTasksViewUpperRow: View {
     return Text("Progress: \(displayString)%")
   }
   
+  var titleHeader: String {
+    if userName == "" {
+      return "Your Daily Habits"
+    } else {
+      return "Good Morning \(userName)!"
+    }
+  }
+  
   var body: some View {
     ZStack {
       Rectangle()
@@ -46,8 +55,11 @@ struct AllTasksViewUpperRow: View {
       
       VStack {
         HStack {
-          Text("Your Daily Habits")
-            .font(.title)
+          Text(titleHeader)
+            .frame(width: width - 100, height: 24, alignment: .leading)
+            .multilineTextAlignment(.leading)
+            .font(.system(size: 200))
+            .minimumScaleFactor(0.12)
             .padding()
           
           Spacer()
@@ -85,7 +97,18 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
     AllTasksViewUpperRow(
       tasks: MockClasses.tasks,
       width: PreviewConstants.width,
-      showSettingsPopover: .constant(false)
+      showSettingsPopover: .constant(false),
+      userName: .constant(MockClasses.userName)
+    )
+    .padding()
+    .backgroundColor(.green)
+    .previewLayout(.sizeThatFits)
+    
+    AllTasksViewUpperRow(
+      tasks: MockClasses.tasks,
+      width: PreviewConstants.width,
+      showSettingsPopover: .constant(false),
+      userName: .constant("")
     )
     .padding()
     .backgroundColor(.green)

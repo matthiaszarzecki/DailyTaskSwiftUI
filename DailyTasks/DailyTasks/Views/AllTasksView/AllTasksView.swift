@@ -38,6 +38,8 @@ struct AllTasksDisplay: View {
   var deleteSingleTask: (_ id: UUID) -> Void
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   
+  @AppStorage("user_name") var userName: String = ""
+  
   @State private var showNewTaskPopover = false
   @State private var showSettingsPopover = false
   
@@ -129,7 +131,8 @@ struct AllTasksDisplay: View {
             tasks: tasks,
             width: geometry.size.width,
             height: upperPartHeight,
-            showSettingsPopover: $showSettingsPopover
+            showSettingsPopover: $showSettingsPopover,
+            userName: $userName
           )
           
           Spacer()
@@ -158,7 +161,8 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           deleteAllTasks: deleteAllTasks,
           resetTasks: resetTasks,
-          closeOverlay: closeSettingsView
+          closeOverlay: closeSettingsView,
+          userName: $userName
         )
       }
     }

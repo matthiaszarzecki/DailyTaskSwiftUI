@@ -12,6 +12,7 @@ struct SettingsView: View {
   var deleteAllTasks: () -> Void
   var resetTasks: () -> Void
   var closeOverlay: () -> Void
+  @Binding var userName: String
   
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
@@ -128,9 +129,12 @@ struct SettingsView: View {
   
   var profileNameAndImage: some View {
     HStack {
-      Text("What's your name?")
-        .font(.title)
-      
+      TextFieldUpdated(
+        text: $userName,
+        placeholder: "What's your name?",
+        width: width - 100
+      )
+
       Spacer()
       
       Image(systemName: "person.crop.circle")
@@ -188,7 +192,8 @@ struct SettingsView_Previews: PreviewProvider {
         width: PreviewConstants.width,
         deleteAllTasks: {},
         resetTasks: {},
-        closeOverlay: {}
+        closeOverlay: {},
+        userName: .constant(MockClasses.userName)
       )
     }
   }

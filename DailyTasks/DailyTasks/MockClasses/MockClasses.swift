@@ -8,6 +8,8 @@
 import Foundation
 
 class MockClasses {
+  static let userName = "Susanne"
+  
   static let task01 = Task(
     name: "Drink water",
     status: false,
