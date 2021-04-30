@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CancelButton: View {
   var closeOverlay: () -> Void
+  var color: Color = .red
   
   var body: some View {
     Button(
@@ -25,7 +26,7 @@ struct CancelButton: View {
             .padding(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 16))
             .foregroundColor(.white)
         }
-        .backgroundColor(.red)
+        .backgroundColor(color)
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(radius: 10)
       }

@@ -19,6 +19,7 @@ struct TextFieldUpdated: View {
           .foregroundColor(.gray)
         
         TextField(placeholder, text: $text)
+          .font(.title3)
           .frame(width: width - 24*2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }

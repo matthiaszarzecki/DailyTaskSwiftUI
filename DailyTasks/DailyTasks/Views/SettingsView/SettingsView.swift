@@ -17,22 +17,6 @@ struct SettingsView: View {
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
   
-  var goBackButton: some View {
-    Button(
-      action: {
-        closeOverlay()
-      },
-      label: {
-        Text("Go Back")
-          .padding()
-          .backgroundColor(.dailyHabitsGreen)
-          .foregroundColor(.white)
-          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-          .shadow(radius: 10)
-      }
-    )
-  }
-  
   var safeDeleteAllTasksButton: some View {
     Button(
       action: {
@@ -132,7 +116,7 @@ struct SettingsView: View {
       TextFieldUpdated(
         text: $userName,
         placeholder: "What's your name?",
-        width: width - 100
+        width: width - 80
       )
 
       Spacer()
@@ -159,7 +143,10 @@ struct SettingsView: View {
         VStack {
           profileNameAndImage
           debugActions
-          goBackButton
+          CancelButton(
+            closeOverlay: { closeOverlay() },
+            color: .dailyHabitsGreen
+          )
         }
         .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
         .backgroundColor(.white)
