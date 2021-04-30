@@ -14,8 +14,9 @@ struct SettingsView: View {
   var closeOverlay: () -> Void
   
   @State private var showActualDeleteButton = false
+  @State private var showActualResetButton = false
   
-  var GoBackButton: some View {
+  var goBackButton: some View {
     Button(
       action: {
         closeOverlay()
@@ -66,14 +67,32 @@ struct SettingsView: View {
     )
   }
   
-  var resetTasksButton: some View {
+  var safeResetTasksButton: some View {
+    Button(
+      action: {
+        withAnimation {
+          showActualResetButton = true
+        }
+      },
+      label: {
+        Text("Reset All Tasks")
+          .padding()
+          .backgroundColor(.red)
+          .foregroundColor(.white)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+          .shadow(radius: 10)
+      }
+    )
+  }
+  
+  var actualResetTasksButton: some View {
     Button(
       action: {
         resetTasks()
         closeOverlay()
       },
       label: {
-        Text("Reset All Tasks")
+        Text("Confirm")
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
@@ -94,7 +113,12 @@ struct SettingsView: View {
           actualDeleteAllTasksButton
         }
       }
-      resetTasksButton
+      HStack {
+        safeResetTasksButton
+        if showActualResetButton {
+          actualResetTasksButton
+        }
+      }
     }
     .frame(width: width - 32*2, height: 150, alignment: .center)
     .padding()
@@ -130,7 +154,7 @@ struct SettingsView: View {
         VStack {
           profileNameAndImage
           debugActions
-          GoBackButton
+          goBackButton
         }
         .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
         .backgroundColor(.white)
