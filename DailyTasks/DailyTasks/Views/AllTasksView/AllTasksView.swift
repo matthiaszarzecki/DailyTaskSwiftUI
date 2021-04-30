@@ -144,6 +144,7 @@ struct AllTasksDisplay: View {
       }
       
       if showNewTaskPopover {
+        OverlayBackground(closeOverlay: closeCreateTaskView)
         CreateNewTaskView(
           width: geometry.size.width,
           addNewTask: addNewTask,
@@ -152,13 +153,13 @@ struct AllTasksDisplay: View {
       }
       
       if showSettingsPopover {
+        OverlayBackground(closeOverlay: closeSettingsView)
         SettingsView(
           width: geometry.size.width,
           deleteAllTasks: deleteAllTasks,
           resetTasks: resetTasks,
           closeOverlay: closeSettingsView
         )
-        .transition(.move(edge: .bottom))
       }
     }
     

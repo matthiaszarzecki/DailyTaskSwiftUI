@@ -144,7 +144,8 @@ struct SettingsView: View {
   var body: some View {
     ZStack {
       // Empty background
-      OverlayBackground(closeOverlay: closeOverlay)
+      Rectangle()
+        .foregroundColor(.clear)
       
       VStack {
         // Upper "empty" part

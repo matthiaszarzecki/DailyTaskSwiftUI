@@ -22,7 +22,8 @@ struct CreateNewTaskView: View {
   var body: some View {
     ZStack {
       // Background Part
-      OverlayBackground(closeOverlay: closeOverlay)
+      Rectangle()
+        .foregroundColor(.clear)
 
       VStack {
         // Upper "empty" part
