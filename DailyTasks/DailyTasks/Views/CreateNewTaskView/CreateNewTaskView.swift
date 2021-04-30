@@ -35,7 +35,11 @@ struct CreateNewTaskView: View {
             .font(.largeTitle)
             .padding()
           
-          TaskNameTextField(taskName: $taskName, width: width)
+          TextFieldUpdated(
+            text: $taskName,
+            placeholder: "Your new Habit!",
+            width: width
+          )
           
           IconGrid(selectedIcon: $selectedIcon, width: width)
 

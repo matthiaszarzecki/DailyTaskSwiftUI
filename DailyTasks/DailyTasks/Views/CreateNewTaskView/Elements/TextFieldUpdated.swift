@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct TaskNameTextField: View {
-  @Binding var taskName: String
+struct TextFieldUpdated: View {
+  @Binding var text: String
+  var placeholder: String
   var width: CGFloat
 
   var body: some View {
@@ -17,7 +18,7 @@ struct TaskNameTextField: View {
         Rectangle()
           .foregroundColor(.gray)
         
-        TextField("Your new task!", text: $taskName)
+        TextField(placeholder, text: $text)
           .frame(width: width - 24*2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }
@@ -28,8 +29,9 @@ struct TaskNameTextField: View {
         Spacer()
         Button(
           action: {
-            taskName = ""
-          }, label: {
+            text = ""
+          },
+          label: {
             Image(systemName: "xmark.circle.fill")
               .foregroundColor(.white)
               .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8))
@@ -44,8 +46,9 @@ struct TaskNameTextField: View {
 
 struct TaskNameTextField_Previews: PreviewProvider {
   static var previews: some View {
-    TaskNameTextField(
-      taskName: .constant("Hello!"),
+    TextFieldUpdated(
+      text: .constant("Hello!"),
+      placeholder: "Your new habit!",
       width: PreviewConstants.width
     )
     .padding()

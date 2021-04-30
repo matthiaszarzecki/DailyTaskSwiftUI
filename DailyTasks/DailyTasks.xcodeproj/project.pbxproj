@@ -13,7 +13,7 @@
 		6E89A02A2632B28800586C1D /* PreviewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A0292632B28800586C1D /* PreviewConstants.swift */; };
 		6E89A02F2632FD0000586C1D /* PartOfDayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */; };
 		6E89A0342632FD8E00586C1D /* StreakRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A0332632FD8E00586C1D /* StreakRow.swift */; };
-		6E89A03C2632FFC700586C1D /* TaskNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A03B2632FFC700586C1D /* TaskNameTextField.swift */; };
+		6E89A03C2632FFC700586C1D /* TextFieldUpdated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A03B2632FFC700586C1D /* TextFieldUpdated.swift */; };
 		6E89A041263300C700586C1D /* ConfirmTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A040263300C700586C1D /* ConfirmTaskButton.swift */; };
 		6E89A046263302CF00586C1D /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A045263302CF00586C1D /* CancelButton.swift */; };
 		6E89A05A263307ED00586C1D /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89A059263307ED00586C1D /* Color-Extension.swift */; };
@@ -65,7 +65,7 @@
 		6E89A0292632B28800586C1D /* PreviewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewConstants.swift; sourceTree = "<group>"; };
 		6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDayRow.swift; sourceTree = "<group>"; };
 		6E89A0332632FD8E00586C1D /* StreakRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakRow.swift; sourceTree = "<group>"; };
-		6E89A03B2632FFC700586C1D /* TaskNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNameTextField.swift; sourceTree = "<group>"; };
+		6E89A03B2632FFC700586C1D /* TextFieldUpdated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUpdated.swift; sourceTree = "<group>"; };
 		6E89A040263300C700586C1D /* ConfirmTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTaskButton.swift; sourceTree = "<group>"; };
 		6E89A045263302CF00586C1D /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		6E89A059263307ED00586C1D /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 				CCC5530726306F3F003C7DBC /* IconGrid.swift */,
 				6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */,
 				6E89A0332632FD8E00586C1D /* StreakRow.swift */,
-				6E89A03B2632FFC700586C1D /* TaskNameTextField.swift */,
+				6E89A03B2632FFC700586C1D /* TextFieldUpdated.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 				6E1DE0DA26341CE500222676 /* OverlayBackground.swift in Sources */,
 				6EB12ECD26261394001065C8 /* AllTasksViewModel.swift in Sources */,
 				CC0AD8002625AAC3003F9A9F /* AllTasksView.swift in Sources */,
-				6E89A03C2632FFC700586C1D /* TaskNameTextField.swift in Sources */,
+				6E89A03C2632FFC700586C1D /* TextFieldUpdated.swift in Sources */,
 				6E89A05A263307ED00586C1D /* Color-Extension.swift in Sources */,
 				6E9FF7A3262CBAB800CA7743 /* RoundedCorner.swift in Sources */,
 				CCC5530D26306F88003C7DBC /* PartOfDayOption.swift in Sources */,
