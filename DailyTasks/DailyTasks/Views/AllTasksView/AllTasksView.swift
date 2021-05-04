@@ -65,34 +65,37 @@ struct AllTasksDisplay: View {
           .backgroundColor(.white)
           //.offset(x: offsets[index])
           /*.gesture(
-            DragGesture()
-              .onChanged(
-                { value in
-                  onChanged(value: value, index: index)
-                }
-              )
-              .onEnded(
-                { value in
-                  onEnded(value: value, index: index)
-                }
-              )
-          )*/
+           DragGesture()
+           .onChanged(
+           { value in
+           onChanged(value: value, index: index)
+           }
+           )
+           .onEnded(
+           { value in
+           onEnded(value: value, index: index)
+           }
+           )
+           )*/
         }
         
       }
+      Rectangle()
+        .frame(width: 100, height: 100, alignment: .center)
+        .foregroundColor(.clear)
       /*.onDelete(
-        perform: { indexSet in
-          // Get Item at index
-          let index = indexSet.first!
-          let item = tasks[index]
-          
-          // Get ID of item
-          let id = item.id
-          
-          // Send delete command to viewModel
-          deleteSingleTask(id)
-        }
-      )*/
+       perform: { indexSet in
+       // Get Item at index
+       let index = indexSet.first!
+       let item = tasks[index]
+       
+       // Get ID of item
+       let id = item.id
+       
+       // Send delete command to viewModel
+       deleteSingleTask(id)
+       }
+       )*/
     }
   }
   
@@ -108,7 +111,7 @@ struct AllTasksDisplay: View {
   }
   
   let upperPartHeight: CGFloat = 128
-  let lowerPartHeight: CGFloat = 72
+  let lowerPartHeight: CGFloat = 0
   var upperAndLowerPartHeight: CGFloat {
     return upperPartHeight + lowerPartHeight
   }
@@ -118,14 +121,59 @@ struct AllTasksDisplay: View {
       ZStack {
         // Actual Task List
         VStack {
+          // Spacer
           Rectangle()
             .foregroundColor(.clear)
             .frame(width: geometry.size.width, height: 52, alignment: .center)
           
           taskList
-            .frame(width: geometry.size.width, height: geometry.size.height - upperAndLowerPartHeight, alignment: .top)
+            .frame(width: geometry.size.width, height: geometry.size.height - 28, alignment: .top)
+            .overlay(
+              Button(
+                action: {
+                  withAnimation {
+                    sortTasks()
+                  }
+                },
+                label: {
+                  HStack {
+                    Image(systemName: "arrow.up.arrow.down")
+                  }
+                  .padding()
+                  .frame(width: 60, height: 60, alignment: .center)
+                  .backgroundColor(.dailyHabitsGreen)
+                  .foregroundColor(.white)
+                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                  .padding()
+                  .shadow(radius: 10)
+                }
+              ),
+              alignment: .bottomTrailing
+            )
+            .overlay(
+              Button(
+                action: {
+                  withAnimation {
+                    showNewTaskPopover = true
+                  }
+                },
+                label: {
+                  HStack {
+                    Image(systemName: "plus")
+                  }
+                  .padding()
+                  .frame(width: 60, height: 60, alignment: .center)
+                  .backgroundColor(.dailyHabitsGreen)
+                  .foregroundColor(.white)
+                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                  .padding()
+                  .shadow(radius: 10)
+                }
+              ),
+              alignment: .bottomLeading
+            )
         }
- 
+        
         VStack {
           AllTasksViewUpperRow(
             tasks: tasks,
@@ -136,13 +184,6 @@ struct AllTasksDisplay: View {
           )
           
           Spacer()
-          
-          AllTasksViewLowerRow(
-            showNewTaskPopover: $showNewTaskPopover,
-            width: geometry.size.width,
-            height: lowerPartHeight,
-            sortTasks: sortTasks
-          )
         }
       }
       
