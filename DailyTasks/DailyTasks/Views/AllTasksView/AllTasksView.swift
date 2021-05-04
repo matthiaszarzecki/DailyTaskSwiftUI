@@ -63,7 +63,7 @@ struct AllTasksDisplay: View {
             }
           )
           .backgroundColor(.white)
-          .offset(x: offsets[index])
+          //.offset(x: offsets[index])
           /*.gesture(
             DragGesture()
               .onChanged(
