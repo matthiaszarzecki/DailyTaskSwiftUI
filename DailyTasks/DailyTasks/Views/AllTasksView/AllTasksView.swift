@@ -124,10 +124,10 @@ struct AllTasksDisplay: View {
           // Spacer
           Rectangle()
             .foregroundColor(.clear)
-            .frame(width: geometry.size.width, height: 52, alignment: .center)
+            .frame(width: geometry.size.width, height: 124, alignment: .center)
           
           taskList
-            .frame(width: geometry.size.width, height: geometry.size.height - 28, alignment: .top)
+            .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
             .overlay(
               Button(
                 action: {
