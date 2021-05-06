@@ -136,8 +136,10 @@ struct AllTasksDisplay: View {
                   }
                 },
                 label: {
-                  HStack {
+                  VStack {
                     Image(systemName: "arrow.up.arrow.down")
+                    Text("Sort")
+                      .font(.system(size: 12))
                   }
                   .padding()
                   .frame(width: 60, height: 60, alignment: .center)
@@ -158,8 +160,10 @@ struct AllTasksDisplay: View {
                   }
                 },
                 label: {
-                  HStack {
+                  VStack {
                     Image(systemName: "plus")
+                    Text("New")
+                      .font(.system(size: 12))
                   }
                   .padding()
                   .frame(width: 60, height: 60, alignment: .center)
