@@ -199,7 +199,6 @@
 				CC0AD8092625AAC5003F9A9F /* Info.plist */,
 				CC0AD82E2625AB14003F9A9F /* AppDelegate */,
 				CC0AD8492625BE4C003F9A9F /* Extensions */,
-				CC0AD8652625C4FD003F9A9F /* MockClasses */,
 				CC0AD8402625BE28003F9A9F /* Models */,
 				CC0AD8032625AAC5003F9A9F /* Preview Content */,
 				CC0AD8362625AB23003F9A9F /* SupportingFiles */,
@@ -211,6 +210,8 @@
 		CC0AD8032625AAC5003F9A9F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				CC0AD8602625C4E9003F9A9F /* MockClasses.swift */,
+				6E89A0292632B28800586C1D /* PreviewConstants.swift */,
 				CC0AD8042625AAC5003F9A9F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -288,15 +289,6 @@
 				6EB12ECC26261394001065C8 /* AllTasksViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		CC0AD8652625C4FD003F9A9F /* MockClasses */ = {
-			isa = PBXGroup;
-			children = (
-				CC0AD8602625C4E9003F9A9F /* MockClasses.swift */,
-				6E89A0292632B28800586C1D /* PreviewConstants.swift */,
-			);
-			path = MockClasses;
 			sourceTree = "<group>";
 		};
 		CC40E4D1262878EB00059061 /* AllTasksView */ = {
