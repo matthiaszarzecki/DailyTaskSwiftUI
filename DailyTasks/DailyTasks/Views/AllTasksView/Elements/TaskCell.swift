@@ -48,6 +48,7 @@ struct TaskCell: View {
 
         if task.status {
           Text("\(task.name)")
+            .foregroundColor(.dailyHabitsGreen)
             .strikethrough()
         } else {
           Text("\(task.name)")
