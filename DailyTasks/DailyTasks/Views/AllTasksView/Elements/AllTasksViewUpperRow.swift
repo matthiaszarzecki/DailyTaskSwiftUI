@@ -37,14 +37,6 @@ struct AllTasksViewUpperRow: View {
     return Text("Progress: \(displayString)%")
   }
   
-  var titleHeader: String {
-    if userName == "" {
-      return "Your Daily Habits"
-    } else {
-      return "Good Morning \(userName)!"
-    }
-  }
-  
   var body: some View {
     ZStack {
       Rectangle()
@@ -55,14 +47,28 @@ struct AllTasksViewUpperRow: View {
       
       VStack {
         HStack {
-          Text(titleHeader)
-            .frame(width: width - 100, height: 24, alignment: .leading)
-            .multilineTextAlignment(.leading)
-            .font(.system(size: 200))
-            .minimumScaleFactor(0.12)
+          if userName == "" {
+            Text("Your Daily Habits")
+              .frame(width: width - 100, height: 24, alignment: .leading)
+              .multilineTextAlignment(.leading)
+              .font(.system(size: 200))
+              .minimumScaleFactor(0.12)
+              .padding()
+          } else {
+            VStack {
+              Text("Good Morning,")
+                .frame(width: width - 100, height: 24, alignment: .leading)
+                .multilineTextAlignment(.leading)
+                .font(.system(size: 12))
+                .minimumScaleFactor(0.12)
+              
+              Text("\(userName)")
+                .frame(width: width - 100, height: 24, alignment: .leading)
+                .font(.system(size: 300))
+                .minimumScaleFactor(0.12)
+            }
             .padding()
-          
-          Spacer()
+          }
           
           Button(
             action: {
