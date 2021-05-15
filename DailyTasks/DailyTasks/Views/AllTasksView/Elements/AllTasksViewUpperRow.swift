@@ -57,17 +57,17 @@ struct AllTasksViewUpperRow: View {
           } else {
             VStack {
               Text("Good Morning,")
-                .frame(width: width - 100, height: 24, alignment: .leading)
+                .frame(width: width - 100, height: 14, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 12))
                 .minimumScaleFactor(0.12)
               
               Text("\(userName)")
-                .frame(width: width - 100, height: 24, alignment: .leading)
+                .frame(width: width - 100, height: 32, alignment: .leading)
                 .font(.system(size: 300))
                 .minimumScaleFactor(0.12)
             }
-            .padding()
+            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
           }
           
           Button(
