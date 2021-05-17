@@ -11,32 +11,32 @@ struct PartOfDayOption: Hashable {
   let index: Int
   let name: String
   
-  enum daytimeOptions: String {
-    case morning = "Morning"
-    case daytime = "Daytime"
-    case evening = "Evening"
-    case allDay = "All Day"
+  enum daytimeOptions {
+    static let morning = "Morning"
+    static let daytime = "Daytime"
+    static let evening = "Evening"
+    static let allDay = "All Day"
   }
   
   static func displayString(id: Int) -> String {
     switch(id) {
     case 0:
-      return daytimeOptions.morning.rawValue
+      return daytimeOptions.morning
     case 1:
-      return daytimeOptions.daytime.rawValue
+      return daytimeOptions.daytime
     case 2:
-      return daytimeOptions.evening.rawValue
+      return daytimeOptions.evening
     case 3:
-      return daytimeOptions.allDay.rawValue
+      return daytimeOptions.allDay
     default:
-      return daytimeOptions.allDay.rawValue
+      return daytimeOptions.allDay
     }
   }
   
   static let options = [
-    PartOfDayOption(index: 0, name: daytimeOptions.morning.rawValue),
-    PartOfDayOption(index: 1, name: daytimeOptions.daytime.rawValue),
-    PartOfDayOption(index: 2, name: daytimeOptions.evening.rawValue),
-    PartOfDayOption(index: 3, name: daytimeOptions.allDay.rawValue)
+    PartOfDayOption(index: 0, name: daytimeOptions.morning),
+    PartOfDayOption(index: 1, name: daytimeOptions.daytime),
+    PartOfDayOption(index: 2, name: daytimeOptions.evening),
+    PartOfDayOption(index: 3, name: daytimeOptions.allDay)
   ]
 }
