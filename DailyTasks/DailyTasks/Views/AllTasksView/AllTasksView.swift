@@ -49,10 +49,34 @@ struct AllTasksDisplay: View {
     return List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
-          Color(.red)
+          // Revealed through dragging
+          //Color(.red)
           
-          Color(.green)
-            .padding(.trailing, 65)
+          //Color(.green)
+            //.padding(.trailing, 65)
+
+          HStack {
+            Spacer()
+            Button(action: {
+              print("1. offset: \(offsets[index])")
+            }) {
+              Image(systemName: "suit.heart")
+                .font(.title)
+                .foregroundColor(.white)
+                .frame(width: 65)
+                .backgroundColor(.blue)
+            }
+            
+            Button(action: {
+              print("2. offset: \(offsets[index])")
+            }) {
+              Image(systemName: "cart.badge.plus")
+                .font(.title)
+                .foregroundColor(.white)
+                .frame(width: 65)
+                .backgroundColor(.green)
+            }
+          }
           
           Button(
             action: {
@@ -62,40 +86,31 @@ struct AllTasksDisplay: View {
               TaskCell(task: tasks[index])
             }
           )
+          // Disable button when currently slid out
+          .disabled(offsets[index] < -125)
           .backgroundColor(.white)
-          //.offset(x: offsets[index])
-          /*.gesture(
-           DragGesture()
-           .onChanged(
-           { value in
-           onChanged(value: value, index: index)
-           }
-           )
-           .onEnded(
-           { value in
-           onEnded(value: value, index: index)
-           }
-           )
-           )*/
+          
+          // Drag Gesture Handling
+          .offset(x: offsets[index])
+          
+          .gesture(
+            DragGesture()
+              .updating(
+                $isDragging,
+                body: { (value, state, _) in
+                  // so we can validate for correct drag
+                  state = true
+                  onChanged(value: value, index: index)
+                }
+              )
+              .onEnded(
+                { (value) in
+                  onEnded(value: value, index: index)
+                }
+              )
+          )
         }
-        
       }
-      Rectangle()
-        .frame(width: 100, height: 100, alignment: .center)
-        .foregroundColor(.clear)
-      /*.onDelete(
-       perform: { indexSet in
-       // Get Item at index
-       let index = indexSet.first!
-       let item = tasks[index]
-       
-       // Get ID of item
-       let id = item.id
-       
-       // Send delete command to viewModel
-       deleteSingleTask(id)
-       }
-       )*/
     }
   }
   
@@ -104,9 +119,14 @@ struct AllTasksDisplay: View {
       setOffset(index, value.translation.width)
     }
   }
+  
   func onEnded(value: DragGesture.Value, index: Int) {
     withAnimation {
-      setOffset(index, 0)
+      if -value.translation.width >= 100 {
+        setOffset(index, -130)
+      } else {
+        setOffset(index, 0)
+      }
     }
   }
   
