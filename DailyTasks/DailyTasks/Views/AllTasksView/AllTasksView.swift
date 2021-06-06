@@ -15,6 +15,7 @@ struct AllTasksView: View {
       tasks: viewModel.state.allTasks,
       offsets: viewModel.state.offsets,
       addNewTask: viewModel.addNewTask,
+      editTask: viewModel.editTask,
       updateTask: viewModel.updateTask,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
@@ -30,6 +31,7 @@ struct AllTasksDisplay: View {
   var tasks: [Task]
   var offsets: [CGFloat]
   var addNewTask: (_ task: Task) -> Void
+  var editTask: (_ task: Task) -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void
@@ -41,6 +43,7 @@ struct AllTasksDisplay: View {
   @AppStorage("user_name") var userName: String = ""
   
   @State private var showNewTaskPopover = false
+  @State private var showUpdateTaskPopover = false
   @State private var showSettingsPopover = false
   
   @GestureState var isDragging = false
@@ -59,6 +62,9 @@ struct AllTasksDisplay: View {
             Spacer()
             Button(action: {
               print("1. offset: \(offsets[index])")
+              withAnimation {
+                showUpdateTaskPopover = true
+              }
             }) {
               Image(systemName: "suit.heart")
                 .font(.title)
@@ -220,6 +226,15 @@ struct AllTasksDisplay: View {
         )
       }
       
+      if showUpdateTaskPopover {
+        OverlayBackground(closeOverlay: closeEditTaskView)
+        UpdateTaskView(
+          width: geometry.size.width,
+          editTask: editTask,
+          closeOverlay: closeEditTaskView
+        )
+      }
+      
       if showSettingsPopover {
         OverlayBackground(closeOverlay: closeSettingsView)
         SettingsView(
@@ -249,6 +264,12 @@ struct AllTasksDisplay: View {
     }
   }
   
+  func closeEditTaskView() {
+    withAnimation {
+      showUpdateTaskPopover = false
+    }
+  }
+  
   func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false
@@ -262,6 +283,7 @@ struct ContentView_Previews: PreviewProvider {
       tasks: MockClasses.tasks,
       offsets: Array.init(repeating: 0, count: 4),
       addNewTask: {_ in },
+      editTask: {_ in },
       updateTask: {_ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
