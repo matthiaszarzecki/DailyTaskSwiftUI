@@ -235,6 +235,7 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           task: tasks[currentlyEditedTaskIndex],
           editTask: editTask,
+          deleteSingleTask: deleteSingleTask,
           closeOverlay: closeEditTaskView
         )
       }

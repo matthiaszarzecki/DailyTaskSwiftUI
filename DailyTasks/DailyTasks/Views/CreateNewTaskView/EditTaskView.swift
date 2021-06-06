@@ -11,8 +11,11 @@ struct EditTaskView: View {
   var width: CGFloat
   @State var task: Task
   var editTask: (_ task: Task) -> Void
+  var deleteSingleTask: (_ id: UUID) -> Void
   var closeOverlay: () -> Void
 
+  @State private var showActualDeleteButton = false
+  
   var body: some View {
     ZStack {
       // Background Part
@@ -38,6 +41,42 @@ struct EditTaskView: View {
           IconGrid(selectedIcon: $task.iconName, width: width)
 
           PartOfDayRow(selectedPartOfDay: $task.partOfDay)
+          
+          HStack {
+            Button(
+              action: {
+                withAnimation {
+                  showActualDeleteButton = true
+                }
+              },
+              label: {
+                Text("Delete Habit")
+                  .padding()
+                  .backgroundColor(.red)
+                  .foregroundColor(.white)
+                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                  .shadow(radius: 10)
+              }
+            )
+            
+            if showActualDeleteButton {
+              Button(
+                action: {
+                  deleteSingleTask(task.id)
+                  closeOverlay()
+                },
+                label: {
+                  Text("Confirm")
+                    .padding()
+                    .backgroundColor(.red)
+                    .foregroundColor(.white)
+                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .shadow(radius: 10)
+                }
+              )
+            }
+          }
+          
           
           HStack {
             CancelButton(
@@ -94,6 +133,7 @@ struct UpdateTaskView_Previews: PreviewProvider {
         width: PreviewConstants.width,
         task: MockClasses.task01,
         editTask: { _ in },
+        deleteSingleTask: { _ in },
         closeOverlay: {}
       )
     }
