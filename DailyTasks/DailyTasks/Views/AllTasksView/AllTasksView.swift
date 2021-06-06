@@ -48,6 +48,8 @@ struct AllTasksDisplay: View {
   
   @GestureState var isDragging = false
   
+  @State private var currentlyEditedTaskIndex = 0
+  
   var taskList: some View {
     return List {
       ForEach(tasks.indices, id: \.self) { index in
@@ -62,6 +64,7 @@ struct AllTasksDisplay: View {
             Spacer()
             Button(action: {
               print("1. offset: \(offsets[index])")
+              self.currentlyEditedTaskIndex = index
               withAnimation {
                 showUpdateTaskPopover = true
               }
@@ -228,8 +231,9 @@ struct AllTasksDisplay: View {
       
       if showUpdateTaskPopover {
         OverlayBackground(closeOverlay: closeEditTaskView)
-        UpdateTaskView(
+        EditTaskView(
           width: geometry.size.width,
+          task: tasks[currentlyEditedTaskIndex],
           editTask: editTask,
           closeOverlay: closeEditTaskView
         )

@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct UpdateTaskView: View {
+struct EditTaskView: View {
   var width: CGFloat
+  @State var task: Task
   var editTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
 
-  @State private var taskName = "New Task!"
-  @State private var startStreak = "0"
+  //@State private var taskName = "New Task!"
+  //@State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
   @State private var selectedIcon = "drop"
-  
-  private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
   
   var body: some View {
     ZStack {
@@ -36,7 +35,7 @@ struct UpdateTaskView: View {
             .padding()
           
           TextFieldUpdated(
-            text: $taskName,
+            text: $task.name,
             placeholder: "Your new Habit!",
             width: width
           )
@@ -49,14 +48,22 @@ struct UpdateTaskView: View {
             CancelButton(
               closeOverlay: closeOverlay
             )
-            /*ConfirmTaskButton(
-              taskName: taskName,
-              startStreak: startStreak,
-              selectedIcon: selectedIcon,
-              selectedPartOfDay: selectedPartOfDay,
-              addNewTask: addNewTask,
-              closeOverlay: closeOverlay
-            )*/
+            
+            Button(
+              action: {
+                editTask(task)
+                closeOverlay()
+              },
+              label: {
+                Text("OK")
+                  .padding()
+                  .backgroundColor(.dailyHabitsGreen)
+                  .foregroundColor(.white)
+                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                  .shadow(radius: 10)
+              }
+            )
+            
           }
           .padding()
         }
@@ -77,9 +84,6 @@ struct UpdateTaskView: View {
       .offset(y: -4)
       .edgesIgnoringSafeArea(.all)
     }
-    .onAppear {
-      taskName = exampleTasks.randomElement() ?? ""
-    }
     .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
   }
 }
@@ -91,8 +95,9 @@ struct UpdateTaskView_Previews: PreviewProvider {
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
       
-      UpdateTaskView(
+      EditTaskView(
         width: PreviewConstants.width,
+        task: MockClasses.task01,
         editTask: { _ in },
         closeOverlay: {}
       )
