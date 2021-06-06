@@ -13,11 +13,6 @@ struct EditTaskView: View {
   var editTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
 
-  //@State private var taskName = "New Task!"
-  //@State private var startStreak = "0"
-  @State private var selectedPartOfDay = 1
-  @State private var selectedIcon = "drop"
-  
   var body: some View {
     ZStack {
       // Background Part
@@ -36,13 +31,13 @@ struct EditTaskView: View {
           
           TextFieldUpdated(
             text: $task.name,
-            placeholder: "Your new Habit!",
+            placeholder: task.name,
             width: width
           )
           
-          IconGrid(selectedIcon: $selectedIcon, width: width)
+          IconGrid(selectedIcon: $task.iconName, width: width)
 
-          PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
+          PartOfDayRow(selectedPartOfDay: $task.partOfDay)
           
           HStack {
             CancelButton(
@@ -55,7 +50,7 @@ struct EditTaskView: View {
                 closeOverlay()
               },
               label: {
-                Text("OK")
+                Text("Update!")
                   .padding()
                   .backgroundColor(.dailyHabitsGreen)
                   .foregroundColor(.white)
