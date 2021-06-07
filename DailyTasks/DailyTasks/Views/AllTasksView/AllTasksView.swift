@@ -41,104 +41,13 @@ struct AllTasksDisplay: View {
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   
   @AppStorage("user_name") var userName: String = ""
-  
+
+  @State private var currentlyEditedTaskIndex = 0
+
   @State private var showNewTaskPopover = false
   @State private var showUpdateTaskPopover = false
   @State private var showSettingsPopover = false
-  
-  @GestureState var isDragging = false
-  
-  @State private var currentlyEditedTaskIndex = 0
-  
-  var taskList: some View {
-    return List {
-      ForEach(tasks.indices, id: \.self) { index in
-        ZStack {
-          // Revealed through dragging
-          //Color(.red)
-          
-          //Color(.green)
-            //.padding(.trailing, 65)
 
-          HStack {
-            Spacer()
-            Button(action: {
-              print("1. offset: \(offsets[index])")
-              self.currentlyEditedTaskIndex = index
-              withAnimation {
-                showUpdateTaskPopover = true
-              }
-            }) {
-              Image(systemName: "suit.heart")
-                .font(.title)
-                .foregroundColor(.white)
-                .frame(width: 65)
-                .backgroundColor(.blue)
-            }
-            
-            Button(action: {
-              print("2. offset: \(offsets[index])")
-            }) {
-              Image(systemName: "cart.badge.plus")
-                .font(.title)
-                .foregroundColor(.white)
-                .frame(width: 65)
-                .backgroundColor(.green)
-            }
-          }
-          
-          Button(
-            action: {
-              updateTask(tasks[index].id)
-            },
-            label: {
-              TaskCell(task: tasks[index])
-            }
-          )
-          // Disable button when currently slid out
-          .disabled(offsets[index] < -125)
-          .backgroundColor(.white)
-          
-          // Drag Gesture Handling
-          .offset(x: offsets[index])
-          
-          .gesture(
-            DragGesture()
-              .updating(
-                $isDragging,
-                body: { (value, state, _) in
-                  // so we can validate for correct drag
-                  state = true
-                  onChanged(value: value, index: index)
-                }
-              )
-              .onEnded(
-                { (value) in
-                  onEnded(value: value, index: index)
-                }
-              )
-          )
-        }
-      }
-    }
-  }
-  
-  func onChanged(value: DragGesture.Value, index: Int) {
-    if value.translation.width < 0 {
-      setOffset(index, value.translation.width)
-    }
-  }
-  
-  func onEnded(value: DragGesture.Value, index: Int) {
-    withAnimation {
-      if -value.translation.width >= 100 {
-        setOffset(index, -130)
-      } else {
-        setOffset(index, 0)
-      }
-    }
-  }
-  
   let upperPartHeight: CGFloat = 128
   let lowerPartHeight: CGFloat = 0
   var upperAndLowerPartHeight: CGFloat {
@@ -155,56 +64,66 @@ struct AllTasksDisplay: View {
             .foregroundColor(.clear)
             .frame(width: geometry.size.width, height: 124, alignment: .center)
           
-          taskList
-            .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
-            .overlay(
-              Button(
-                action: {
-                  withAnimation {
-                    sortTasks()
-                  }
-                },
-                label: {
-                  VStack {
-                    Image(systemName: "arrow.up.arrow.down")
-                    Text("Sort")
-                      .font(.system(size: 12))
-                  }
-                  .padding()
-                  .frame(width: 60, height: 60, alignment: .center)
-                  .backgroundColor(.dailyHabitsGreen)
-                  .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                  .padding()
-                  .shadow(radius: 10)
+          TaskList(
+            tasks: tasks,
+            offsets: offsets,
+            editTask: editTask,
+            updateTask: updateTask,
+            setOffset: setOffset,
+            showUpdateTaskPopover: $showUpdateTaskPopover,
+            currentlyEditedTaskIndex: $currentlyEditedTaskIndex
+          )
+          .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
+          // Sort Button
+          .overlay(
+            Button(
+              action: {
+                withAnimation {
+                  sortTasks()
                 }
-              ),
-              alignment: .bottomTrailing
-            )
-            .overlay(
-              Button(
-                action: {
-                  withAnimation {
-                    showNewTaskPopover = true
-                  }
-                },
-                label: {
-                  VStack {
-                    Image(systemName: "plus")
-                    Text("New")
-                      .font(.system(size: 12))
-                  }
-                  .padding()
-                  .frame(width: 60, height: 60, alignment: .center)
-                  .backgroundColor(.dailyHabitsGreen)
-                  .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                  .padding()
-                  .shadow(radius: 10)
+              },
+              label: {
+                VStack {
+                  Image(systemName: "arrow.up.arrow.down")
+                  Text("Sort")
+                    .font(.system(size: 12))
                 }
-              ),
-              alignment: .bottomLeading
-            )
+                .padding()
+                .frame(width: 60, height: 60, alignment: .center)
+                .backgroundColor(.dailyHabitsGreen)
+                .foregroundColor(.white)
+                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding()
+                .shadow(radius: 10)
+              }
+            ),
+            alignment: .bottomTrailing
+          )
+          // New Task Button
+          .overlay(
+            Button(
+              action: {
+                withAnimation {
+                  showNewTaskPopover = true
+                }
+              },
+              label: {
+                VStack {
+                  Image(systemName: "plus")
+                  Text("New")
+                    .font(.system(size: 12))
+                }
+                .padding()
+                .frame(width: 60, height: 60, alignment: .center)
+                .backgroundColor(.dailyHabitsGreen)
+                .foregroundColor(.white)
+                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding()
+                .shadow(radius: 10)
+              }
+            ),
+            alignment: .bottomLeading
+          )
         }
         
         VStack {
