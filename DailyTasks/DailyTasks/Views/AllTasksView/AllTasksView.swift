@@ -15,6 +15,7 @@ struct AllTasksView: View {
       tasks: viewModel.state.allTasks,
       offsets: viewModel.state.offsets,
       addNewTask: viewModel.addNewTask,
+      editTask: viewModel.editTask,
       updateTask: viewModel.updateTask,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
@@ -30,6 +31,7 @@ struct AllTasksDisplay: View {
   var tasks: [Task]
   var offsets: [CGFloat]
   var addNewTask: (_ task: Task) -> Void
+  var editTask: (_ task: Task) -> Void
   var updateTask: (_ id: UUID) -> Void
   var deleteAllTasks: () -> Void
   var checkIfTasksNeedResetting: () -> Void
@@ -39,77 +41,13 @@ struct AllTasksDisplay: View {
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   
   @AppStorage("user_name") var userName: String = ""
-  
+
+  @State private var currentlyEditedTaskIndex = 0
+
   @State private var showNewTaskPopover = false
+  @State private var showUpdateTaskPopover = false
   @State private var showSettingsPopover = false
-  
-  @GestureState var isDragging = false
-  
-  var taskList: some View {
-    return List {
-      ForEach(tasks.indices, id: \.self) { index in
-        ZStack {
-          Color(.red)
-          
-          Color(.green)
-            .padding(.trailing, 65)
-          
-          Button(
-            action: {
-              updateTask(tasks[index].id)
-            },
-            label: {
-              TaskCell(task: tasks[index])
-            }
-          )
-          .backgroundColor(.white)
-          //.offset(x: offsets[index])
-          /*.gesture(
-           DragGesture()
-           .onChanged(
-           { value in
-           onChanged(value: value, index: index)
-           }
-           )
-           .onEnded(
-           { value in
-           onEnded(value: value, index: index)
-           }
-           )
-           )*/
-        }
-        
-      }
-      Rectangle()
-        .frame(width: 100, height: 100, alignment: .center)
-        .foregroundColor(.clear)
-      /*.onDelete(
-       perform: { indexSet in
-       // Get Item at index
-       let index = indexSet.first!
-       let item = tasks[index]
-       
-       // Get ID of item
-       let id = item.id
-       
-       // Send delete command to viewModel
-       deleteSingleTask(id)
-       }
-       )*/
-    }
-  }
-  
-  func onChanged(value: DragGesture.Value, index: Int) {
-    if value.translation.width < 0 {
-      setOffset(index, value.translation.width)
-    }
-  }
-  func onEnded(value: DragGesture.Value, index: Int) {
-    withAnimation {
-      setOffset(index, 0)
-    }
-  }
-  
+
   let upperPartHeight: CGFloat = 128
   let lowerPartHeight: CGFloat = 0
   var upperAndLowerPartHeight: CGFloat {
@@ -126,56 +64,66 @@ struct AllTasksDisplay: View {
             .foregroundColor(.clear)
             .frame(width: geometry.size.width, height: 124, alignment: .center)
           
-          taskList
-            .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
-            .overlay(
-              Button(
-                action: {
-                  withAnimation {
-                    sortTasks()
-                  }
-                },
-                label: {
-                  VStack {
-                    Image(systemName: "arrow.up.arrow.down")
-                    Text("Sort")
-                      .font(.system(size: 12))
-                  }
-                  .padding()
-                  .frame(width: 60, height: 60, alignment: .center)
-                  .backgroundColor(.dailyHabitsGreen)
-                  .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                  .padding()
-                  .shadow(radius: 10)
+          TaskList(
+            tasks: tasks,
+            offsets: offsets,
+            editTask: editTask,
+            updateTask: updateTask,
+            setOffset: setOffset,
+            showUpdateTaskPopover: $showUpdateTaskPopover,
+            currentlyEditedTaskIndex: $currentlyEditedTaskIndex
+          )
+          .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
+          // Sort Button
+          .overlay(
+            Button(
+              action: {
+                withAnimation {
+                  sortTasks()
                 }
-              ),
-              alignment: .bottomTrailing
-            )
-            .overlay(
-              Button(
-                action: {
-                  withAnimation {
-                    showNewTaskPopover = true
-                  }
-                },
-                label: {
-                  VStack {
-                    Image(systemName: "plus")
-                    Text("New")
-                      .font(.system(size: 12))
-                  }
-                  .padding()
-                  .frame(width: 60, height: 60, alignment: .center)
-                  .backgroundColor(.dailyHabitsGreen)
-                  .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                  .padding()
-                  .shadow(radius: 10)
+              },
+              label: {
+                VStack {
+                  Image(systemName: "arrow.up.arrow.down")
+                  Text("Sort")
+                    .font(.system(size: 12))
                 }
-              ),
-              alignment: .bottomLeading
-            )
+                .padding()
+                .frame(width: 60, height: 60, alignment: .center)
+                .backgroundColor(.dailyHabitsGreen)
+                .foregroundColor(.white)
+                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding()
+                .shadow(radius: 10)
+              }
+            ),
+            alignment: .bottomTrailing
+          )
+          // New Task Button
+          .overlay(
+            Button(
+              action: {
+                withAnimation {
+                  showNewTaskPopover = true
+                }
+              },
+              label: {
+                VStack {
+                  Image(systemName: "plus")
+                  Text("New")
+                    .font(.system(size: 12))
+                }
+                .padding()
+                .frame(width: 60, height: 60, alignment: .center)
+                .backgroundColor(.dailyHabitsGreen)
+                .foregroundColor(.white)
+                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding()
+                .shadow(radius: 10)
+              }
+            ),
+            alignment: .bottomLeading
+          )
         }
         
         VStack {
@@ -197,6 +145,17 @@ struct AllTasksDisplay: View {
           width: geometry.size.width,
           addNewTask: addNewTask,
           closeOverlay: closeCreateTaskView
+        )
+      }
+      
+      if showUpdateTaskPopover {
+        OverlayBackground(closeOverlay: closeEditTaskView)
+        EditTaskView(
+          width: geometry.size.width,
+          task: tasks[currentlyEditedTaskIndex],
+          editTask: editTask,
+          deleteSingleTask: deleteSingleTask,
+          closeOverlay: closeEditTaskView
         )
       }
       
@@ -229,6 +188,12 @@ struct AllTasksDisplay: View {
     }
   }
   
+  func closeEditTaskView() {
+    withAnimation {
+      showUpdateTaskPopover = false
+    }
+  }
+  
   func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false
@@ -242,6 +207,7 @@ struct ContentView_Previews: PreviewProvider {
       tasks: MockClasses.tasks,
       offsets: Array.init(repeating: 0, count: 4),
       addNewTask: {_ in },
+      editTask: {_ in },
       updateTask: {_ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},

@@ -146,6 +146,14 @@ class AllTasksViewModel: ObservableObject {
     saveAllData()
   }
   
+  func editTask(task: Task) {
+    if let index = state.allTasks.firstIndex(where: { $0.id == task.id }) {
+      state.allTasks[index] = task
+    }
+    
+    saveAllData()
+  }
+  
   func deleteSingleTask(id: UUID) {
     if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
       state.allTasks.remove(at: index)
