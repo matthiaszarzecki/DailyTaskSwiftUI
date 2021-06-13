@@ -19,7 +19,7 @@ struct TaskList: View {
   @GestureState var isDragging = false
 
   var body: some View {
-    return ScrollView {
+    return List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
           // Revealed through dragging
@@ -71,7 +71,7 @@ struct TaskList: View {
           .offset(x: offsets[index])
 
           .gesture(
-            DragGesture()
+            DragGesture(minimumDistance: 30, coordinateSpace: .local)
               .updating(
                 $isDragging,
                 body: { (value, state, _) in
