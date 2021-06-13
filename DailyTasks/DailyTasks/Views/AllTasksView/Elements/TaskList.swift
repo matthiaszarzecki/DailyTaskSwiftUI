@@ -23,10 +23,7 @@ struct TaskList: View {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
           // Revealed through dragging
-          //Color(.red)
-
-          //Color(.green)
-          //.padding(.trailing, 65)
+          Color.dailyHabitsGreen
 
           HStack {
             Spacer()
@@ -37,22 +34,11 @@ struct TaskList: View {
                 showUpdateTaskPopover = true
               }
             }) {
-              Image(systemName: "suit.heart")
+              Image(systemName: "gear")
                 .font(.title)
                 .foregroundColor(.white)
-                .frame(width: 65)
-                .backgroundColor(.blue)
             }
-
-            Button(action: {
-              print("2. offset: \(offsets[index])")
-            }) {
-              Image(systemName: "cart.badge.plus")
-                .font(.title)
-                .foregroundColor(.white)
-                .frame(width: 65)
-                .backgroundColor(.green)
-            }
+            .frame(width: 130)
           }
 
           Button(
