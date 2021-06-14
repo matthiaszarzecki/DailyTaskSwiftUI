@@ -39,6 +39,8 @@ struct TaskList: View {
                 .foregroundColor(.white)
             }
             .frame(width: 130)
+            // Only enable button once fully slid out
+            .disabled(offsets[index] > -125)
           }
 
           Button(
