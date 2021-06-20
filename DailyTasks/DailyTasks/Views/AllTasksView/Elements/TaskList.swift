@@ -17,7 +17,7 @@ struct TaskList: View {
   @Binding var currentlyEditedTaskIndex: Int
   
   @GestureState var isDragging = false
-
+  
   var greenCellBackground: some View {
     // Revealed through dragging
     Color.dailyHabitsGreen
@@ -40,7 +40,7 @@ struct TaskList: View {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
           greenCellBackground
-
+          
           HStack {
             Spacer()
             Button(
@@ -55,7 +55,7 @@ struct TaskList: View {
             // Only enable button once fully slid out
             .disabled(offsets[index] > -125)
           }
-
+          
           Button(
             action: {
               updateTask(tasks[index].id)
@@ -67,10 +67,10 @@ struct TaskList: View {
           // Disable button when currently slid out
           .disabled(offsets[index] < -125)
           .backgroundColor(.white)
-
+          
           // Drag Gesture Handling
           .offset(x: offsets[index])
-
+          
           .gesture(
             DragGesture(minimumDistance: 30, coordinateSpace: .local)
               .updating(
@@ -99,13 +99,13 @@ struct TaskList: View {
       showUpdateTaskPopover = true
     }
   }
-
+  
   func onChanged(value: DragGesture.Value, index: Int) {
     if value.translation.width < 0 {
       setOffset(index, value.translation.width)
     }
   }
-
+  
   func onEnded(value: DragGesture.Value, index: Int) {
     withAnimation {
       if -value.translation.width >= 100 {
@@ -121,7 +121,8 @@ struct TaskList_Previews: PreviewProvider {
   static var previews: some View {
     TaskList(
       tasks: MockClasses.tasks,
-      offsets: [],
+      // Offsets MUST be the same length as tasks
+      offsets: [0, 0, -130, -130, 0],
       editTask: {_ in },
       updateTask: {_ in },
       setOffset: {_,_  in },
