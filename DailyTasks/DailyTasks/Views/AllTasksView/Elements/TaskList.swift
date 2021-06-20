@@ -34,9 +34,15 @@ struct TaskList: View {
                 showUpdateTaskPopover = true
               }
             }) {
-              Image(systemName: "gear")
-                .font(.title)
-                .foregroundColor(.white)
+              VStack {
+                Image(systemName: "gear")
+                  .font(.title)
+                  .foregroundColor(.white)
+                Text("Edit")
+                  .foregroundColor(.white)
+                  .font(.footnote)
+              }
+              
             }
             .frame(width: 130)
             // Only enable button once fully slid out
