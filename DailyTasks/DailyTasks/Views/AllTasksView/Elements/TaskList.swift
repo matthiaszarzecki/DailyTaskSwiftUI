@@ -90,6 +90,12 @@ struct TaskList: View {
           )
         }
       }
+      
+      // Spacer to be able to scroll the
+      // list above the overlay buttons
+      Rectangle()
+        .foregroundColor(.clear)
+        .frame(width: 200, height: 66, alignment: .center)
     }
   }
   

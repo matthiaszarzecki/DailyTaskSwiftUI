@@ -74,6 +74,7 @@ struct AllTasksDisplay: View {
             currentlyEditedTaskIndex: $currentlyEditedTaskIndex
           )
           .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
+          
           // Sort Button
           .overlay(
             Button(
@@ -205,7 +206,8 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
-      offsets: Array.init(repeating: 0, count: 4),
+      // Offsets MUST be the same length as tasks
+      offsets: Array.init(repeating: 0, count: MockClasses.tasks.count),
       addNewTask: {_ in },
       editTask: {_ in },
       updateTask: {_ in },
