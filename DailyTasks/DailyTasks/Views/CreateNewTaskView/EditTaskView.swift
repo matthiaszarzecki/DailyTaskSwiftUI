@@ -28,7 +28,7 @@ struct EditTaskView: View {
         
         // Actual popover part
         VStack {
-          Text("Edit Habit")
+          Text("Change Habit")
             .font(.largeTitle)
             .padding()
           
@@ -89,7 +89,7 @@ struct EditTaskView: View {
                 closeOverlay()
               },
               label: {
-                Text("Update!")
+                Text("Change!")
                   .padding()
                   .backgroundColor(.dailyHabitsGreen)
                   .foregroundColor(.white)
