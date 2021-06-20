@@ -131,7 +131,7 @@ class AllTasksViewModel: ObservableObject {
  
   /// Updates single task to increase of decrease
   /// current streak and toggle done status.
-  func updateTask(id: UUID) {
+  func toggleTaskAsDone(id: UUID) {
     if let index = state.allTasks.firstIndex(where: { $0.id == id }) {
       let oldState = state.allTasks[index].status
       if !oldState {

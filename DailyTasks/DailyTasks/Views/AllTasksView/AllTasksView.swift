@@ -16,7 +16,7 @@ struct AllTasksView: View {
       offsets: viewModel.state.offsets,
       addNewTask: viewModel.addNewTask,
       editTask: viewModel.editTask,
-      updateTask: viewModel.updateTask,
+      updateTask: viewModel.toggleTaskAsDone,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
       resetTasks: viewModel.resetAllTasks,
@@ -68,7 +68,7 @@ struct AllTasksDisplay: View {
             tasks: tasks,
             offsets: offsets,
             editTask: editTask,
-            updateTask: updateTask,
+            toggleTaskAsDone: updateTask,
             setOffset: setOffset,
             showUpdateTaskPopover: $showUpdateTaskPopover,
             currentlyEditedTaskIndex: $currentlyEditedTaskIndex

@@ -11,7 +11,7 @@ struct TaskList: View {
   var tasks: [Task]
   var offsets: [CGFloat]
   var editTask: (_ task: Task) -> Void
-  var updateTask: (_ id: UUID) -> Void
+  var toggleTaskAsDone: (_ id: UUID) -> Void
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
@@ -58,15 +58,16 @@ struct TaskList: View {
           
           Button(
             action: {
-              updateTask(tasks[index].id)
+              // Only allow action when cell is not slid out.
+              // Using .disable is causing issues with transparency.
+              if offsets[index] == 0 {
+                toggleTaskAsDone(tasks[index].id)
+              }
             },
             label: {
               TaskCell(task: tasks[index])
             }
           )
-          // Disable button when currently slid out
-          .disabled(offsets[index] < -125)
-          .backgroundColor(.white)
           
           // Drag Gesture Handling
           .offset(x: offsets[index])
@@ -124,7 +125,7 @@ struct TaskList_Previews: PreviewProvider {
       // Offsets MUST be the same length as tasks
       offsets: [0, 0, -130, -130, 0],
       editTask: {_ in },
-      updateTask: {_ in },
+      toggleTaskAsDone: {_ in },
       setOffset: {_,_  in },
       showUpdateTaskPopover: .constant(false),
       currentlyEditedTaskIndex: .constant(0)
