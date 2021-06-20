@@ -124,7 +124,8 @@ class AllTasksViewModel: ObservableObject {
   // MARK: - Create, Update, Delete actions
   
   func addNewTask(task: Task) {
-    state.allTasks.append(task)
+    state.allTasks.insert(task, at: 0)
+    sortTasks()
     state.offsets.append(0)
     saveAllData()
   }
