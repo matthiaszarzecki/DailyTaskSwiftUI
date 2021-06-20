@@ -192,6 +192,7 @@ struct AllTasksDisplay: View {
   func closeEditTaskView() {
     withAnimation {
       showUpdateTaskPopover = false
+      setOffset(currentlyEditedTaskIndex, 0)
     }
   }
   
