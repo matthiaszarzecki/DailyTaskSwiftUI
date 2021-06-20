@@ -18,32 +18,39 @@ struct TaskList: View {
   
   @GestureState var isDragging = false
 
+  var greenCellBackground: some View {
+    // Revealed through dragging
+    Color.dailyHabitsGreen
+      .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
+  }
+  
+  var editTaskButton: some View {
+    VStack {
+      Image(systemName: "gear")
+        .font(.title)
+        .foregroundColor(.white)
+      Text("Edit")
+        .foregroundColor(.white)
+        .font(.footnote)
+    }
+  }
+  
   var body: some View {
     return List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
-          // Revealed through dragging
-          Color.dailyHabitsGreen
+          greenCellBackground
 
           HStack {
             Spacer()
-            Button(action: {
-              print("1. offset: \(offsets[index])")
-              self.currentlyEditedTaskIndex = index
-              withAnimation {
-                showUpdateTaskPopover = true
+            Button(
+              action: {
+                editTaskClicked(index: index)
+              },
+              label: {
+                editTaskButton
               }
-            }) {
-              VStack {
-                Image(systemName: "gear")
-                  .font(.title)
-                  .foregroundColor(.white)
-                Text("Edit")
-                  .foregroundColor(.white)
-                  .font(.footnote)
-              }
-              
-            }
+            )
             .frame(width: 130)
             // Only enable button once fully slid out
             .disabled(offsets[index] > -125)
@@ -82,6 +89,14 @@ struct TaskList: View {
           )
         }
       }
+    }
+  }
+  
+  func editTaskClicked(index: Int) {
+    print("1. offset: \(offsets[index])")
+    self.currentlyEditedTaskIndex = index
+    withAnimation {
+      showUpdateTaskPopover = true
     }
   }
 

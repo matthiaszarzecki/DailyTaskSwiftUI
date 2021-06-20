@@ -70,20 +70,25 @@ struct TaskCell: View {
       
       TaskStatistics(task: task)
     }
+    .backgroundColor(.white)
+    .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
   }
 }
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
     TaskCell(task: MockClasses.task01)
+      .backgroundColor(.red)
       .padding()
       .previewLayout(.sizeThatFits)
     
     TaskCell(task: MockClasses.task02)
+      .backgroundColor(.red)
       .padding()
       .previewLayout(.sizeThatFits)
-    
+      
     TaskCell(task: MockClasses.task05)
+      .backgroundColor(.red)
       .padding()
       .previewLayout(.sizeThatFits)
   }
