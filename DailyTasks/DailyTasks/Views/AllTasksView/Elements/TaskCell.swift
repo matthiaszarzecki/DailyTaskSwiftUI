@@ -67,11 +67,12 @@ struct TaskCell: View {
         alignment: .topTrailing
       )
       .padding(.bottom, 4)
+      .padding(.trailing, 8)
       
       TaskStatistics(task: task)
     }
     .backgroundColor(.white)
-    .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    .cornerRadius(12, corners: [.topRight, .bottomRight])
   }
 }
 
