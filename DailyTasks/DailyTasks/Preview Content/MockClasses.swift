@@ -50,7 +50,7 @@ class MockClasses {
     name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     status: true,
     iconName: "drop",
-    currentStreak: 68,
+    currentStreak: 1,
     highestStreak: 68,
     partOfDay: 4
   )

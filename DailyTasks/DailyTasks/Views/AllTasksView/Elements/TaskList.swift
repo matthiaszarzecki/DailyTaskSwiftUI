@@ -89,6 +89,8 @@ struct TaskList: View {
               )
           )
         }
+        // Smaller padding on the right to make sliding look nicer
+        .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 4))
       }
       
       // Spacer to be able to scroll the

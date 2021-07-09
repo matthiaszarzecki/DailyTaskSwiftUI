@@ -11,11 +11,24 @@ struct TaskCell: View {
   let task: Task
   
   private let iconSize: CGFloat = 30
+
+  private var danger: Bool {
+    let ratio: Double = Double(task.currentStreak) / Double(task.highestStreak)
+    let daysAfterWhichDangerStartsAfterStreakBreaking = 10
+
+    // e.g. 10 days - ratio of 0.1. 100 days - 0.01
+    let dangerRatio = 1.0 / Double(daysAfterWhichDangerStartsAfterStreakBreaking)
+    return ratio < dangerRatio
+  }
   
   var taskIcon: some View {
-    Image(systemName: task.iconName)
+    // When a long-running task has been failed
+    // recently, color the icon red.
+    let color: Color = danger ? .red : .gray
+
+    return Image(systemName: task.iconName)
       .frame(width: iconSize, height: iconSize, alignment: .center)
-      .backgroundColor(.gray)
+      .backgroundColor(color)
       .foregroundColor(.white)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
