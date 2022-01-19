@@ -68,7 +68,7 @@ struct TaskList: View {
               TaskCell(task: tasks[index])
             }
           )
-          .buttonStyle(.plain)
+          .accentColor(.black)
           
           // Drag Gesture Handling
           .offset(x: offsets[index])
@@ -77,21 +77,21 @@ struct TaskList: View {
             DragGesture(minimumDistance: 30, coordinateSpace: .local)
               .updating(
                 $isDragging,
-                body: { (value, state, _) in
+                body: { value, state, _ in
                   // so we can validate for correct drag
                   state = true
                   onChanged(value: value, index: index)
                 }
               )
-              .onEnded(
-                { (value) in
+              .onEnded { value in
                   onEnded(value: value, index: index)
-                }
-              )
+              }
           )
         }
         // Smaller padding on the right to make sliding look nicer
-        .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 4))
+        .listRowInsets(
+          EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 4)
+        )
       }
       
       // Spacer to be able to scroll the
