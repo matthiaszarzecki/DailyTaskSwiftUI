@@ -27,12 +27,16 @@ struct IconGrid: View {
     "moon",
     "bicycle"
   ]
-  private let iconSize: CGFloat = 40
+  private let iconSize: CGFloat = 36
   private let padding: CGFloat = 10
   private let cellWidthSmall: CGFloat = 33
   
   var body: some View {
-    let column = GridItem(.fixed(cellWidthSmall), spacing: padding, alignment: .leading)
+    let column = GridItem(
+      .fixed(cellWidthSmall),
+      spacing: padding,
+      alignment: .leading
+    )
     let gridItems = [column, column, column, column, column, column, column]
     
     return LazyVGrid(columns: gridItems, spacing: padding) {
@@ -53,10 +57,18 @@ struct IconGrid: View {
             },
             label: {
               Image(systemName: option)
-                .frame(width: iconSize, height: iconSize, alignment: .center)
+                .frame(
+                  width: iconSize,
+                  height: iconSize,
+                  alignment: .center
+                )
                 .backgroundColor(.gray)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 10, style: .continuous
+                  )
+                )
             }
           )
         }

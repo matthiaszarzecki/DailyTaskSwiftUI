@@ -34,7 +34,12 @@ struct PartOfDayRow: View {
                 .padding(padding)
                 .backgroundColor(.gray)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 10,
+                    style: .continuous
+                  )
+                )
             }
           )
         }
