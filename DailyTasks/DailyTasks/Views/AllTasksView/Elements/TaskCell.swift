@@ -35,16 +35,20 @@ struct TaskCell: View {
   
   var statusIcon: some View {
     if task.status {
-      return AnyView(Image(systemName: "checkmark")
-        .frame(width: iconSize, height: iconSize, alignment: .center)
-        .foregroundColor(.white)
-        .backgroundColor(.dailyHabitsGreen)
-        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+      return AnyView(
+        Image(systemName: "checkmark")
+          .frame(width: iconSize, height: iconSize, alignment: .center)
+          .foregroundColor(.white)
+          .backgroundColor(.dailyHabitsGreen)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+      )
     } else {
-      return AnyView(Rectangle()
-        .frame(width: iconSize, height: iconSize, alignment: .center)
-        .foregroundColor(.dailyHabitsGray)
-        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+      return AnyView(
+        Rectangle()
+          .frame(width: iconSize, height: iconSize, alignment: .center)
+          .foregroundColor(.dailyHabitsGray)
+          .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+      )
     }
   }
   
