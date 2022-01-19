@@ -62,7 +62,11 @@ struct AllTasksDisplay: View {
           // Spacer
           Rectangle()
             .foregroundColor(.clear)
-            .frame(width: geometry.size.width, height: 124, alignment: .center)
+            .frame(
+              width: geometry.size.width,
+              height: 124,
+              alignment: .center
+            )
           
           TaskList(
             tasks: tasks,
@@ -73,7 +77,11 @@ struct AllTasksDisplay: View {
             showUpdateTaskPopover: $showUpdateTaskPopover,
             currentlyEditedTaskIndex: $currentlyEditedTaskIndex
           )
-          .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
+          .frame(
+            width: geometry.size.width,
+            height: geometry.size.height - 100,
+            alignment: .top
+          )
           
           // Sort Button
           .overlay(
@@ -93,7 +101,12 @@ struct AllTasksDisplay: View {
                 .frame(width: 60, height: 60, alignment: .center)
                 .backgroundColor(.dailyHabitsGreen)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 20,
+                    style: .continuous
+                  )
+                )
                 .padding()
                 .shadow(radius: 10)
               }
@@ -118,7 +131,12 @@ struct AllTasksDisplay: View {
                 .frame(width: 60, height: 60, alignment: .center)
                 .backgroundColor(.dailyHabitsGreen)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 20,
+                    style: .continuous
+                  )
+                )
                 .padding()
                 .shadow(radius: 10)
               }
@@ -176,7 +194,8 @@ struct AllTasksDisplay: View {
     // check if a reset should happen.
     .onReceive(
       NotificationCenter.default.publisher(
-        for: UIApplication.willEnterForegroundNotification)
+        for: UIApplication.willEnterForegroundNotification
+      )
     ) { _ in
       print("### Checking for update after putting app into foreground")
       checkIfTasksNeedResetting()

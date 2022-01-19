@@ -68,6 +68,7 @@ struct TaskList: View {
               TaskCell(task: tasks[index])
             }
           )
+          .buttonStyle(.plain)
           
           // Drag Gesture Handling
           .offset(x: offsets[index])
