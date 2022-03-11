@@ -82,7 +82,7 @@ struct AllTasksDisplay: View {
             height: geometry.size.height - 100,
             alignment: .top
           )
-          
+
           // Sort Button
           .overlay(
             Button(

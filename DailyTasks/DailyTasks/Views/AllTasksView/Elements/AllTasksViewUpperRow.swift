@@ -55,8 +55,8 @@ struct AllTasksViewUpperRow: View {
               .minimumScaleFactor(0.12)
               .padding()
           } else {
-            VStack {
-              Text("Good Morning,")
+            VStack(spacing: 4) {
+              Text("Good Morning")
                 .frame(width: width - 100, height: 14, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 12))
