@@ -13,7 +13,7 @@ class MockClasses {
   static let task01 = Task(
     name: "Drink water",
     status: false,
-    iconName: "drop",
+    iconName: "hare",
     currentStreak: 2,
     highestStreak: 4,
     partOfDay: 0
@@ -22,7 +22,7 @@ class MockClasses {
   static let task02 = Task(
     name: "Go for a walk",
     status: true,
-    iconName: "drop",
+    iconName: "hare",
     currentStreak: 1,
     highestStreak: 0,
     partOfDay: 1
@@ -31,7 +31,7 @@ class MockClasses {
   static let task03 = Task(
     name: "Eat an apple",
     status: false,
-    iconName: "drop",
+    iconName: "hare",
     currentStreak: 14,
     highestStreak: 167,
     partOfDay: 3
@@ -40,7 +40,7 @@ class MockClasses {
   static let task04 = Task(
     name: "Do sit-ups",
     status: true,
-    iconName: "drop",
+    iconName: "hare",
     currentStreak: 68,
     highestStreak: 68,
     partOfDay: 4

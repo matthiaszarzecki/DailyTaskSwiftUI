@@ -98,6 +98,7 @@ struct TaskList: View {
       // list above the overlay buttons
       Rectangle()
         .foregroundColor(.clear)
+        .backgroundColor(.clear)
         .frame(width: 200, height: 66, alignment: .center)
     }
   }

@@ -27,6 +27,7 @@ struct TaskCell: View {
     let color: Color = danger ? .red : .gray
 
     return Image(systemName: task.iconName)
+      .font(.system(size: 14))
       .frame(width: iconSize, height: iconSize, alignment: .center)
       .backgroundColor(color)
       .foregroundColor(.white)
@@ -59,8 +60,8 @@ struct TaskCell: View {
   }
   
   var body: some View {
-    VStack {
-      HStack {
+    VStack(spacing: 0) {
+      HStack(spacing: 12) {
         emptyPlaceholderToAnchorOverlaysOn
 
         if task.status {
@@ -88,6 +89,8 @@ struct TaskCell: View {
       
       TaskStatistics(task: task)
     }
+    .padding(.top, 4)
+    .padding(.bottom, 4)
     .backgroundColor(.white)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
   }
@@ -97,17 +100,17 @@ struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
     TaskCell(task: MockClasses.task01)
       .padding()
-      .backgroundColor(.red)
+      .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
     
     TaskCell(task: MockClasses.task02)
       .padding()
-      .backgroundColor(.red)
+      .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
       
     TaskCell(task: MockClasses.task05)
       .padding()
-      .backgroundColor(.red)
+      .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
   }
 }
