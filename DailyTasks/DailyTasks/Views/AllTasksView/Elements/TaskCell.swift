@@ -91,8 +91,11 @@ struct TaskCell: View {
     }
     .padding(.top, 4)
     .padding(.bottom, 4)
-    .backgroundColor(.white)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
+    .background(
+      Image("stripes_vertical")
+        .resizable(resizingMode: .tile)
+    )
   }
 }
 
