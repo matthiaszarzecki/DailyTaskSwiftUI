@@ -58,14 +58,14 @@ struct AllTasksDisplay: View {
     GeometryReader { geometry in
       ZStack {
         // Actual Task List
-        VStack {
+        VStack(spacing: 0) {
           // Spacer
           Rectangle()
             .foregroundColor(.clear)
             .frame(
               width: geometry.size.width,
               height: 124,
-              alignment: .center
+              alignment: .leading
             )
           
           TaskList(
@@ -145,7 +145,7 @@ struct AllTasksDisplay: View {
           )
         }
         
-        VStack {
+        VStack(spacing: 0) {
           AllTasksViewUpperRow(
             tasks: tasks,
             width: geometry.size.width,

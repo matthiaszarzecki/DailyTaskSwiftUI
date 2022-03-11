@@ -95,6 +95,7 @@ struct AllTasksViewUpperRow: View {
         .padding(.bottom, 12)
       }
     }
+    .frame(width: width, height: height, alignment: .center)
   }
 }
 
