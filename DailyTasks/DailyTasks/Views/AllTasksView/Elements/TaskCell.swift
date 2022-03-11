@@ -12,6 +12,18 @@ struct TaskCell: View {
   
   private let iconSize: CGFloat = 30
 
+  private var backgroundName: String {
+    if task.partOfDay == 0 {
+      return "background_morning"
+    } else if task.partOfDay == 1 {
+      return "background_daytime"
+    } else if task.partOfDay == 2 {
+      return "background_evening"
+    } else {
+      return "background_all_day"
+    }
+  }
+
   private var danger: Bool {
     let ratio: Double = Double(task.currentStreak) / Double(task.highestStreak)
     let daysAfterWhichDangerStartsAfterStreakBreaking = 10
@@ -93,7 +105,7 @@ struct TaskCell: View {
     .padding(.bottom, 4)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
     .background(
-      Image("stripes_vertical")
+      Image(backgroundName)
         .resizable(resizingMode: .tile)
     )
   }

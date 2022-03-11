@@ -17,3 +17,7 @@ Todo:
 - Weekly Tasks
 - User Icon Upload
 - User Name setting
+
+Tilable Backgrounds created with:
+- https://patternizer.com/
+- http://www.stripegenerator.com

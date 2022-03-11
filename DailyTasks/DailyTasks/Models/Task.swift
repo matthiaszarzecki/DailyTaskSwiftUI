@@ -15,5 +15,11 @@ struct Task: Codable, Identifiable, Hashable {
   var iconName: String
   var currentStreak: Int
   var highestStreak: Int
+
+  /// The time of day this task is supposed to be done.
+  /// 0 - Morning
+  /// 1 - Daytime
+  /// 2 - Evening
+  /// 3 - All Day
   var partOfDay: Int
 }
