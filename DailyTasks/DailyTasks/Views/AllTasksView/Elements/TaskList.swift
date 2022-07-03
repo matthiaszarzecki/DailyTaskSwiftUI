@@ -36,7 +36,7 @@ struct TaskList: View {
   }
   
   var body: some View {
-    return List {
+    List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
           greenCellBackground
@@ -90,15 +90,15 @@ struct TaskList: View {
         }
         // Smaller padding on the right to make sliding look nicer
         .listRowInsets(
-          EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 4)
+          EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         )
       }
       
       // Spacer to be able to scroll the
       // list above the overlay buttons
       Rectangle()
-        .foregroundColor(.clear)
-        .backgroundColor(.clear)
+        .foregroundColor(Color(hex: "F2F2F7"))
+        .backgroundColor(Color(hex: "F2F2F7"))
         .frame(width: 200, height: 66, alignment: .center)
     }
   }
