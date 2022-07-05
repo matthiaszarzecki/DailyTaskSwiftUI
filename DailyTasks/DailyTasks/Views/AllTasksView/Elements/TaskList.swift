@@ -94,9 +94,9 @@ struct TaskList: View {
         )
       }
 
-        // TODO: Set cell height manualy
-        // TODO: Larger Cells
-        // TODO: Padding around slidable are, bg should be all tiles
+      // TODO: Set cell height manualy
+      // TODO: Larger Cells
+      // TODO: Padding around slidable are, bg should be all tiles
       
       // Spacer to be able to scroll the
       // list above the overlay buttons
