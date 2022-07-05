@@ -93,10 +93,15 @@ struct TaskList: View {
           EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         )
       }
+
+        // TODO: Set cell height manualy
+        // TODO: Larger Cells
+        // TODO: Padding around slidable are, bg should be all tiles
       
       // Spacer to be able to scroll the
       // list above the overlay buttons
       Rectangle()
+        // TODO: Move this color to extension
         .foregroundColor(Color(hex: "F2F2F7"))
         .backgroundColor(Color(hex: "F2F2F7"))
         .frame(width: 200, height: 66, alignment: .center)
@@ -119,11 +124,11 @@ struct TaskList: View {
   
   func onEnded(value: DragGesture.Value, index: Int) {
     withAnimation {
-      if -value.translation.width >= 100 {
-        setOffset(index, -130)
-      } else {
-        setOffset(index, 0)
-      }
+      // Once offset is close to the left max value move it to max directly
+      let offset: CGFloat = -value.translation.width >= 100
+        ? -130
+        : 0
+      setOffset(index, offset)
     }
   }
 }
@@ -132,7 +137,7 @@ struct TaskList_Previews: PreviewProvider {
   static var previews: some View {
     TaskList(
       tasks: MockClasses.tasks,
-      // Offsets MUST be the same length as tasks
+      // Offsets array MUST be the same length as tasks
       offsets: [0, 0, -130, -130, 0],
       editTask: {_ in },
       toggleTaskAsDone: {_ in },
