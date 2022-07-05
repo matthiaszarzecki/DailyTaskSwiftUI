@@ -34,8 +34,8 @@ struct TaskCell: View {
   }
   
   var taskIcon: some View {
-    // When a long-running task has been failed
-    // recently, color the icon red.
+    // When a long-running task has been
+    // failed recently, color the icon red.
     let color: Color = danger ? .red : .gray
 
     return Image(systemName: task.iconName)
@@ -77,11 +77,11 @@ struct TaskCell: View {
         emptyPlaceholderToAnchorOverlaysOn
 
         if task.status {
-          Text("\(task.name)")
+          Text(task.name)
             .foregroundColor(.dailyHabitsGreen)
             .strikethrough()
         } else {
-          Text("\(task.name)")
+          Text(task.name)
         }
         
         Spacer()
@@ -104,6 +104,7 @@ struct TaskCell: View {
     .padding(.top, 4)
     .padding(.bottom, 4)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
+    .padding(8)
     .background(
       Image(backgroundName)
         .resizable(resizingMode: .tile)

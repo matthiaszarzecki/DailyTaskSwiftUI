@@ -11,6 +11,7 @@ import SwiftUI
 extension Color {
   static let dailyHabitsGreen = Color(hex: "93c47d")
   static let dailyHabitsGray = Color(hex: "D5D5D6")
+  static let backgroundGray = Color(hex: "F2F2F7")
   
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {

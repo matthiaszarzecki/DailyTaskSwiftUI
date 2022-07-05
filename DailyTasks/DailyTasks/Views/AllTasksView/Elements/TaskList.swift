@@ -88,23 +88,19 @@ struct TaskList: View {
               }
           )
         }
-        // Smaller padding on the right to make sliding look nicer
+
+        // No Auto-Insets
         .listRowInsets(
           EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         )
       }
 
-      // TODO: Set cell height manualy
-      // TODO: Larger Cells
-      // TODO: Padding around slidable are, bg should be all tiles
-      
       // Spacer to be able to scroll the
       // list above the overlay buttons
       Rectangle()
-        // TODO: Move this color to extension
-        .foregroundColor(Color(hex: "F2F2F7"))
-        .backgroundColor(Color(hex: "F2F2F7"))
-        .frame(width: 200, height: 66, alignment: .center)
+        .foregroundColor(.clear)
+        .backgroundColor(.clear)
+        .frame(width: 200, height: 78, alignment: .center)
     }
   }
   
