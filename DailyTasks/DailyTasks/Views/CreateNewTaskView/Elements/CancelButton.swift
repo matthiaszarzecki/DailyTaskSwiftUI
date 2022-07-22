@@ -20,10 +20,14 @@ struct CancelButton: View {
         HStack {
           Image(systemName: "arrow.backward")
             .foregroundColor(.white)
-            .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 0))
+            .padding(
+              EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 0)
+            )
 
           Text("Go Back")
-            .padding(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 16))
+            .padding(
+              EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 16)
+            )
             .foregroundColor(.white)
         }
         .backgroundColor(color)

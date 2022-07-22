@@ -144,11 +144,15 @@ struct SettingsView: View {
           profileNameAndImage
           debugActions
           CancelButton(
-            closeOverlay: { closeOverlay() },
+            closeOverlay: closeOverlay,
             color: .dailyHabitsGreen
           )
         }
-        .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
+        .frame(
+          width: width - 12,
+          height: UIScreen.main.bounds.size.height * 0.5,
+          alignment: .center
+        )
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])

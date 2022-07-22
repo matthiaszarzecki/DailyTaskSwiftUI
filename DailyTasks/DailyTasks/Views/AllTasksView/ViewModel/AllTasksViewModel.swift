@@ -11,7 +11,9 @@ import SwiftUI
 class AllTasksViewModel: ObservableObject {
   @Published private(set) var state = AllTasksViewState()
   @AppStorage("all_daily_tasks") private var allTasksData = Data()
-  @AppStorage("reset_date") private var resetDate: String = ISO8601DateFormatter().string(from: Date.distantPast)
+  @AppStorage("reset_date") private var resetDate = ISO8601DateFormatter().string(
+    from: Date.distantPast
+  )
 
   init() {
     loadAllTasks()
@@ -80,7 +82,12 @@ class AllTasksViewModel: ObservableObject {
     let expiryAdvance = DateComponents(day: 1)
     if let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date()) {
       // ...at 0400 in the morning.
-      if let nextDateAdapted = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate) {
+      if let nextDateAdapted = Calendar.current.date(
+        bySettingHour: 4,
+        minute: 0,
+        second: 0,
+        of: nextDate
+      ) {
         return ISO8601DateFormatter().string(from: nextDateAdapted)
       }
     }

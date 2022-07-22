@@ -54,7 +54,9 @@ struct EditTaskView: View {
                   .padding()
                   .backgroundColor(.red)
                   .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                  .mask(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                  )
                   .shadow(radius: 10)
               }
             )
@@ -70,7 +72,9 @@ struct EditTaskView: View {
                     .padding()
                     .backgroundColor(.red)
                     .foregroundColor(.white)
-                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .mask(
+                      RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    )
                     .shadow(radius: 10)
                 }
               )
@@ -92,14 +96,20 @@ struct EditTaskView: View {
                   .padding()
                   .backgroundColor(.dailyHabitsGreen)
                   .foregroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                  .mask(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                  )
                   .shadow(radius: 10)
               }
             )
           }
           .padding()
         }
-        .frame(width: width, height: UIScreen.main.bounds.size.height * 0.6, alignment: .center)
+        .frame(
+          width: width,
+          height: UIScreen.main.bounds.size.height * 0.6,
+          alignment: .center
+        )
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])

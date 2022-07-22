@@ -35,7 +35,9 @@ struct TextFieldUpdated: View {
           label: {
             Image(systemName: "xmark.circle.fill")
               .foregroundColor(.white)
-              .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8))
+              .padding(
+                EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8)
+              )
           }
         )
       }

@@ -40,7 +40,7 @@ struct AllTasksDisplay: View {
   var deleteSingleTask: (_ id: UUID) -> Void
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
 
-  @AppStorage("user_name") var userName: String = ""
+  @AppStorage("user_name") var userName = ""
 
   @State private var currentlyEditedTaskIndex: Int = .zero
 
