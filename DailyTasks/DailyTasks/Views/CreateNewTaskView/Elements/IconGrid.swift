@@ -23,7 +23,7 @@ struct IconGrid: View {
     "hare",
     "pills",
     "figure.walk",
-    "trash",
+    "scope",
     "moon",
     "bicycle"
   ]
