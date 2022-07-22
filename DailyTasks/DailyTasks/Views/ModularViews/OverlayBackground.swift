@@ -35,7 +35,7 @@ struct OverlayBackground_Previews: PreviewProvider {
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
 
-      OverlayBackground(closeOverlay: {})
+      OverlayBackground {}
     }
   }
 }

@@ -28,8 +28,9 @@ struct HandleForOverlay: View {
 
 struct HandleForOverlay_Previews: PreviewProvider {
   static var previews: some View {
-    HandleForOverlay(closeOverlay: {})
-      .padding()
-      .previewLayout(.sizeThatFits)
+    HandleForOverlay {
+    }
+    .padding()
+    .previewLayout(.sizeThatFits)
   }
 }

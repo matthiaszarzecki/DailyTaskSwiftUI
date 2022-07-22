@@ -68,7 +68,7 @@ class AllTasksViewModel: ObservableObject {
         // If task is NOT done...
 
         // Reset current streak to zero.
-        state.allTasks[index].currentStreak = 0
+        state.allTasks[index].currentStreak = .zero
       }
     }
     saveAllData()
@@ -168,8 +168,8 @@ class AllTasksViewModel: ObservableObject {
 
   func deleteAllTasks() {
     self.allTasksData = Data()
-    state.allTasks = [Task]()
-    state.offsets = [CGFloat]()
+    state.allTasks = []
+    state.offsets = []
   }
 
   // MARK: - Loading & Saving

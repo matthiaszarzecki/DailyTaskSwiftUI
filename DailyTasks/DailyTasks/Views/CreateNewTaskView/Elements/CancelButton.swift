@@ -36,8 +36,9 @@ struct CancelButton: View {
 
 struct CancelButton_Previews: PreviewProvider {
   static var previews: some View {
-    CancelButton(closeOverlay: {})
-      .padding()
-      .previewLayout(.sizeThatFits)
+    CancelButton {
+    }
+    .padding()
+    .previewLayout(.sizeThatFits)
   }
 }

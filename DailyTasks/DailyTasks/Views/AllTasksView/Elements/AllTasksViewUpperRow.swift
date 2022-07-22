@@ -20,15 +20,13 @@ struct AllTasksViewUpperRow: View {
   }
 
   private var allTasks: Int {
-    return tasks.count
+    tasks.count
   }
 
   private var taskDoneRatio: Double {
-    if tasks.isEmpty {
-      return 0.0
-    } else {
-      return Double(doneTasks) / Double(allTasks)
-    }
+    tasks.isEmpty
+      ? 0.0
+      : Double(doneTasks) / Double(allTasks)
   }
 
   private var progressDisplay: some View {
@@ -47,7 +45,7 @@ struct AllTasksViewUpperRow: View {
 
       VStack {
         HStack {
-          if userName == "" {
+          if userName.isEmpty {
             Text("Your Daily Habits")
               .frame(width: width - 100, height: 24, alignment: .leading)
               .multilineTextAlignment(.leading)
