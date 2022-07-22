@@ -11,7 +11,7 @@ import SwiftUI
 /// on tap sets showParentView to false.
 struct OverlayBackground: View {
   var closeOverlay: () -> Void
-  
+
   var body: some View {
     Button(
       action: {
@@ -22,7 +22,6 @@ struct OverlayBackground: View {
           .foregroundColor(.black)
           .opacity(0.6)
           .edgesIgnoringSafeArea(.all)
-         
       }
     )
     .transition(.opacity)

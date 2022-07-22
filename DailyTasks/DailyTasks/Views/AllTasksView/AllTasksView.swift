@@ -42,7 +42,7 @@ struct AllTasksDisplay: View {
 
   @AppStorage("user_name") var userName: String = ""
 
-  @State private var currentlyEditedTaskIndex = 0
+  @State private var currentlyEditedTaskIndex: Int = .zero
 
   @State private var showNewTaskPopover = false
   @State private var showUpdateTaskPopover = false
@@ -67,7 +67,7 @@ struct AllTasksDisplay: View {
               height: 124,
               alignment: .leading
             )
-          
+
           TaskList(
             tasks: tasks,
             offsets: offsets,
@@ -144,7 +144,7 @@ struct AllTasksDisplay: View {
             alignment: .bottomLeading
           )
         }
-        
+
         VStack(spacing: 0) {
           AllTasksViewUpperRow(
             tasks: tasks,

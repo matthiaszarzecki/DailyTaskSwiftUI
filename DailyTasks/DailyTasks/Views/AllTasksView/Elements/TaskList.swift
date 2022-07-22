@@ -84,7 +84,7 @@ struct TaskList: View {
                 }
               )
               .onEnded { value in
-                  onEnded(value: value, index: index)
+                onEnded(value: value, index: index)
               }
           )
         }
@@ -135,8 +135,8 @@ struct TaskList_Previews: PreviewProvider {
       tasks: MockClasses.tasks,
       // Offsets array MUST be the same length as tasks
       offsets: [0, 0, -130, -130, 0],
-      editTask: {_ in },
-      toggleTaskAsDone: {_ in },
+      editTask: { _ in },
+      toggleTaskAsDone: { _ in },
       setOffset: { _, _  in },
       showUpdateTaskPopover: .constant(false),
       currentlyEditedTaskIndex: .constant(0)

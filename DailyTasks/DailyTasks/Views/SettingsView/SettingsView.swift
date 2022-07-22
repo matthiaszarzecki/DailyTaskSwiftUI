@@ -105,7 +105,7 @@ struct SettingsView: View {
         }
       }
     }
-    .frame(width: width - 32*2, height: 150, alignment: .center)
+    .frame(width: width - 32 * 2, height: 150, alignment: .center)
     .padding()
     .backgroundColor(.dailyHabitsGray)
     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))

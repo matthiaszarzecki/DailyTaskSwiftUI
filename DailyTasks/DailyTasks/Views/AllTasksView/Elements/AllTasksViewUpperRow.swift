@@ -86,10 +86,10 @@ struct AllTasksViewUpperRow: View {
         }
 
         progressDisplay
-          .frame(width: width - 16*2, height: 20, alignment: .leading)
+          .frame(width: width - 16 * 2, height: 20, alignment: .leading)
 
         ProgressBar(
-          width: width - 16*2,
+          width: width - 16 * 2,
           value: taskDoneRatio
         )
         .padding(.bottom, 12)

@@ -22,8 +22,10 @@ class AllTasksViewModel: ObservableObject {
 
   func checkIfTasksNeedResetting() {
     loadAllTasks()
-    if let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
-       Date() > expiryDateParsed {
+    if
+      let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
+      Date() > expiryDateParsed
+    {
       print("### Resetting Tasks")
 
       // Set new reset date
@@ -42,7 +44,7 @@ class AllTasksViewModel: ObservableObject {
   func resetAllTasks() {
     // Counter for counting how many tasks have
     // been reset (only done tasks get reset).
-    var counter = 0
+    var counter: Int = .zero
 
     for index in 0..<state.allTasks.count {
       // Assigning current task to constant
