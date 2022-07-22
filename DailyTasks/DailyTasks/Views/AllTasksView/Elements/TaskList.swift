@@ -78,14 +78,11 @@ struct TaskList: View {
               minimumDistance: 30,
               coordinateSpace: .local
             )
-            .updating(
-              $isDragging,
-              body: { value, state, _ in
-                // so we can validate for correct drag
-                state = true
-                onChanged(value: value, index: index)
-              }
-            )
+            .updating($isDragging) { value, state, _ in
+              // so we can validate for correct drag
+              state = true
+              onChanged(value: value, index: index)
+            }
             .onEnded { value in
               onEnded(value: value, index: index)
             }
