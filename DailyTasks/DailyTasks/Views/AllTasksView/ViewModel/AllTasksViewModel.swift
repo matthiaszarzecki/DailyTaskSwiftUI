@@ -78,20 +78,21 @@ class AllTasksViewModel: ObservableObject {
   func getResetDate() -> String {
     // Set expiry date to next day...
     let expiryAdvance = DateComponents(day: 1)
-    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
-
-    // ...at 0400 in the morning.
-    nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
-
-    let stringDate = ISO8601DateFormatter().string(from: nextDate)
-    return stringDate
+    if let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date()) {
+      // ...at 0400 in the morning.
+      if let nextDateAdapted = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate) {
+        return ISO8601DateFormatter().string(from: nextDateAdapted)
+      }
+    }
+    return ""
   }
 
   func getResetDateOneMinuteInTheFuture() -> String {
     let expiryAdvance = DateComponents(minute: 1)
-    let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
-    let stringDate = ISO8601DateFormatter().string(from: nextDate)
-    return stringDate
+    if let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date()) {
+      return ISO8601DateFormatter().string(from: nextDate)
+    }
+    return ""
   }
 
   func setOffset(index: Int, offset: CGFloat) {
