@@ -32,7 +32,7 @@ struct TaskCell: View {
     let dangerRatio = 1.0 / Double(daysAfterWhichDangerStartsAfterStreakBreaking)
     return ratio < dangerRatio
   }
-  
+
   var taskIcon: some View {
     // When a long-running task has been
     // failed recently, color the icon red.
@@ -45,7 +45,7 @@ struct TaskCell: View {
       .foregroundColor(.white)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
-  
+
   var statusIcon: some View {
     if task.status {
       return AnyView(
@@ -70,7 +70,7 @@ struct TaskCell: View {
       .frame(width: iconSize, height: iconSize, alignment: .center)
       .foregroundColor(.clear)
   }
-  
+
   var body: some View {
     VStack(spacing: 0) {
       HStack(spacing: 12) {
@@ -83,9 +83,9 @@ struct TaskCell: View {
         } else {
           Text(task.name)
         }
-        
+
         Spacer()
-        
+
         emptyPlaceholderToAnchorOverlaysOn
       }
       .overlay(
@@ -98,7 +98,7 @@ struct TaskCell: View {
       )
       .padding(.bottom, 4)
       .padding(.trailing, 8)
-      
+
       TaskStatistics(task: task)
     }
     .padding(.top, 4)
@@ -118,12 +118,12 @@ struct TaskCell_Previews: PreviewProvider {
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
-    
+
     TaskCell(task: MockClasses.task02)
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
-      
+
     TaskCell(task: MockClasses.task05)
       .padding()
       .backgroundColor(.purple)

@@ -13,16 +13,16 @@ struct AllTasksViewUpperRow: View {
   var height: CGFloat = 128
   @Binding var showSettingsPopover: Bool
   @Binding var userName: String
-  
+
   private var doneTasks: Int {
     let doneTasks = tasks.filter { $0.status }
     return doneTasks.count
   }
-  
+
   private var allTasks: Int {
     return tasks.count
   }
-  
+
   private var taskDoneRatio: Double {
     if tasks.isEmpty {
       return 0.0

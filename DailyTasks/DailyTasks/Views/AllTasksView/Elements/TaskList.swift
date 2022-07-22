@@ -15,15 +15,15 @@ struct TaskList: View {
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
-  
+
   @GestureState var isDragging = false
-  
+
   var greenCellBackground: some View {
     // Revealed through dragging
     Color.dailyHabitsGreen
       .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
   }
-  
+
   var editTaskButton: some View {
     VStack {
       Image(systemName: "gear")

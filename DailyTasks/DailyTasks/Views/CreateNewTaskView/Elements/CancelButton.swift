@@ -10,7 +10,7 @@ import SwiftUI
 struct CancelButton: View {
   var closeOverlay: () -> Void
   var color: Color = .red
-  
+
   var body: some View {
     Button(
       action: {
