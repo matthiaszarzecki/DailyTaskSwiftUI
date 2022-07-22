@@ -49,9 +49,9 @@ struct AllTasksDisplay: View {
   @State private var showSettingsPopover = false
 
   let upperPartHeight: CGFloat = 128
-  let lowerPartHeight: CGFloat = 0
+  let lowerPartHeight: CGFloat = .zero
   var upperAndLowerPartHeight: CGFloat {
-    return upperPartHeight + lowerPartHeight
+    upperPartHeight + lowerPartHeight
   }
 
   var body: some View {
@@ -227,16 +227,16 @@ struct ContentView_Previews: PreviewProvider {
     AllTasksDisplay(
       tasks: MockClasses.tasks,
       // Offsets MUST be the same length as tasks
-      offsets: Array.init(repeating: 0, count: MockClasses.tasks.count),
-      addNewTask: {_ in },
-      editTask: {_ in },
-      updateTask: {_ in },
+      offsets: Array(repeating: 0, count: MockClasses.tasks.count),
+      addNewTask: { _ in },
+      editTask: { _ in },
+      updateTask: { _ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
       resetTasks: {},
       sortTasks: {},
-      deleteSingleTask: {_ in },
-      setOffset: {_, _ in }
+      deleteSingleTask: { _ in },
+      setOffset: { _, _ in }
     )
   }
 }

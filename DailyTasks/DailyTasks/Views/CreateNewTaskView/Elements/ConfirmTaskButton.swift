@@ -55,7 +55,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
-      addNewTask: {_ in },
+      addNewTask: { _ in },
       closeOverlay: {}
     )
     .padding()
@@ -66,7 +66,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
-      addNewTask: {_ in },
+      addNewTask: { _ in },
       closeOverlay: {}
     )
     .padding()

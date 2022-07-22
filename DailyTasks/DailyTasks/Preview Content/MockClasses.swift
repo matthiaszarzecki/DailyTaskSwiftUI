@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MockClasses {
+enum MockClasses {
   static let userName = "Susanne"
 
   static let task01 = Task(

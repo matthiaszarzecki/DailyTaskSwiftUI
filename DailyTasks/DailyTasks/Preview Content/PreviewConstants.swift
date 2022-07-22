@@ -8,6 +8,6 @@
 import Foundation
 import SwiftUI
 
-class PreviewConstants {
+enum PreviewConstants {
   static let width: CGFloat = 350
 }

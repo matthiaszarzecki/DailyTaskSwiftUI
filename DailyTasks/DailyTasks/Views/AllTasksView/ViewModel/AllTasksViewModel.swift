@@ -190,7 +190,7 @@ class AllTasksViewModel: ObservableObject {
   // MARK: - ViewState
 
   struct AllTasksViewState {
-    var allTasks = [Task]()
-    var offsets = [CGFloat]()
+    var allTasks: [Task] = []
+    var offsets: [CGFloat] = []
   }
 }

@@ -20,10 +20,10 @@ struct TextFieldUpdated: View {
 
         TextField(placeholder, text: $text)
           .font(.title3)
-          .frame(width: width - 24*2, height: 48, alignment: .center)
+          .frame(width: width - 24 * 2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }
-      .frame(width: width - 16*2, height: 48, alignment: .center)
+      .frame(width: width - 16 * 2, height: 48, alignment: .center)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
       HStack {
@@ -41,7 +41,7 @@ struct TextFieldUpdated: View {
       }
     }
     .padding()
-    .frame(width: width - 16*2, height: 48, alignment: .center)
+    .frame(width: width - 16 * 2, height: 48, alignment: .center)
   }
 }
 

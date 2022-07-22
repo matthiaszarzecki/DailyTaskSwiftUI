@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskCell: View {
   let task: Task
-  
+
   private let iconSize: CGFloat = 30
 
   private var backgroundName: String {
@@ -25,7 +25,7 @@ struct TaskCell: View {
   }
 
   private var danger: Bool {
-    let ratio: Double = Double(task.currentStreak) / Double(task.highestStreak)
+    let ratio = Double(task.currentStreak) / Double(task.highestStreak)
     let daysAfterWhichDangerStartsAfterStreakBreaking = 10
 
     // e.g. 10 days - ratio of 0.1. 100 days - 0.01
@@ -64,7 +64,7 @@ struct TaskCell: View {
       )
     }
   }
-  
+
   var emptyPlaceholderToAnchorOverlaysOn: some View {
     Rectangle()
       .frame(width: iconSize, height: iconSize, alignment: .center)
