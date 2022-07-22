@@ -89,7 +89,7 @@ struct EditTaskView: View {
                 closeOverlay()
               },
               label: {
-                Text("Change")
+                Text("Confirm Changes")
                   .padding()
                   .backgroundColor(.dailyHabitsGreen)
                   .foregroundColor(.white)
