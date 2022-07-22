@@ -9,7 +9,7 @@ import Foundation
 
 struct Task: Codable, Identifiable, Hashable {
   var id = UUID()
-  
+
   var name: String
   var status: Bool
   var iconName: String

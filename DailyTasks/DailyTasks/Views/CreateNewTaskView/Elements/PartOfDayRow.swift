@@ -11,7 +11,7 @@ struct PartOfDayRow: View {
   @Binding var selectedPartOfDay: Int
 
   private let padding: CGFloat = 6
-  
+
   var body: some View {
     HStack {
       ForEach(PartOfDayOption.options, id: \.self) { option in

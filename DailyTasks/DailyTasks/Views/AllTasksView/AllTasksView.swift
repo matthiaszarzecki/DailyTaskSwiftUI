@@ -153,11 +153,11 @@ struct AllTasksDisplay: View {
             showSettingsPopover: $showSettingsPopover,
             userName: $userName
           )
-          
+
           Spacer()
         }
       }
-      
+
       if showNewTaskPopover {
         OverlayBackground(closeOverlay: closeCreateTaskView)
         CreateNewTaskView(
@@ -166,7 +166,7 @@ struct AllTasksDisplay: View {
           closeOverlay: closeCreateTaskView
         )
       }
-      
+
       if showUpdateTaskPopover {
         OverlayBackground(closeOverlay: closeEditTaskView)
         EditTaskView(
@@ -177,7 +177,7 @@ struct AllTasksDisplay: View {
           closeOverlay: closeEditTaskView
         )
       }
-      
+
       if showSettingsPopover {
         OverlayBackground(closeOverlay: closeSettingsView)
         SettingsView(
@@ -189,7 +189,7 @@ struct AllTasksDisplay: View {
         )
       }
     }
-    
+
     // When the app is put to the foreground,
     // check if a reset should happen.
     .onReceive(
@@ -201,20 +201,20 @@ struct AllTasksDisplay: View {
       checkIfTasksNeedResetting()
     }
   }
-  
+
   func closeCreateTaskView() {
     withAnimation {
       showNewTaskPopover = false
     }
   }
-  
+
   func closeEditTaskView() {
     withAnimation {
       showUpdateTaskPopover = false
       setOffset(currentlyEditedTaskIndex, 0)
     }
   }
-  
+
   func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false

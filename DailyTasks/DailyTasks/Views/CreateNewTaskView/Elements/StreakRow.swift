@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StreakRow: View {
   @Binding var startStreak: String
-  
+
   var body: some View {
     HStack {
       TextField("Start Streak", text: $startStreak)
@@ -20,7 +20,7 @@ struct StreakRow: View {
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(.top, 16)
         .padding(.bottom, 16)
-      
+
       Button(
         action: {
           startStreak = ""

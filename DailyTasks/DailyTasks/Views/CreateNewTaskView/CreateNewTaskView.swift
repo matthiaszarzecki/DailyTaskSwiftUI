@@ -16,9 +16,19 @@ struct CreateNewTaskView: View {
   @State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
   @State private var selectedIcon = "drop"
-  
-  private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
-  
+
+  private let exampleTasks = [
+    "Drink water",
+    "Go for a walk",
+    "Eat a fruit",
+    "Go for a run",
+    "Go outside",
+    "Read 10 pages in a book",
+    "Play Guitar",
+    "Eat a vegetable",
+    "Do 10 push-ups"
+  ]
+
   var body: some View {
     ZStack {
       // Background Part
@@ -28,23 +38,23 @@ struct CreateNewTaskView: View {
       VStack {
         // Upper "empty" part
         Spacer()
-        
+
         // Actual popover part
         VStack {
           Text("Start a new habit!")
             .font(.largeTitle)
             .padding()
-          
+
           TextFieldUpdated(
             text: $taskName,
             placeholder: "Your new Habit!",
             width: width
           )
-          
+
           IconGrid(selectedIcon: $selectedIcon, width: width)
 
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
-          
+
           HStack {
             CancelButton(
               closeOverlay: closeOverlay
@@ -70,7 +80,7 @@ struct CreateNewTaskView: View {
           alignment: .top
         )
       }
-      
+
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
@@ -90,7 +100,7 @@ struct CreateNewTaskView_Previews: PreviewProvider {
       Rectangle()
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
-      
+
       CreateNewTaskView(
         width: PreviewConstants.width,
         addNewTask: { _ in },

@@ -34,13 +34,13 @@ struct TaskList: View {
         .font(.footnote)
     }
   }
-  
+
   var body: some View {
     List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
           greenCellBackground
-          
+
           HStack {
             Spacer()
             Button(
@@ -55,7 +55,7 @@ struct TaskList: View {
             // Only enable button once fully slid out
             .disabled(offsets[index] > -125)
           }
-          
+
           Button(
             action: {
               // Only allow action when cell is not slid out.
@@ -69,10 +69,10 @@ struct TaskList: View {
             }
           )
           .accentColor(.black)
-          
+
           // Drag Gesture Handling
           .offset(x: offsets[index])
-          
+
           .gesture(
             DragGesture(minimumDistance: 30, coordinateSpace: .local)
               .updating(
@@ -103,7 +103,7 @@ struct TaskList: View {
         .frame(width: 200, height: 78, alignment: .center)
     }
   }
-  
+
   func editTaskClicked(index: Int) {
     print("1. offset: \(offsets[index])")
     self.currentlyEditedTaskIndex = index
@@ -111,13 +111,13 @@ struct TaskList: View {
       showUpdateTaskPopover = true
     }
   }
-  
+
   func onChanged(value: DragGesture.Value, index: Int) {
     if value.translation.width < 0 {
       setOffset(index, value.translation.width)
     }
   }
-  
+
   func onEnded(value: DragGesture.Value, index: Int) {
     withAnimation {
       // Once offset is close to the left max value move it to max directly
@@ -137,7 +137,7 @@ struct TaskList_Previews: PreviewProvider {
       offsets: [0, 0, -130, -130, 0],
       editTask: {_ in },
       toggleTaskAsDone: {_ in },
-      setOffset: {_,_  in },
+      setOffset: { _, _  in },
       showUpdateTaskPopover: .constant(false),
       currentlyEditedTaskIndex: .constant(0)
     )

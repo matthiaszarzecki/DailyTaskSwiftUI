@@ -17,7 +17,7 @@ struct TextFieldUpdated: View {
       ZStack {
         Rectangle()
           .foregroundColor(.gray)
-        
+
         TextField(placeholder, text: $text)
           .font(.title3)
           .frame(width: width - 24*2, height: 48, alignment: .center)
@@ -25,7 +25,7 @@ struct TextFieldUpdated: View {
       }
       .frame(width: width - 16*2, height: 48, alignment: .center)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-      
+
       HStack {
         Spacer()
         Button(

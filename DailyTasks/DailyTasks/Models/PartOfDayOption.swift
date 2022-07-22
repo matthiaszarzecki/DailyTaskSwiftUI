@@ -10,16 +10,16 @@ import Foundation
 struct PartOfDayOption: Hashable {
   let index: Int
   let name: String
-  
+
   enum daytimeOptions {
     static let morning = "Morning"
     static let daytime = "Daytime"
     static let evening = "Evening"
     static let allDay = "All Day"
   }
-  
+
   static func displayString(id: Int) -> String {
-    switch(id) {
+    switch id {
     case 0:
       return daytimeOptions.morning
     case 1:
@@ -32,7 +32,7 @@ struct PartOfDayOption: Hashable {
       return daytimeOptions.allDay
     }
   }
-  
+
   static let options = [
     PartOfDayOption(index: 0, name: daytimeOptions.morning),
     PartOfDayOption(index: 1, name: daytimeOptions.daytime),

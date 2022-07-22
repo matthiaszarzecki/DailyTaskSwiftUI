@@ -35,7 +35,7 @@ struct OverlayBackground_Previews: PreviewProvider {
       Rectangle()
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
-      
+
       OverlayBackground(closeOverlay: {})
     }
   }

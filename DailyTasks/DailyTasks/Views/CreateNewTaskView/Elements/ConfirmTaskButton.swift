@@ -14,15 +14,15 @@ struct ConfirmTaskButton: View {
   var selectedPartOfDay: Int
   var addNewTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
-  
+
   var body: some View {
     let disabled = taskName.isEmpty
     let color: Color = disabled ? .gray : .dailyHabitsGreen
-    
+
     return Button(
       action: {
         let streak = Int(startStreak) ?? 0
-        
+
         let task = Task(
           name: taskName,
           status: false,
@@ -31,7 +31,7 @@ struct ConfirmTaskButton: View {
           highestStreak: 0,
           partOfDay: selectedPartOfDay
         )
-        
+
         addNewTask(task)
         closeOverlay()
       },
@@ -60,7 +60,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
     )
     .padding()
     .previewLayout(.sizeThatFits)
-    
+
     ConfirmTaskButton(
       taskName: "",
       startStreak: "",

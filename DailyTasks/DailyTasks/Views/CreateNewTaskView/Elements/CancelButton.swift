@@ -21,7 +21,7 @@ struct CancelButton: View {
           Image(systemName: "arrow.backward")
             .foregroundColor(.white)
             .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 0))
-          
+
           Text("Go Back")
             .padding(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 16))
             .foregroundColor(.white)

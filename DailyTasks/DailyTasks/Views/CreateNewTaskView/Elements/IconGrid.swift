@@ -10,7 +10,7 @@ import SwiftUI
 struct IconGrid: View {
   @Binding var selectedIcon: String
   var width: CGFloat
-  
+
   private let iconOptions = [
     "drop",
     "leaf",
@@ -30,7 +30,7 @@ struct IconGrid: View {
   private let iconSize: CGFloat = 36
   private let padding: CGFloat = 10
   private let cellWidthSmall: CGFloat = 33
-  
+
   var body: some View {
     let column = GridItem(
       .fixed(cellWidthSmall),
@@ -38,7 +38,7 @@ struct IconGrid: View {
       alignment: .leading
     )
     let gridItems = [column, column, column, column, column, column, column]
-    
+
     return LazyVGrid(columns: gridItems, spacing: padding) {
       ForEach(iconOptions, id: \.self) { option in
         if selectedIcon == option {

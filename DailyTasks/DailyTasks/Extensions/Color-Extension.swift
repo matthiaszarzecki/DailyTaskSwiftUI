@@ -12,7 +12,7 @@ extension Color {
   static let dailyHabitsGreen = Color(hex: "93c47d")
   static let dailyHabitsGray = Color(hex: "D5D5D6")
   static let backgroundGray = Color(hex: "F2F2F7")
-  
+
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {
     let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -29,7 +29,7 @@ extension Color {
     default:
       (a, r, g, b) = (1, 1, 1, 0)
     }
-    
+
     self.init(
       .sRGB,
       red: Double(r) / 255,
