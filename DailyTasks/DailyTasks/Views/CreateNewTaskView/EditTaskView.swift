@@ -15,7 +15,7 @@ struct EditTaskView: View {
   var closeOverlay: () -> Void
 
   @State private var showActualDeleteButton = false
-  
+
   var body: some View {
     ZStack {
       // Background Part
@@ -25,23 +25,23 @@ struct EditTaskView: View {
       VStack {
         // Upper "empty" part
         Spacer()
-        
+
         // Actual popover part
         VStack {
           Text("Change Habit")
             .font(.largeTitle)
             .padding()
-          
+
           TextFieldUpdated(
             text: $task.name,
             placeholder: task.name,
             width: width
           )
-          
+
           IconGrid(selectedIcon: $task.iconName, width: width)
 
           PartOfDayRow(selectedPartOfDay: $task.partOfDay)
-          
+
           HStack {
             Button(
               action: {
@@ -58,7 +58,7 @@ struct EditTaskView: View {
                   .shadow(radius: 10)
               }
             )
-            
+
             if showActualDeleteButton {
               Button(
                 action: {
@@ -76,13 +76,12 @@ struct EditTaskView: View {
               )
             }
           }
-          
-          
+
           HStack {
             CancelButton(
               closeOverlay: closeOverlay
             )
-            
+
             Button(
               action: {
                 editTask(task)
@@ -110,7 +109,7 @@ struct EditTaskView: View {
           alignment: .top
         )
       }
-      
+
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
@@ -127,7 +126,7 @@ struct UpdateTaskView_Previews: PreviewProvider {
       Rectangle()
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
-      
+
       EditTaskView(
         width: PreviewConstants.width,
         task: MockClasses.task01,
