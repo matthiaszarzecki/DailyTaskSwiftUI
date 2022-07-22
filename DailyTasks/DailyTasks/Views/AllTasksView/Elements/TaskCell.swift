@@ -111,17 +111,17 @@ struct TaskCell: View {
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    TaskCell(task: MockClasses.task01)
+    TaskCell(task: .mockTask01)
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
 
-    TaskCell(task: MockClasses.task02)
+    TaskCell(task: .mockTask02)
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
 
-    TaskCell(task: MockClasses.task05)
+    TaskCell(task: .mockTask05)
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)

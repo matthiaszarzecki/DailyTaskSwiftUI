@@ -37,15 +37,15 @@ struct TaskStatistics: View {
 
 struct TaskStatistics_Previews: PreviewProvider {
   static var previews: some View {
-    TaskStatistics(task: MockClasses.task01)
+    TaskStatistics(task: .mockTask01)
       .padding()
       .previewLayout(.sizeThatFits)
 
-    TaskStatistics(task: MockClasses.task02)
+    TaskStatistics(task: .mockTask02)
       .padding()
       .previewLayout(.sizeThatFits)
 
-    TaskStatistics(task: MockClasses.task05)
+    TaskStatistics(task: .mockTask05)
       .padding()
       .previewLayout(.sizeThatFits)
   }

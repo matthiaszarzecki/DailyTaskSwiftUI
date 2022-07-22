@@ -132,7 +132,7 @@ struct TaskList: View {
 struct TaskList_Previews: PreviewProvider {
   static var previews: some View {
     TaskList(
-      tasks: MockClasses.tasks,
+      tasks: .mockTasks,
       // Offsets array MUST be the same length as tasks
       offsets: [0, 0, -130, -130, 0],
       editTask: { _ in },

@@ -100,7 +100,7 @@ struct AllTasksViewUpperRow: View {
 struct AllTasksViewUpperRow_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksViewUpperRow(
-      tasks: MockClasses.tasks,
+      tasks: .mockTasks,
       width: PreviewConstants.width,
       showSettingsPopover: .constant(false),
       userName: .constant(MockClasses.userName)
@@ -110,7 +110,7 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
     .previewLayout(.sizeThatFits)
 
     AllTasksViewUpperRow(
-      tasks: MockClasses.tasks,
+      tasks: .mockTasks,
       width: PreviewConstants.width,
       showSettingsPopover: .constant(false),
       userName: .constant("")

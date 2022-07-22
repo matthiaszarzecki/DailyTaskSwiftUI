@@ -139,7 +139,7 @@ struct UpdateTaskView_Previews: PreviewProvider {
 
       EditTaskView(
         width: PreviewConstants.width,
-        task: MockClasses.task01,
+        task: .mockTask01,
         editTask: { _ in },
         deleteSingleTask: { _ in },
         closeOverlay: {}

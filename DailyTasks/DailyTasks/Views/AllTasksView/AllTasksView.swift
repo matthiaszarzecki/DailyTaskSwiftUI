@@ -224,10 +224,11 @@ struct AllTasksDisplay: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
+    let tasks: [Task] = .mockTasks
     AllTasksDisplay(
-      tasks: MockClasses.tasks,
+      tasks: tasks,
       // Offsets MUST be the same length as tasks
-      offsets: Array(repeating: 0, count: MockClasses.tasks.count),
+      offsets: Array(repeating: 0, count: tasks.count),
       addNewTask: { _ in },
       editTask: { _ in },
       updateTask: { _ in },
