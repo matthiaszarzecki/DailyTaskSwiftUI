@@ -13,10 +13,10 @@ struct SettingsView: View {
   var resetTasks: () -> Void
   var closeOverlay: () -> Void
   @Binding var userName: String
-  
+
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
-  
+
   var safeDeleteAllTasksButton: some View {
     Button(
       action: {
@@ -34,7 +34,7 @@ struct SettingsView: View {
       }
     )
   }
-  
+
   var actualDeleteAllTasksButton: some View {
     Button(
       action: {
@@ -51,7 +51,7 @@ struct SettingsView: View {
       }
     )
   }
-  
+
   var safeResetTasksButton: some View {
     Button(
       action: {
@@ -69,7 +69,7 @@ struct SettingsView: View {
       }
     )
   }
-  
+
   var actualResetTasksButton: some View {
     Button(
       action: {
@@ -86,12 +86,12 @@ struct SettingsView: View {
       }
     )
   }
-  
+
   var debugActions: some View {
     VStack {
       Text("Debug Actions")
         .font(.title)
-      
+
       HStack {
         safeDeleteAllTasksButton
         if showActualDeleteButton {
@@ -110,7 +110,7 @@ struct SettingsView: View {
     .backgroundColor(.dailyHabitsGray)
     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
-  
+
   var profileNameAndImage: some View {
     HStack {
       TextFieldUpdated(
@@ -120,7 +120,7 @@ struct SettingsView: View {
       )
 
       Spacer()
-      
+
       Image(systemName: "person.crop.circle")
         .foregroundColor(.dailyHabitsGreen)
         .font(.title)
@@ -128,17 +128,17 @@ struct SettingsView: View {
     }
     .padding()
   }
-  
+
   var body: some View {
     ZStack {
       // Empty background
       Rectangle()
         .foregroundColor(.clear)
-      
+
       VStack {
         // Upper "empty" part
         Spacer()
-        
+
         // The actual view
         VStack {
           profileNameAndImage
@@ -174,7 +174,7 @@ struct SettingsView_Previews: PreviewProvider {
       Rectangle()
         .edgesIgnoringSafeArea(.all)
         .foregroundColor(.green)
-      
+
       SettingsView(
         width: PreviewConstants.width,
         deleteAllTasks: {},

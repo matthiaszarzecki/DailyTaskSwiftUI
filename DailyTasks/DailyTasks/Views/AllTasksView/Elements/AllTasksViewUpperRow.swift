@@ -30,13 +30,13 @@ struct AllTasksViewUpperRow: View {
       return Double(doneTasks) / Double(allTasks)
     }
   }
-  
+
   private var progressDisplay: some View {
     let displayNumber = taskDoneRatio * 100
     let displayString = String(format: "%.0f", displayNumber)
     return Text("Progress: \(displayString)%")
   }
-  
+
   var body: some View {
     ZStack {
       Rectangle()
@@ -44,7 +44,7 @@ struct AllTasksViewUpperRow: View {
         .foregroundColor(.white)
         .shadow(radius: 12)
         .frame(width: width, height: height, alignment: .center)
-      
+
       VStack {
         HStack {
           if userName == "" {
@@ -61,7 +61,7 @@ struct AllTasksViewUpperRow: View {
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 12))
                 .minimumScaleFactor(0.12)
-              
+
               Text("\(userName)")
                 .frame(width: width - 100, height: 32, alignment: .leading)
                 .font(.system(size: 300))
@@ -69,7 +69,7 @@ struct AllTasksViewUpperRow: View {
             }
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
           }
-          
+
           Button(
             action: {
               withAnimation {
@@ -84,10 +84,10 @@ struct AllTasksViewUpperRow: View {
             }
           )
         }
-        
+
         progressDisplay
           .frame(width: width - 16*2, height: 20, alignment: .leading)
-        
+
         ProgressBar(
           width: width - 16*2,
           value: taskDoneRatio
@@ -110,7 +110,7 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
     .padding()
     .backgroundColor(.green)
     .previewLayout(.sizeThatFits)
-    
+
     AllTasksViewUpperRow(
       tasks: MockClasses.tasks,
       width: PreviewConstants.width,

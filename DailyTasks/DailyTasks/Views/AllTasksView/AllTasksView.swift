@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllTasksView: View {
   @ObservedObject private var viewModel = AllTasksViewModel()
-  
+
   var body: some View {
     AllTasksDisplay(
       tasks: viewModel.state.allTasks,
@@ -39,7 +39,7 @@ struct AllTasksDisplay: View {
   var sortTasks: () -> Void
   var deleteSingleTask: (_ id: UUID) -> Void
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
-  
+
   @AppStorage("user_name") var userName: String = ""
 
   @State private var currentlyEditedTaskIndex = 0
@@ -53,7 +53,7 @@ struct AllTasksDisplay: View {
   var upperAndLowerPartHeight: CGFloat {
     return upperPartHeight + lowerPartHeight
   }
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {
