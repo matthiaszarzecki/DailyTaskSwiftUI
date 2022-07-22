@@ -26,10 +26,10 @@ struct TaskCell: View {
 
   private var danger: Bool {
     let ratio = Double(task.currentStreak) / Double(task.highestStreak)
-    let daysAfterWhichDangerStartsAfterStreakBreaking = 10
+    let daysAfterDangerStartsAfterStreakBreaking = 10
 
     // e.g. 10 days - ratio of 0.1. 100 days - 0.01
-    let dangerRatio = 1.0 / Double(daysAfterWhichDangerStartsAfterStreakBreaking)
+    let dangerRatio = 1.0 / Double(daysAfterDangerStartsAfterStreakBreaking)
     return ratio < dangerRatio
   }
 
