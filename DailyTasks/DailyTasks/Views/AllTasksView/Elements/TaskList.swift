@@ -16,15 +16,16 @@ struct TaskList: View {
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
 
-  @GestureState var isDragging = false
+  @GestureState private var isDragging = false
+  private let maxDragDistance: CGFloat = 130
 
-  var greenCellBackground: some View {
+  private var greenCellBackground: some View {
     // Revealed through dragging
     Color.dailyHabitsGreen
       .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
   }
 
-  var editTaskButton: some View {
+  private var editTaskButton: some View {
     VStack {
       Image(systemName: "gear")
         .font(.title)
@@ -43,6 +44,7 @@ struct TaskList: View {
 
           HStack {
             Spacer()
+
             Button(
               action: {
                 editTaskClicked(index: index)
@@ -51,9 +53,10 @@ struct TaskList: View {
                 editTaskButton
               }
             )
-            .frame(width: 130)
+            .frame(width: maxDragDistance)
+
             // Only enable button once fully slid out
-            .disabled(offsets[index] > -125)
+            .disabled(offsets[index] > -(maxDragDistance - 5))
           }
 
           Button(
@@ -107,8 +110,7 @@ struct TaskList: View {
     }
   }
 
-
-  func editTaskClicked(index: Int) {
+  private func editTaskClicked(index: Int) {
     print("1. offset: \(offsets[index])")
     self.currentlyEditedTaskIndex = index
     withAnimation {
@@ -116,17 +118,17 @@ struct TaskList: View {
     }
   }
 
-  func onChanged(value: DragGesture.Value, index: Int) {
+  private func onChanged(value: DragGesture.Value, index: Int) {
     if value.translation.width < 0 {
       setOffset(index, value.translation.width)
     }
   }
 
-  func onEnded(value: DragGesture.Value, index: Int) {
+  private func onEnded(value: DragGesture.Value, index: Int) {
     withAnimation {
       // Once offset is close to the left max value move it to max directly
-      let offset: CGFloat = -value.translation.width >= 100
-        ? -130
+      let offset: CGFloat = -value.translation.width >= (maxDragDistance - 30)
+        ? -maxDragDistance
         : 0
       setOffset(index, offset)
     }
@@ -135,10 +137,12 @@ struct TaskList: View {
 
 struct TaskList_Previews: PreviewProvider {
   static var previews: some View {
+    let maxDragDistance: CGFloat = 130
+
     TaskList(
       tasks: .mockTasks,
       // Offsets array MUST be the same length as tasks
-      offsets: [0, 0, -130, -130, 0],
+      offsets: [0, 0, -maxDragDistance, -maxDragDistance, 0],
       editTask: { _ in },
       toggleTaskAsDone: { _ in },
       setOffset: { _, _  in },
