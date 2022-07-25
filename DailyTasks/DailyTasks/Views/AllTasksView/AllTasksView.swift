@@ -48,9 +48,9 @@ struct AllTasksDisplay: View {
   @State private var showUpdateTaskPopover = false
   @State private var showSettingsPopover = false
 
-  let upperPartHeight: CGFloat = 128
-  let lowerPartHeight: CGFloat = .zero
-  var upperAndLowerPartHeight: CGFloat {
+  private let upperPartHeight: CGFloat = 128
+  private let lowerPartHeight: CGFloat = .zero
+  private var upperAndLowerPartHeight: CGFloat {
     upperPartHeight + lowerPartHeight
   }
 
@@ -202,20 +202,20 @@ struct AllTasksDisplay: View {
     }
   }
 
-  func closeCreateTaskView() {
+  private func closeCreateTaskView() {
     withAnimation {
       showNewTaskPopover = false
     }
   }
 
-  func closeEditTaskView() {
+  private func closeEditTaskView() {
     withAnimation {
       showUpdateTaskPopover = false
       setOffset(currentlyEditedTaskIndex, 0)
     }
   }
 
-  func closeSettingsView() {
+  private func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false
     }
