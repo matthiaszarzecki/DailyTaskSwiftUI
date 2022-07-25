@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskCell: View {
   let task: Task
+  let isLastCellToBeShown: Bool
 
   private let iconSize: CGFloat = 30
 
@@ -33,7 +34,7 @@ struct TaskCell: View {
     return ratio < dangerRatio
   }
 
-  var taskIcon: some View {
+  private var taskIcon: some View {
     // When a long-running task has been
     // failed recently, color the icon red.
     let color: Color = danger ? .red : .gray
@@ -47,7 +48,7 @@ struct TaskCell: View {
   }
 
   @ViewBuilder
-  var statusIcon: some View {
+  private var statusIcon: some View {
     if task.status {
       Image(systemName: "checkmark")
         .frame(width: iconSize, height: iconSize, alignment: .center)
@@ -62,68 +63,126 @@ struct TaskCell: View {
     }
   }
 
-  var emptyPlaceholderToAnchorOverlaysOn: some View {
+  private var emptyPlaceholderToAnchorOverlaysOn: some View {
     Rectangle()
       .frame(width: iconSize, height: iconSize, alignment: .center)
       .foregroundColor(.clear)
   }
 
   var body: some View {
-    VStack(spacing: 0) {
-      HStack(spacing: 12) {
-        emptyPlaceholderToAnchorOverlaysOn
+    if isLastCellToBeShown {
+      VStack(spacing: 0) {
+        HStack(spacing: 12) {
+          emptyPlaceholderToAnchorOverlaysOn
 
-        if task.status {
-          Text(task.name)
-            .foregroundColor(.dailyHabitsGreen)
-            .strikethrough()
-        } else {
-          Text(task.name)
+          if task.status {
+            Text(task.name)
+              .foregroundColor(.dailyHabitsGreen)
+              .strikethrough()
+          } else {
+            Text(task.name)
+          }
+
+          Spacer()
+
+          emptyPlaceholderToAnchorOverlaysOn
         }
+        .overlay(
+          taskIcon,
+          alignment: .topLeading
+        )
+        .overlay(
+          statusIcon,
+          alignment: .topTrailing
+        )
+        .padding(.bottom, 4)
+        .padding(.trailing, 8)
 
-        Spacer()
-
-        emptyPlaceholderToAnchorOverlaysOn
+        TaskStatistics(task: task)
       }
-      .overlay(
-        taskIcon,
-        alignment: .topLeading
-      )
-      .overlay(
-        statusIcon,
-        alignment: .topTrailing
-      )
+      .padding(.top, 4)
       .padding(.bottom, 4)
-      .padding(.trailing, 8)
+      .cornerRadius(12, corners: [.topRight, .bottomRight])
+      .padding(8)
+      .background(
+        Image(backgroundName)
+          .resizable(resizingMode: .tile)
+      )
+      .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+    } else {
+      VStack(spacing: 0) {
+        HStack(spacing: 12) {
+          emptyPlaceholderToAnchorOverlaysOn
 
-      TaskStatistics(task: task)
+          if task.status {
+            Text(task.name)
+              .foregroundColor(.dailyHabitsGreen)
+              .strikethrough()
+          } else {
+            Text(task.name)
+          }
+
+          Spacer()
+
+          emptyPlaceholderToAnchorOverlaysOn
+        }
+        .overlay(
+          taskIcon,
+          alignment: .topLeading
+        )
+        .overlay(
+          statusIcon,
+          alignment: .topTrailing
+        )
+        .padding(.bottom, 4)
+        .padding(.trailing, 8)
+
+        TaskStatistics(task: task)
+      }
+      .padding(.top, 4)
+      .padding(.bottom, 4)
+      .cornerRadius(12, corners: [.topRight, .bottomRight])
+      .padding(8)
+      .background(
+        Image(backgroundName)
+          .resizable(resizingMode: .tile)
+      )
     }
-    .padding(.top, 4)
-    .padding(.bottom, 4)
-    .cornerRadius(12, corners: [.topRight, .bottomRight])
-    .padding(8)
-    .background(
-      Image(backgroundName)
-        .resizable(resizingMode: .tile)
-    )
   }
 }
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    TaskCell(task: .mockTask01)
-      .padding()
-      .backgroundColor(.purple)
-      .previewLayout(.sizeThatFits)
+    TaskCell(
+      task: .mockTask01,
+      isLastCellToBeShown: false
+    )
+    .padding()
+    .backgroundColor(.purple)
+    .previewLayout(.sizeThatFits)
 
-    TaskCell(task: .mockTask02)
-      .padding()
-      .backgroundColor(.purple)
-      .previewLayout(.sizeThatFits)
+    TaskCell(
+      task: .mockTask02,
+      isLastCellToBeShown: false
+    )
+    .padding()
+    .backgroundColor(.purple)
+    .previewLayout(.sizeThatFits)
 
-    TaskCell(task: .mockTask05)
-      .padding()
-      .backgroundColor(.purple)
-      .previewLayout(.sizeThatFits)
+    TaskCell(
+      task: .mockTask05,
+      isLastCellToBeShown: false
+    )
+    .padding()
+    .backgroundColor(.purple)
+    .previewLayout(.sizeThatFits)
+
+    TaskCell(
+      task: .mockTask05,
+      isLastCellToBeShown: true
+    )
+    .padding()
+    .backgroundColor(.purple)
+    .previewLayout(.sizeThatFits)
   }
 }

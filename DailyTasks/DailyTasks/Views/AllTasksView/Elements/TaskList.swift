@@ -23,6 +23,7 @@ struct TaskList: View {
     // Revealed through dragging
     Color.dailyHabitsGreen
       .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
+      .backgroundColor(.backgroundGray)
   }
 
   private var editTaskButton: some View {
@@ -68,7 +69,10 @@ struct TaskList: View {
               }
             },
             label: {
-              TaskCell(task: tasks[index])
+              TaskCell(
+                task: tasks[index],
+                isLastCellToBeShown: index == tasks.count - 1
+              )
             }
           )
           .accentColor(.black)
