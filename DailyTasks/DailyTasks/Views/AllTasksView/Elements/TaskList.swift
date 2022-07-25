@@ -95,14 +95,18 @@ struct TaskList: View {
         )
       }
 
-      // Spacer to be able to scroll the
-      // list above the overlay buttons
-      Rectangle()
-        .foregroundColor(.clear)
-        .backgroundColor(.clear)
-        .frame(width: 200, height: 78, alignment: .center)
+      // Spacer to be able to scroll the list above the overlay buttons.
+      // The ZStack with 0 edgeinsets allows to use the whole cell
+      ZStack {
+        Color.backgroundGray
+          .frame(height: 100)
+      }
+      .listRowInsets(
+        EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+      )
     }
   }
+
 
   func editTaskClicked(index: Int) {
     print("1. offset: \(offsets[index])")
