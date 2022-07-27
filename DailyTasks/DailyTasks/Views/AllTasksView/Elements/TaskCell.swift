@@ -99,10 +99,8 @@ struct TaskCell: View {
 
       TaskStatistics(task: task)
     }
-    .padding(.top, 4)
-    .padding(.bottom, 4)
+    .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
     .cornerRadius(12, corners: [.topRight, .bottomRight])
-    .padding(8)
     .background(
       Image(backgroundName)
         .resizable(resizingMode: .tile)
