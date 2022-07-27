@@ -153,36 +153,22 @@ struct TaskCell: View {
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    TaskCell(
-      task: .mockTask01,
-      isLastCellToBeShown: false
-    )
-    .padding()
-    .backgroundColor(.purple)
-    .previewLayout(.sizeThatFits)
+    let configurations: [(task: Task, isLastCellToBeShown: Bool)] = [
+      (.mockTask01, false),
+      (.mockTask02, false),
+      (.mockTask05, false),
+      (.mockTask05, true)
+    ]
 
-    TaskCell(
-      task: .mockTask02,
-      isLastCellToBeShown: false
-    )
-    .padding()
-    .backgroundColor(.purple)
-    .previewLayout(.sizeThatFits)
-
-    TaskCell(
-      task: .mockTask05,
-      isLastCellToBeShown: false
-    )
-    .padding()
-    .backgroundColor(.purple)
-    .previewLayout(.sizeThatFits)
-
-    TaskCell(
-      task: .mockTask05,
-      isLastCellToBeShown: true
-    )
-    .padding()
-    .backgroundColor(.purple)
-    .previewLayout(.sizeThatFits)
+    ForEach(0..<configurations.count, id: \.self) { index in
+      let configuration = configurations[index]
+      TaskCell(
+        task: configuration.task,
+        isLastCellToBeShown: configuration.isLastCellToBeShown
+      )
+      .padding()
+      .backgroundColor(.purple)
+      .previewLayout(.sizeThatFits)
+    }
   }
 }
