@@ -69,84 +69,52 @@ struct TaskCell: View {
       .foregroundColor(.clear)
   }
 
+  private var cellBody: some View {
+    VStack(spacing: 0) {
+      HStack(spacing: 12) {
+        emptyPlaceholderToAnchorOverlaysOn
+
+        if task.status {
+          Text(task.name)
+            .foregroundColor(.dailyHabitsGreen)
+            .strikethrough()
+        } else {
+          Text(task.name)
+        }
+
+        Spacer()
+
+        emptyPlaceholderToAnchorOverlaysOn
+      }
+      .overlay(
+        taskIcon,
+        alignment: .topLeading
+      )
+      .overlay(
+        statusIcon,
+        alignment: .topTrailing
+      )
+      .padding(.bottom, 4)
+      .padding(.trailing, 8)
+
+      TaskStatistics(task: task)
+    }
+    .padding(.top, 4)
+    .padding(.bottom, 4)
+    .cornerRadius(12, corners: [.topRight, .bottomRight])
+    .padding(8)
+    .background(
+      Image(backgroundName)
+        .resizable(resizingMode: .tile)
+    )
+  }
+
   var body: some View {
     if isLastCellToBeShown {
-      VStack(spacing: 0) {
-        HStack(spacing: 12) {
-          emptyPlaceholderToAnchorOverlaysOn
-
-          if task.status {
-            Text(task.name)
-              .foregroundColor(.dailyHabitsGreen)
-              .strikethrough()
-          } else {
-            Text(task.name)
-          }
-
-          Spacer()
-
-          emptyPlaceholderToAnchorOverlaysOn
-        }
-        .overlay(
-          taskIcon,
-          alignment: .topLeading
-        )
-        .overlay(
-          statusIcon,
-          alignment: .topTrailing
-        )
-        .padding(.bottom, 4)
-        .padding(.trailing, 8)
-
-        TaskStatistics(task: task)
-      }
-      .padding(.top, 4)
-      .padding(.bottom, 4)
-      .cornerRadius(12, corners: [.topRight, .bottomRight])
-      .padding(8)
-      .background(
-        Image(backgroundName)
-          .resizable(resizingMode: .tile)
-      )
-      .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+      cellBody
+        .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
     } else {
-      VStack(spacing: 0) {
-        HStack(spacing: 12) {
-          emptyPlaceholderToAnchorOverlaysOn
-
-          if task.status {
-            Text(task.name)
-              .foregroundColor(.dailyHabitsGreen)
-              .strikethrough()
-          } else {
-            Text(task.name)
-          }
-
-          Spacer()
-
-          emptyPlaceholderToAnchorOverlaysOn
-        }
-        .overlay(
-          taskIcon,
-          alignment: .topLeading
-        )
-        .overlay(
-          statusIcon,
-          alignment: .topTrailing
-        )
-        .padding(.bottom, 4)
-        .padding(.trailing, 8)
-
-        TaskStatistics(task: task)
-      }
-      .padding(.top, 4)
-      .padding(.bottom, 4)
-      .cornerRadius(12, corners: [.topRight, .bottomRight])
-      .padding(8)
-      .background(
-        Image(backgroundName)
-          .resizable(resizingMode: .tile)
-      )
+      cellBody
     }
   }
 }
