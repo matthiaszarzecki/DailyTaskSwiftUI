@@ -174,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				6E89A06626330F5E00586C1D /* AllTasksViewUpperRow.swift */,
+				6EE6083528A7DED50095ED9A /* SlidableCell.swift */,
 				CC40E4DF26287D0600059061 /* TaskCell.swift */,
 				6E98CFE6266E5E390034775F /* TaskList.swift */,
-				6EE6083528A7DED50095ED9A /* SlidableCell.swift */,
 				6E981B812638BC5700A21B2C /* TaskStatistics.swift */,
 			);
 			path = Elements;
