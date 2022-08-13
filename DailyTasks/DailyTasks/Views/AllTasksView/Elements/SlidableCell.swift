@@ -36,6 +36,7 @@ struct SlidableCell: View {
     Color.dailyHabitsGreen
       .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
       .backgroundColor(.backgroundGray)
+      .frame(height: 74)
   }
 
   var body: some View {

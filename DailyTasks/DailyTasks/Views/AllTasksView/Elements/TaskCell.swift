@@ -78,8 +78,10 @@ struct TaskCell: View {
           Text(task.name)
             .foregroundColor(.dailyHabitsGreen)
             .strikethrough()
+            .minimumScaleFactor(0.7)
         } else {
           Text(task.name)
+            .minimumScaleFactor(0.7)
         }
 
         Spacer()
@@ -95,22 +97,22 @@ struct TaskCell: View {
         alignment: .topTrailing
       )
       .padding(.bottom, 4)
-      .padding(.trailing, 8)
 
       TaskStatistics(task: task)
     }
     .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
-    .cornerRadius(12, corners: [.topRight, .bottomRight])
     .background(
       Image(backgroundName)
         .resizable(resizingMode: .tile)
     )
+    .frame(height: 74)
+    .cornerRadius(12, corners: [.topRight, .bottomRight])
   }
 
   var body: some View {
     if isLastCellToBeShown {
       cellBody
-        .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+        .cornerRadius(12, corners: [.bottomLeft])
     } else {
       cellBody
     }
