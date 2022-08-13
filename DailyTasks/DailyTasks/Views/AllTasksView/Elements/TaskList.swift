@@ -16,92 +16,17 @@ struct TaskList: View {
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
 
-  @GestureState private var isDragging = false
-  private let maxDragDistance: CGFloat = 130
-
-  private var greenCellBackground: some View {
-    // Revealed through dragging
-    Color.dailyHabitsGreen
-      .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
-      .backgroundColor(.backgroundGray)
-  }
-
-  private var editTaskButton: some View {
-    VStack {
-      Image(systemName: "gear")
-        .font(.title)
-        .foregroundColor(.white)
-      Text("Edit")
-        .foregroundColor(.white)
-        .font(.footnote)
-    }
-  }
-
   var body: some View {
     List {
       ForEach(tasks.indices, id: \.self) { index in
-        ZStack {
-          // Green Background of Cell
-          greenCellBackground
-
-          // Edit-Button, revealed through Dragging
-          HStack {
-            Spacer()
-
-            Button(
-              action: {
-                editTaskClicked(index: index)
-              },
-              label: {
-                editTaskButton
-              }
-            )
-            .frame(width: maxDragDistance)
-
-            // Only enable button once fully slid out
-            .disabled(offsets[index] > -(maxDragDistance - 5))
-          }
-
-          // Actual Task-Cell, can be tapped to toggle task
-          Button(
-            action: {
-              // Only allow action when cell is not slid out.
-              // Using .disable is causing issues with transparency.
-              if offsets[index] == 0 {
-                toggleTaskAsDone(tasks[index].id)
-              }
-            },
-            label: {
-              TaskCell(
-                task: tasks[index],
-                isLastCellToBeShown: index == tasks.count - 1
-              )
-            }
-          )
-          .accentColor(.black)
-
-          // Drag Gesture Handling
-          .offset(x: offsets[index])
-
-          .gesture(
-            DragGesture(
-              minimumDistance: 30,
-              coordinateSpace: .local
-            )
-            .updating($isDragging) { value, state, _ in
-              // so we can validate for correct drag
-              state = true
-              onChanged(value: value, index: index)
-            }
-            .onEnded { value in
-              onEnded(value: value, index: index)
-            }
-          )
-        }
-
-        // No Auto-Insets
-        .listRowInsets(
-          EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        SlidableCell(
+          task: tasks[index],
+          isLastCellToBeShown: index == tasks.count - 1,
+          offset: offsets[index],
+          index: index,
+          setOffset: setOffset,
+          editTaskClicked: editTaskClicked,
+          toggleTaskAsDone: toggleTaskAsDone
         )
       }
 
@@ -122,22 +47,6 @@ struct TaskList: View {
     self.currentlyEditedTaskIndex = index
     withAnimation {
       showUpdateTaskPopover = true
-    }
-  }
-
-  private func onChanged(value: DragGesture.Value, index: Int) {
-    if value.translation.width < 0 {
-      setOffset(index, value.translation.width)
-    }
-  }
-
-  private func onEnded(value: DragGesture.Value, index: Int) {
-    withAnimation {
-      // Once offset is close to the left max value move it to max directly
-      let offset: CGFloat = -value.translation.width >= (maxDragDistance - 30)
-        ? -maxDragDistance
-        : 0
-      setOffset(index, offset)
     }
   }
 }
