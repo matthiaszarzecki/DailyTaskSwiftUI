@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskCell: View {
   let task: Task
   let isLastCellToBeShown: Bool
+  let height: CGFloat
 
   private let iconSize: CGFloat = 30
 
@@ -105,7 +106,7 @@ struct TaskCell: View {
       Image(backgroundName)
         .resizable(resizingMode: .tile)
     )
-    .frame(height: 74)
+    .frame(height: height)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
   }
 
@@ -132,7 +133,8 @@ struct TaskCell_Previews: PreviewProvider {
       let configuration = configurations[index]
       TaskCell(
         task: configuration.task,
-        isLastCellToBeShown: configuration.isLastCellToBeShown
+        isLastCellToBeShown: configuration.isLastCellToBeShown,
+        height: 74
       )
       .padding()
       .backgroundColor(.purple)

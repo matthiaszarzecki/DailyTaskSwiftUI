@@ -19,6 +19,7 @@ struct SlidableCell: View {
 
   @GestureState private var isDragging = false
   private let maxDragDistance: CGFloat = 130
+  private let cellHeight: CGFloat = 74
 
   private var editTaskButton: some View {
     VStack {
@@ -36,7 +37,7 @@ struct SlidableCell: View {
     Color.dailyHabitsGreen
       .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
       .backgroundColor(.backgroundGray)
-      .frame(height: 74)
+      .frame(height: cellHeight)
   }
 
   var body: some View {
@@ -74,7 +75,8 @@ struct SlidableCell: View {
         label: {
           TaskCell(
             task: task,
-            isLastCellToBeShown: isLastCellToBeShown
+            isLastCellToBeShown: isLastCellToBeShown,
+            height: cellHeight
           )
         }
       )
