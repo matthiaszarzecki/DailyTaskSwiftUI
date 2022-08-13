@@ -41,8 +41,10 @@ struct TaskList: View {
     List {
       ForEach(tasks.indices, id: \.self) { index in
         ZStack {
+          // Green Background of Cell
           greenCellBackground
 
+          // Edit-Button, revealed through Dragging
           HStack {
             Spacer()
 
@@ -60,6 +62,7 @@ struct TaskList: View {
             .disabled(offsets[index] > -(maxDragDistance - 5))
           }
 
+          // Actual Task-Cell, can be tapped to toggle task
           Button(
             action: {
               // Only allow action when cell is not slid out.
