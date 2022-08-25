@@ -20,9 +20,7 @@ struct TaskList: View {
   var body: some View {
     List {
       ForEach(tasks.indices, id: \.self) { index in
-        if isPrivacyEnabled && tasks[index].isPrivate {
-          Text("Private Task")
-        } else {
+        if !(isPrivacyEnabled && tasks[index].isPrivate) {
           SlidableCell(
             task: tasks[index],
             isLastCellToBeShown: index == tasks.count - 1,
