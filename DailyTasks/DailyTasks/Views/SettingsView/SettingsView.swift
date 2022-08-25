@@ -13,6 +13,7 @@ struct SettingsView: View {
   var resetTasks: () -> Void
   var closeOverlay: () -> Void
   @Binding var userName: String
+  @Binding var isPrivacyEnabled: Bool
 
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
@@ -90,7 +91,7 @@ struct SettingsView: View {
   private var debugActions: some View {
     VStack {
       Text("Debug Actions")
-        .font(.title)
+        .font(.title2)
 
       HStack {
         safeDeleteAllTasksButton
@@ -142,7 +143,17 @@ struct SettingsView: View {
         // The actual view
         VStack {
           profileNameAndImage
+
+          Toggle(
+            "Private Mode",
+            isOn: $isPrivacyEnabled
+          )
+          .tint(.dailyHabitsGreen)
+          .frame(width: width - 34, alignment: .center)
+          .padding(.bottom, 12)
+
           debugActions
+
           CancelButton(
             closeOverlay: closeOverlay,
             color: .dailyHabitsGreen
@@ -184,7 +195,8 @@ struct SettingsView_Previews: PreviewProvider {
         deleteAllTasks: {},
         resetTasks: {},
         closeOverlay: {},
-        userName: .constant(MockClasses.userName)
+        userName: .constant(MockClasses.userName),
+        isPrivacyEnabled: .constant(true)
       )
     }
   }

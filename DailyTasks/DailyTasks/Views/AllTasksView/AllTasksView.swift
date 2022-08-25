@@ -43,6 +43,7 @@ struct AllTasksDisplay: View {
   @AppStorage("user_name") var userName = ""
 
   @State private var currentlyEditedTaskIndex: Int = .zero
+  @State private var isPrivacyEnabled = false
 
   @State private var showNewTaskPopover = false
   @State private var showUpdateTaskPopover = false
@@ -185,7 +186,8 @@ struct AllTasksDisplay: View {
           deleteAllTasks: deleteAllTasks,
           resetTasks: resetTasks,
           closeOverlay: closeSettingsView,
-          userName: $userName
+          userName: $userName,
+          isPrivacyEnabled: $isPrivacyEnabled
         )
       }
     }
