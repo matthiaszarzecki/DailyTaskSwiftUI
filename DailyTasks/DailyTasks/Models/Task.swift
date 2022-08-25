@@ -23,13 +23,16 @@ struct Task: Codable, Identifiable, Hashable {
   /// 3 - All Day
   var partOfDay: Int
 
+  var isPrivate: Bool
+
   init(
     name: String,
     status: Bool,
     iconName: String,
     currentStreak: Int,
     highestStreak: Int,
-    partOfDay: Int
+    partOfDay: Int,
+    isPrivate: Bool
   ) {
     self.name = name
     self.status = status
@@ -37,6 +40,7 @@ struct Task: Codable, Identifiable, Hashable {
     self.currentStreak = currentStreak
     self.highestStreak = highestStreak
     self.partOfDay = partOfDay
+    self.isPrivate = isPrivate
   }
 
   init(from decoder: Decoder) throws {
@@ -48,6 +52,14 @@ struct Task: Codable, Identifiable, Hashable {
     currentStreak = try container.decode(Int.self, forKey: .currentStreak)
     highestStreak = try container.decode(Int.self, forKey: .highestStreak)
     partOfDay = try container.decode(Int.self, forKey: .partOfDay)
+
+    // isPrivate has been added during production, and
+    // might not exist. Set default to false in that case.
+    if let isPrivateInStorage = try? container.decode(Bool.self, forKey: .isPrivate) {
+      isPrivate = isPrivateInStorage
+    } else {
+      isPrivate = false
+    }
   }
 
   func encode(to encoder: Encoder) throws {
@@ -59,6 +71,7 @@ struct Task: Codable, Identifiable, Hashable {
     try container.encode(currentStreak, forKey: .currentStreak)
     try container.encode(highestStreak, forKey: .highestStreak)
     try container.encode(partOfDay, forKey: .partOfDay)
+    try container.encode(isPrivate, forKey: .isPrivate)
   }
 
   enum CodingKeys: String, CodingKey {
@@ -68,6 +81,7 @@ struct Task: Codable, Identifiable, Hashable {
     case currentStreak
     case highestStreak
     case partOfDay
+    case isPrivate
   }
 }
 
@@ -78,7 +92,8 @@ extension Task {
     iconName: "hare",
     currentStreak: 2,
     highestStreak: 4,
-    partOfDay: 0
+    partOfDay: 0,
+    isPrivate: false
   )
 
   static let mockTask02 = Task(
@@ -87,7 +102,8 @@ extension Task {
     iconName: "hare",
     currentStreak: 1,
     highestStreak: 0,
-    partOfDay: 1
+    partOfDay: 1,
+    isPrivate: false
   )
 
   static let mockTask03 = Task(
@@ -96,7 +112,8 @@ extension Task {
     iconName: "hare",
     currentStreak: 14,
     highestStreak: 167,
-    partOfDay: 3
+    partOfDay: 3,
+    isPrivate: false
   )
 
   static let mockTask04 = Task(
@@ -105,7 +122,8 @@ extension Task {
     iconName: "hare",
     currentStreak: 68,
     highestStreak: 68,
-    partOfDay: 4
+    partOfDay: 4,
+    isPrivate: false
   )
 
   static let mockTask05 = Task(
@@ -118,7 +136,8 @@ extension Task {
     iconName: "drop",
     currentStreak: 1,
     highestStreak: 68,
-    partOfDay: 4
+    partOfDay: 4,
+    isPrivate: false
   )
 }
 

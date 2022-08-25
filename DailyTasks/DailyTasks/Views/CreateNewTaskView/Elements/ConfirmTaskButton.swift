@@ -29,7 +29,9 @@ struct ConfirmTaskButton: View {
           iconName: selectedIcon,
           currentStreak: streak,
           highestStreak: 0,
-          partOfDay: selectedPartOfDay
+          partOfDay: selectedPartOfDay,
+          // TODO: Check if this is correct
+          isPrivate: false
         )
 
         addNewTask(task)
