@@ -22,6 +22,53 @@ struct Task: Codable, Identifiable, Hashable {
   /// 2 - Evening
   /// 3 - All Day
   var partOfDay: Int
+
+  init(
+    name: String,
+    status: Bool,
+    iconName: String,
+    currentStreak: Int,
+    highestStreak: Int,
+    partOfDay: Int
+  ) {
+    self.name = name
+    self.status = status
+    self.iconName = iconName
+    self.currentStreak = currentStreak
+    self.highestStreak = highestStreak
+    self.partOfDay = partOfDay
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    name = try container.decode(String.self, forKey: .name)
+    status = try container.decode(Bool.self, forKey: .status)
+    iconName = try container.decode(String.self, forKey: .iconName)
+    currentStreak = try container.decode(Int.self, forKey: .currentStreak)
+    highestStreak = try container.decode(Int.self, forKey: .highestStreak)
+    partOfDay = try container.decode(Int.self, forKey: .partOfDay)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    try container.encode(name, forKey: .name)
+    try container.encode(status, forKey: .status)
+    try container.encode(iconName, forKey: .iconName)
+    try container.encode(currentStreak, forKey: .currentStreak)
+    try container.encode(highestStreak, forKey: .highestStreak)
+    try container.encode(partOfDay, forKey: .partOfDay)
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case name
+    case status
+    case iconName
+    case currentStreak
+    case highestStreak
+    case partOfDay
+  }
 }
 
 extension Task {
