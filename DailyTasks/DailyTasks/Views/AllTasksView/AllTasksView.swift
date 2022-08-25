@@ -76,7 +76,8 @@ struct AllTasksDisplay: View {
             toggleTaskAsDone: updateTask,
             setOffset: setOffset,
             showUpdateTaskPopover: $showUpdateTaskPopover,
-            currentlyEditedTaskIndex: $currentlyEditedTaskIndex
+            currentlyEditedTaskIndex: $currentlyEditedTaskIndex,
+            isPrivacyEnabled: isPrivacyEnabled
           )
           .frame(
             width: geometry.size.width,

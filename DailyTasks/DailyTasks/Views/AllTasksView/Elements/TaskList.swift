@@ -15,19 +15,24 @@ struct TaskList: View {
   var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
+  var isPrivacyEnabled: Bool
 
   var body: some View {
     List {
       ForEach(tasks.indices, id: \.self) { index in
-        SlidableCell(
-          task: tasks[index],
-          isLastCellToBeShown: index == tasks.count - 1,
-          offset: offsets[index],
-          index: index,
-          setOffset: setOffset,
-          editTaskClicked: editTaskClicked,
-          toggleTaskAsDone: toggleTaskAsDone
-        )
+        if isPrivacyEnabled && tasks[index].isPrivate {
+          Text("Private Task")
+        } else {
+          SlidableCell(
+            task: tasks[index],
+            isLastCellToBeShown: index == tasks.count - 1,
+            offset: offsets[index],
+            index: index,
+            setOffset: setOffset,
+            editTaskClicked: editTaskClicked,
+            toggleTaskAsDone: toggleTaskAsDone
+          )
+        }
       }
 
       // Spacer to be able to scroll the list above the overlay buttons.
@@ -63,7 +68,8 @@ struct TaskList_Previews: PreviewProvider {
       toggleTaskAsDone: { _ in },
       setOffset: { _, _  in },
       showUpdateTaskPopover: .constant(false),
-      currentlyEditedTaskIndex: .constant(0)
+      currentlyEditedTaskIndex: .constant(0),
+      isPrivacyEnabled: false
     )
   }
 }
