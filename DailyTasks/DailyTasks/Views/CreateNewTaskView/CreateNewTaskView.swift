@@ -67,6 +67,7 @@ struct CreateNewTaskView: View {
               startStreak: startStreak,
               selectedIcon: selectedIcon,
               selectedPartOfDay: selectedPartOfDay,
+              isPrivate: isPrivate,
               addNewTask: addNewTask,
               closeOverlay: closeOverlay
             )

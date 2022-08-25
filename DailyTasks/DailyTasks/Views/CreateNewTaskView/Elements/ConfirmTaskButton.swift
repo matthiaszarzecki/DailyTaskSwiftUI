@@ -12,6 +12,7 @@ struct ConfirmTaskButton: View {
   var startStreak: String
   var selectedIcon: String
   var selectedPartOfDay: Int
+  var isPrivate: Bool
   var addNewTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
 
@@ -30,8 +31,7 @@ struct ConfirmTaskButton: View {
           currentStreak: streak,
           highestStreak: 0,
           partOfDay: selectedPartOfDay,
-          // TODO: Check if this is correct
-          isPrivate: false
+          isPrivate: isPrivate
         )
 
         addNewTask(task)
@@ -57,6 +57,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
+      isPrivate: false,
       addNewTask: { _ in },
       closeOverlay: {}
     )
@@ -68,6 +69,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
       startStreak: "",
       selectedIcon: "",
       selectedPartOfDay: 0,
+      isPrivate: false,
       addNewTask: { _ in },
       closeOverlay: {}
     )
