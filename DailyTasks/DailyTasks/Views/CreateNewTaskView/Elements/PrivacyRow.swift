@@ -50,7 +50,7 @@ struct PrivacyRow: View {
         }
       }
     }
-    .padding(EdgeInsets(top: 12, leading: 6, bottom: 12, trailing: 6))
+    .padding(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
   }
 }
 

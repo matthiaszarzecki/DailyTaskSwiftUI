@@ -16,6 +16,7 @@ struct CreateNewTaskView: View {
   @State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
   @State private var selectedIcon = "drop"
+  @State private var isPrivate = false
 
   private let exampleTasks = [
     "Drink water",
@@ -54,6 +55,8 @@ struct CreateNewTaskView: View {
           IconGrid(selectedIcon: $selectedIcon, width: width)
 
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
+
+          PrivacyRow(isPrivate: $isPrivate)
 
           HStack {
             CancelButton(
