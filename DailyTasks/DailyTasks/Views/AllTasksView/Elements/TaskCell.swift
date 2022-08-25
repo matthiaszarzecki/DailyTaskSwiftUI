@@ -70,6 +70,16 @@ struct TaskCell: View {
       .foregroundColor(.clear)
   }
 
+  private var privacyIcon: some View {
+    Group {
+      if task.isPrivate {
+        Image(systemName: "eye.slash")
+          .font(.system(size: 14))
+          .foregroundColor(.dailyHabitsGreen)
+      }
+    }
+  }
+
   private var cellBody: some View {
     VStack(spacing: 0) {
       HStack(spacing: 12) {
@@ -100,6 +110,10 @@ struct TaskCell: View {
       .padding(.bottom, 4)
 
       TaskStatistics(task: task)
+        .overlay(
+          privacyIcon,
+          alignment: .bottomTrailing
+        )
     }
     .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
     .background(

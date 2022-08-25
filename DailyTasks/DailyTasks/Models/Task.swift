@@ -137,7 +137,7 @@ extension Task {
     currentStreak: 1,
     highestStreak: 68,
     partOfDay: 4,
-    isPrivate: false
+    isPrivate: true
   )
 }
 
