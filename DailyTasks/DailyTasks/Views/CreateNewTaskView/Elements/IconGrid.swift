@@ -11,22 +11,6 @@ struct IconGrid: View {
   @Binding var selectedIcon: String
   var width: CGFloat
 
-  private let iconOptions = [
-    "drop",
-    "leaf",
-    "highlighter",
-    "ear",
-    "eye",
-    "book",
-    "guitars",
-    "chevron.left.slash.chevron.right",
-    "hare",
-    "pills",
-    "figure.walk",
-    "scope",
-    "moon",
-    "bicycle"
-  ]
   private let iconSize: CGFloat = 36
   private let padding: CGFloat = 10
   private let cellWidthSmall: CGFloat = 33
@@ -40,9 +24,11 @@ struct IconGrid: View {
     let gridItems = [column, column, column, column, column, column, column]
 
     return LazyVGrid(columns: gridItems, spacing: padding) {
-      ForEach(iconOptions, id: \.self) { option in
-        if selectedIcon == option {
-          Image(systemName: option)
+      ForEach(TaskIcon.allCases, id: \.rawValue) { icon in
+        let iconName = icon.rawValue
+
+        if selectedIcon == iconName {
+          Image(systemName: iconName)
             .frame(width: iconSize, height: iconSize, alignment: .center)
             .backgroundColor(.white)
             .foregroundColor(.gray)
@@ -53,10 +39,10 @@ struct IconGrid: View {
         } else {
           Button(
             action: {
-              selectedIcon = option
+              selectedIcon = iconName
             },
             label: {
-              Image(systemName: option)
+              Image(systemName: iconName)
                 .frame(
                   width: iconSize,
                   height: iconSize,
@@ -82,7 +68,7 @@ struct IconGrid: View {
 struct IconGrid_Previews: PreviewProvider {
   static var previews: some View {
     IconGrid(
-      selectedIcon: .constant("folder"),
+      selectedIcon: .constant(TaskIcon.bicycle.rawValue),
       width: PreviewConstants.width
     )
     .previewLayout(.sizeThatFits)

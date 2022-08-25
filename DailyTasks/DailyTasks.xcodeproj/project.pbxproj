@@ -23,6 +23,7 @@
 		6E9FF7A3262CBAB800CA7743 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */; };
 		6EB12ECD26261394001065C8 /* AllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB12ECC26261394001065C8 /* AllTasksViewModel.swift */; };
 		6EB31E3C28B8016100C71BDC /* PrivacyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB31E3B28B8016100C71BDC /* PrivacyRow.swift */; };
+		6EB31E3E28B822A800C71BDC /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB31E3D28B822A800C71BDC /* TaskIcon.swift */; };
 		6EB8EBDC262A4EDD00E1484D /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */; };
 		6EC9014A266D5DD4009A74E1 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90149266D5DD4009A74E1 /* EditTaskView.swift */; };
 		6EE6083628A7DED50095ED9A /* SlidableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE6083528A7DED50095ED9A /* SlidableCell.swift */; };
@@ -78,6 +79,7 @@
 		6E9FF7A2262CBAB800CA7743 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		6EB12ECC26261394001065C8 /* AllTasksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllTasksViewModel.swift; sourceTree = "<group>"; };
 		6EB31E3B28B8016100C71BDC /* PrivacyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyRow.swift; sourceTree = "<group>"; };
+		6EB31E3D28B822A800C71BDC /* TaskIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
 		6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		6EC90149266D5DD4009A74E1 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		6EE6083528A7DED50095ED9A /* SlidableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidableCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			children = (
 				CC0AD83B2625BE15003F9A9F /* Task.swift */,
 				CCC5530C26306F88003C7DBC /* PartOfDayOption.swift */,
+				6EB31E3D28B822A800C71BDC /* TaskIcon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				6E98CFE7266E5E390034775F /* TaskList.swift in Sources */,
 				6E89A02F2632FD0000586C1D /* PartOfDayRow.swift in Sources */,
 				6E89A02A2632B28800586C1D /* PreviewConstants.swift in Sources */,
+				6EB31E3E28B822A800C71BDC /* TaskIcon.swift in Sources */,
 				CC0AD8452625BE46003F9A9F /* Data-Extension.swift in Sources */,
 				6EB8EBDC262A4EDD00E1484D /* ProgressBar.swift in Sources */,
 				CC0AD83C2625BE15003F9A9F /* Task.swift in Sources */,
