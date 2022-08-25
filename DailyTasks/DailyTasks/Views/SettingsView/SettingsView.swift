@@ -17,7 +17,7 @@ struct SettingsView: View {
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
 
-  var safeDeleteAllTasksButton: some View {
+  private var safeDeleteAllTasksButton: some View {
     Button(
       action: {
         withAnimation {
@@ -35,7 +35,7 @@ struct SettingsView: View {
     )
   }
 
-  var actualDeleteAllTasksButton: some View {
+  private var actualDeleteAllTasksButton: some View {
     Button(
       action: {
         deleteAllTasks()
@@ -52,7 +52,7 @@ struct SettingsView: View {
     )
   }
 
-  var safeResetTasksButton: some View {
+  private var safeResetTasksButton: some View {
     Button(
       action: {
         withAnimation {
@@ -60,7 +60,7 @@ struct SettingsView: View {
         }
       },
       label: {
-        Text("Reset All Tasks")
+        Text("Reset Tasks (jump to next day)")
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
@@ -70,7 +70,7 @@ struct SettingsView: View {
     )
   }
 
-  var actualResetTasksButton: some View {
+  private var actualResetTasksButton: some View {
     Button(
       action: {
         resetTasks()
@@ -87,7 +87,7 @@ struct SettingsView: View {
     )
   }
 
-  var debugActions: some View {
+  private var debugActions: some View {
     VStack {
       Text("Debug Actions")
         .font(.title)
@@ -111,7 +111,7 @@ struct SettingsView: View {
     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
 
-  var profileNameAndImage: some View {
+  private var profileNameAndImage: some View {
     HStack {
       TextFieldUpdated(
         text: $userName,
