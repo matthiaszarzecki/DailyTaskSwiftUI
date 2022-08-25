@@ -60,7 +60,7 @@ struct SettingsView: View {
         }
       },
       label: {
-        Text("Reset Tasks (jump to next day)")
+        Text("Jump to next day")
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
