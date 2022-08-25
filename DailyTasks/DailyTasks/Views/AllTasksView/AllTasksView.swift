@@ -153,7 +153,8 @@ struct AllTasksDisplay: View {
             width: geometry.size.width,
             height: upperPartHeight,
             showSettingsPopover: $showSettingsPopover,
-            userName: $userName
+            userName: $userName,
+            isPrivacyEnabled: isPrivacyEnabled
           )
 
           Spacer()

@@ -13,6 +13,7 @@ struct AllTasksViewUpperRow: View {
   var height: CGFloat = 128
   @Binding var showSettingsPopover: Bool
   @Binding var userName: String
+  var isPrivacyEnabled: Bool
 
   private var doneTasks: Int {
     let doneTasks = tasks.filter { $0.status }
@@ -47,7 +48,7 @@ struct AllTasksViewUpperRow: View {
         HStack {
           if userName.isEmpty {
             Text("Your Daily Habits")
-              .frame(width: width - 100, height: 24, alignment: .leading)
+              .frame(width: width - 144, height: 24, alignment: .leading)
               .multilineTextAlignment(.leading)
               .font(.system(size: 200))
               .minimumScaleFactor(0.12)
@@ -55,17 +56,25 @@ struct AllTasksViewUpperRow: View {
           } else {
             VStack(spacing: 4) {
               Text("Good Morning")
-                .frame(width: width - 100, height: 14, alignment: .leading)
+                .frame(width: width - 144, height: 14, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 12))
                 .minimumScaleFactor(0.12)
 
               Text("\(userName)")
-                .frame(width: width - 100, height: 32, alignment: .leading)
+                .frame(width: width - 144, height: 32, alignment: .leading)
                 .font(.system(size: 300))
                 .minimumScaleFactor(0.12)
             }
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+          }
+
+          Spacer()
+
+          if isPrivacyEnabled {
+            Image(systemName: "eye.slash")
+              .font(.title2)
+              .foregroundColor(.dailyHabitsGreen)
           }
 
           Button(
@@ -103,7 +112,8 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
       tasks: .mockTasks,
       width: PreviewConstants.width,
       showSettingsPopover: .constant(false),
-      userName: .constant(MockClasses.userName)
+      userName: .constant(MockClasses.userName),
+      isPrivacyEnabled: true
     )
     .padding()
     .backgroundColor(.green)
@@ -113,7 +123,8 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
       tasks: .mockTasks,
       width: PreviewConstants.width,
       showSettingsPopover: .constant(false),
-      userName: .constant("")
+      userName: .constant(""),
+      isPrivacyEnabled: false
     )
     .padding()
     .backgroundColor(.green)
