@@ -109,7 +109,7 @@ struct EditTaskView: View {
         }
         .frame(
           width: width,
-          height: UIScreen.main.bounds.size.height * 0.6,
+          height: UIScreen.main.bounds.size.height * 0.7,
           alignment: .center
         )
         .backgroundColor(.white)

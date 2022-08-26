@@ -76,7 +76,7 @@ struct CreateNewTaskView: View {
         }
         .frame(
           width: width - 12,
-          height: UIScreen.main.bounds.size.height * 0.6,
+          height: UIScreen.main.bounds.size.height * 0.7,
           alignment: .center
         )
         .backgroundColor(.white)
