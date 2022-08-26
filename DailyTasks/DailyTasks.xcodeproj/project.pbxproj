@@ -281,8 +281,8 @@
 		CC0AD8402625BE28003F9A9F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CC0AD83B2625BE15003F9A9F /* Task.swift */,
 				CCC5530C26306F88003C7DBC /* PartOfDayOption.swift */,
+				CC0AD83B2625BE15003F9A9F /* Task.swift */,
 				6EB31E3D28B822A800C71BDC /* TaskIcon.swift */,
 			);
 			path = Models;
