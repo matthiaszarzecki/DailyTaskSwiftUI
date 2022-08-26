@@ -73,7 +73,7 @@ struct AllTasksViewUpperRow: View {
 
           if isPrivacyEnabled {
             Image(systemName: "eye.slash")
-              .font(.title2)
+              .font(.system(size: 26))
               .foregroundColor(.dailyHabitsGreen)
           }
 
@@ -86,7 +86,7 @@ struct AllTasksViewUpperRow: View {
             label: {
               Image(systemName: "person.crop.circle")
                 .foregroundColor(.dailyHabitsGreen)
-                .font(.title)
+                .font(.system(size: 26))
                 .padding()
             }
           )
