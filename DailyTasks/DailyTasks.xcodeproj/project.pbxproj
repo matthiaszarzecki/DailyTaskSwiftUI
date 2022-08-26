@@ -293,10 +293,10 @@
 		CC0AD8492625BE4C003F9A9F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6EB31E3F28B8A7A800C71BDC /* CGFloat-Extension.swift */,
 				6E89A059263307ED00586C1D /* Color-Extension.swift */,
 				CC0AD8442625BE46003F9A9F /* Data-Extension.swift */,
 				CC0AD8722625C879003F9A9F /* View-Extension.swift */,
-				6EB31E3F28B8A7A800C71BDC /* CGFloat-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
