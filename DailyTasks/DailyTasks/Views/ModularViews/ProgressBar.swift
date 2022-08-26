@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProgressBar: View {
-  var width: CGFloat
-  var value: Double
+  let width: CGFloat
+  let value: Double
 
   private let height: CGFloat = 10
 
@@ -26,6 +26,7 @@ struct ProgressBar: View {
           height: height
         )
         .foregroundColor(.dailyHabitsGreen)
+        .mask(RoundedRectangle(cornerRadius: height / 2, style: .continuous))
         .animation(.linear)
     }
     .mask(RoundedRectangle(cornerRadius: height / 2, style: .continuous))
