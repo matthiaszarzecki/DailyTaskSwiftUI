@@ -24,7 +24,8 @@ struct StreakRow: View {
       Button(
         action: {
           startStreak = ""
-        }, label: {
+        },
+        label: {
           Image(systemName: "xmark.circle.fill")
         }
       )

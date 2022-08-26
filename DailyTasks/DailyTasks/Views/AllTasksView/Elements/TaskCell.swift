@@ -107,7 +107,7 @@ struct TaskCell: View {
         statusIcon,
         alignment: .topTrailing
       )
-      .padding(.bottom, 4)
+      .padding(.bottom, .spacing4)
 
       TaskStatistics(task: task)
         .overlay(
@@ -115,7 +115,14 @@ struct TaskCell: View {
           alignment: .bottomTrailing
         )
     }
-    .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
+    .padding(
+      EdgeInsets(
+        top: .spacing12,
+        leading: .spacing8,
+        bottom: .spacing12,
+        trailing: .spacing8
+      )
+    )
     .background(
       Image(backgroundName)
         .resizable(resizingMode: .tile)

@@ -66,7 +66,14 @@ struct AllTasksViewUpperRow: View {
                 .font(.system(size: 300))
                 .minimumScaleFactor(0.12)
             }
-            .padding(EdgeInsets(top: 0, leading: .spacing16, bottom: 0, trailing: .spacing16))
+            .padding(
+              EdgeInsets(
+                top: 0,
+                leading: .spacing16,
+                bottom: 0,
+                trailing: .spacing16
+              )
+            )
           }
 
           Spacer()

@@ -106,7 +106,7 @@ struct SettingsView: View {
         }
       }
     }
-    .frame(width: width - 32 * 2, height: 150, alignment: .center)
+    .frame(width: width - .spacing32 * 2, height: 150, alignment: .center)
     .padding()
     .backgroundColor(.dailyHabitsGray)
     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -150,7 +150,7 @@ struct SettingsView: View {
           )
           .tint(.dailyHabitsGreen)
           .frame(width: width - .spacing16 * 2, alignment: .center)
-          .padding(.bottom, 12)
+          .padding(.bottom, .spacing12)
 
           debugActions
 
@@ -160,7 +160,7 @@ struct SettingsView: View {
           )
         }
         .frame(
-          width: width - .spacing12,
+          width: width - .spacing6 * 2,
           height: UIScreen.main.bounds.size.height * 0.5,
           alignment: .center
         )

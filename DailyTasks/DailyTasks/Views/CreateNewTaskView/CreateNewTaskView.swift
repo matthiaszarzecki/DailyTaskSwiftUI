@@ -75,7 +75,7 @@ struct CreateNewTaskView: View {
           .padding()
         }
         .frame(
-          width: width - 12,
+          width: width - .spacing12,
           height: UIScreen.main.bounds.size.height * 0.7,
           alignment: .center
         )

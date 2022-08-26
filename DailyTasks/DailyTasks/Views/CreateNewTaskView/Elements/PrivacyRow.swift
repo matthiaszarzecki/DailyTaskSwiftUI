@@ -10,7 +10,7 @@ import SwiftUI
 struct PrivacyRow: View {
   @Binding var isPrivate: Bool
 
-  private let padding: CGFloat = 6
+  private let padding: CGFloat = .spacing6
 
   private let privacyOptions: [(isPrivate: Bool, title: String)] = [
     (false, "Public"),
@@ -50,7 +50,7 @@ struct PrivacyRow: View {
         }
       }
     }
-    .padding(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+    .padding(.spacing6)
   }
 }
 

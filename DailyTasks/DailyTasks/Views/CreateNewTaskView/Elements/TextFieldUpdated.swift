@@ -20,7 +20,7 @@ struct TextFieldUpdated: View {
 
         TextField(placeholder, text: $text)
           .font(.title3)
-          .frame(width: width - 24 * 2, height: 48, alignment: .center)
+          .frame(width: width - .spacing24 * 2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }
       .frame(width: width - .spacing16 * 2, height: 48, alignment: .center)

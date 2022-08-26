@@ -10,13 +10,13 @@ import SwiftUI
 struct PartOfDayRow: View {
   @Binding var selectedPartOfDay: Int
 
-  private let padding: CGFloat = 6
+  private let padding: CGFloat = .spacing6
 
   var body: some View {
     HStack {
       ForEach(PartOfDayOption.options, id: \.self) { option in
         if selectedPartOfDay == option.index {
-          Text("\(option.name)")
+          Text(option.name)
             .padding(padding)
             .backgroundColor(.white)
             .foregroundColor(.gray)
@@ -45,7 +45,7 @@ struct PartOfDayRow: View {
         }
       }
     }
-    .padding(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+    .padding(.spacing6)
   }
 }
 
