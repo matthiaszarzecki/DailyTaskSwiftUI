@@ -48,7 +48,7 @@ struct AllTasksViewUpperRow: View {
         HStack {
           if userName.isEmpty {
             Text("Your Daily Habits")
-              .frame(width: width - 144, height: 24, alignment: .leading)
+              .frame(width: width * 0.55, height: 24, alignment: .leading)
               .multilineTextAlignment(.leading)
               .font(.system(size: 200))
               .minimumScaleFactor(0.12)
@@ -56,13 +56,13 @@ struct AllTasksViewUpperRow: View {
           } else {
             VStack(spacing: 4) {
               Text("Good Morning")
-                .frame(width: width - 144, height: 14, alignment: .leading)
+                .frame(width: width * 0.55, height: 14, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 12))
                 .minimumScaleFactor(0.12)
 
               Text("\(userName)")
-                .frame(width: width - 144, height: 32, alignment: .leading)
+                .frame(width: width * 0.55, height: 32, alignment: .leading)
                 .font(.system(size: 300))
                 .minimumScaleFactor(0.12)
             }
@@ -91,15 +91,16 @@ struct AllTasksViewUpperRow: View {
             }
           )
         }
+        .frame(width: width, height: 72, alignment: .center)
 
         progressDisplay
-          .frame(width: width - 16 * 2, height: 20, alignment: .leading)
+          .frame(width: width - .spacing16 * 2, height: 20, alignment: .leading)
 
         ProgressBar(
-          width: width - 16 * 2,
+          width: width - .spacing16 * 2,
           value: taskDoneRatio
         )
-        .padding(.bottom, 12)
+        .padding(.bottom, .spacing12)
       }
     }
     .frame(width: width, height: height, alignment: .center)
