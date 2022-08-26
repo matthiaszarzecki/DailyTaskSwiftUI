@@ -61,7 +61,7 @@ struct IconGrid: View {
       }
     }
     .padding()
-    .frame(width: width - 16 * 2)
+    .frame(width: width - .spacing16 * 2)
   }
 }
 

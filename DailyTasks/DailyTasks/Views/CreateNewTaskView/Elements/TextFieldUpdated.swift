@@ -23,7 +23,7 @@ struct TextFieldUpdated: View {
           .frame(width: width - 24 * 2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }
-      .frame(width: width - 16 * 2, height: 48, alignment: .center)
+      .frame(width: width - .spacing16 * 2, height: 48, alignment: .center)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
       HStack {
@@ -36,14 +36,19 @@ struct TextFieldUpdated: View {
             Image(systemName: "xmark.circle.fill")
               .foregroundColor(.white)
               .padding(
-                EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8)
+                EdgeInsets(
+                  top: .spacing16,
+                  leading: .spacing16,
+                  bottom: .spacing16,
+                  trailing: .spacing8
+                )
               )
           }
         )
       }
     }
     .padding()
-    .frame(width: width - 16 * 2, height: 48, alignment: .center)
+    .frame(width: width - .spacing16 * 2, height: 48, alignment: .center)
   }
 }
 

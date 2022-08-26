@@ -18,8 +18,8 @@ struct StreakRow: View {
         .backgroundColor(.gray)
         .foregroundColor(.white)
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .padding(.top, 16)
-        .padding(.bottom, 16)
+        .padding(.top, .spacing16)
+        .padding(.bottom, .spacing16)
 
       Button(
         action: {
