@@ -4,10 +4,10 @@
 
 App in SwiftUI that records your daily habits, creates a daily todo-list, and resets it each day.
 
-![screenshot](media/screenshot_01.png)
-![screenshot](media/screenshot_02.png)
-![screenshot](media/screenshot_03.png)
-![screenshot](media/screenshot_04.png)
+![screenshot](media/screenshot_05.png)
+![screenshot](media/screenshot_06.png)
+![screenshot](media/screenshot_07.png)
+![screenshot](media/screenshot_08.png)
 
 ### Features:
 - Create a list of tasks that can be check off
