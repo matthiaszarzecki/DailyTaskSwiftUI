@@ -117,17 +117,17 @@ struct SettingsView: View {
       TextFieldUpdated(
         text: $userName,
         placeholder: "What's your name?",
-        width: width - 80
+        width: width * 0.8
       )
-
-      Spacer()
 
       Image(systemName: "person.crop.circle")
         .foregroundColor(.dailyHabitsGreen)
-        .font(.title)
-        .padding()
+        .font(.system(size: 42))
+        .padding(.leading, .spacing4)
+        .padding(4)
     }
-    .padding()
+    .frame(width: width - 12, alignment: .center)
+    .padding(.bottom, .spacing8)
   }
 
   var body: some View {
@@ -149,7 +149,7 @@ struct SettingsView: View {
             isOn: $isPrivacyEnabled
           )
           .tint(.dailyHabitsGreen)
-          .frame(width: width - 34, alignment: .center)
+          .frame(width: width - .spacing16 * 2, alignment: .center)
           .padding(.bottom, 12)
 
           debugActions
@@ -160,7 +160,7 @@ struct SettingsView: View {
           )
         }
         .frame(
-          width: width - 12,
+          width: width - .spacing12,
           height: UIScreen.main.bounds.size.height * 0.5,
           alignment: .center
         )
@@ -176,7 +176,7 @@ struct SettingsView: View {
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
-      .offset(y: -4)
+      .offset(y: -.spacing4)
       .edgesIgnoringSafeArea(.all)
     }
     .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
