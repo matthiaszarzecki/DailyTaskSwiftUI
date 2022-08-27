@@ -5,7 +5,6 @@
 //  Created by Matthias Zarzecki on 26.08.22.
 //
 
-import Foundation
 import UIKit
 
 extension CGFloat {
