@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct EditTaskView: View {
-  var width: CGFloat
+  let width: CGFloat
   @State var task: Task
-  var editTask: (_ task: Task) -> Void
-  var deleteSingleTask: (_ id: UUID) -> Void
-  var closeOverlay: () -> Void
+  let editTask: (_ task: Task) -> Void
+  let deleteSingleTask: (_ id: UUID) -> Void
+  let closeOverlay: () -> Void
 
   @State private var showActualDeleteButton = false
 
@@ -128,7 +128,9 @@ struct EditTaskView: View {
       .offset(y: -4)
       .edgesIgnoringSafeArea(.all)
     }
-    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+    .transition(
+      AnyTransition.opacity.combined(with: .move(edge: .bottom))
+    )
   }
 }
 

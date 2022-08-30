@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-  var width: CGFloat
-  var deleteAllTasks: () -> Void
-  var resetTasks: () -> Void
-  var closeOverlay: () -> Void
+  let width: CGFloat
+  let deleteAllTasks: () -> Void
+  let resetTasks: () -> Void
+  let closeOverlay: () -> Void
   @Binding var userName: String
   @Binding var isPrivacyEnabled: Bool
 
@@ -179,7 +179,9 @@ struct SettingsView: View {
       .offset(y: -.spacing4)
       .edgesIgnoringSafeArea(.all)
     }
-    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+    .transition(
+      AnyTransition.opacity.combined(with: .move(edge: .bottom))
+    )
   }
 }
 

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AllTasksViewUpperRow: View {
-  var tasks: [Task]
-  var width: CGFloat
+  let tasks: [Task]
+  let width: CGFloat
   var height: CGFloat = 128
   @Binding var showSettingsPopover: Bool
   @Binding var userName: String
-  var isPrivacyEnabled: Bool
+  let isPrivacyEnabled: Bool
 
   private var doneTasks: Int {
     let doneTasks = tasks.filter { $0.status }

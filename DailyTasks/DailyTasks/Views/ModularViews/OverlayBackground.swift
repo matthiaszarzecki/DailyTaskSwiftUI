@@ -10,7 +10,7 @@ import SwiftUI
 /// A Rectangle the size of the entire screen that
 /// on tap sets showParentView to false.
 struct OverlayBackground: View {
-  var closeOverlay: () -> Void
+  let closeOverlay: () -> Void
 
   var body: some View {
     Button(

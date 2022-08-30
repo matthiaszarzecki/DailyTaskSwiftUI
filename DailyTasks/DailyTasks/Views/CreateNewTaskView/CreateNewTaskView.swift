@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CreateNewTaskView: View {
-  var width: CGFloat
-  var addNewTask: (_ task: Task) -> Void
-  var closeOverlay: () -> Void
+  let width: CGFloat
+  let addNewTask: (_ task: Task) -> Void
+  let closeOverlay: () -> Void
 
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
@@ -98,7 +98,9 @@ struct CreateNewTaskView: View {
     .onAppear {
       taskName = exampleTasks.randomElement() ?? ""
     }
-    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+    .transition(
+      AnyTransition.opacity.combined(with: .move(edge: .bottom))
+    )
   }
 }
 

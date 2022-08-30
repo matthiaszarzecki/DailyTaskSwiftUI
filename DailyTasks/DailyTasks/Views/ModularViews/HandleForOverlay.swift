@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HandleForOverlay: View {
-  var closeOverlay: () -> Void
+  let closeOverlay: () -> Void
 
   var body: some View {
     Button(

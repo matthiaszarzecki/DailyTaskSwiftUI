@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct RoundedCorner: Shape {
-  var radius: CGFloat = .infinity
-  var corners: UIRectCorner = .allCorners
+  let radius: CGFloat
+  let corners: UIRectCorner
 
   func path(in rect: CGRect) -> Path {
     let path = UIBezierPath(

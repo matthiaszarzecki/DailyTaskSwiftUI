@@ -26,7 +26,7 @@ struct TaskStatistics: View {
     }
   }
 
-  func getRecordText(highestStreak: Int) -> String {
+  private func getRecordText(highestStreak: Int) -> String {
     var recordText = ""
     if task.highestStreak > 0 {
       recordText = " - Record: \(highestStreak)"

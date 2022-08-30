@@ -15,7 +15,7 @@ struct SlidableCell: View {
   let index: Int
   let setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   let editTaskClicked: (_ index: Int) -> Void
-  var toggleTaskAsDone: (_ id: UUID) -> Void
+  let toggleTaskAsDone: (_ id: UUID) -> Void
 
   @GestureState private var isDragging = false
   private let maxDragDistance: CGFloat = 130

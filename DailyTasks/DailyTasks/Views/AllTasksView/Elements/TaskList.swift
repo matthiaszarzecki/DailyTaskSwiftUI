@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TaskList: View {
-  var tasks: [Task]
-  var offsets: [CGFloat]
-  var editTask: (_ task: Task) -> Void
-  var toggleTaskAsDone: (_ id: UUID) -> Void
-  var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
+  let tasks: [Task]
+  let offsets: [CGFloat]
+  let editTask: (_ task: Task) -> Void
+  let toggleTaskAsDone: (_ id: UUID) -> Void
+  let setOffset: (_ index: Int, _ offset: CGFloat) -> Void
   @Binding var showUpdateTaskPopover: Bool
   @Binding var currentlyEditedTaskIndex: Int
-  var isPrivacyEnabled: Bool
+  let isPrivacyEnabled: Bool
 
   var body: some View {
     List {

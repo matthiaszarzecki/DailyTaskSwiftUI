@@ -28,17 +28,17 @@ struct AllTasksView: View {
 }
 
 struct AllTasksDisplay: View {
-  var tasks: [Task]
-  var offsets: [CGFloat]
-  var addNewTask: (_ task: Task) -> Void
-  var editTask: (_ task: Task) -> Void
-  var updateTask: (_ id: UUID) -> Void
-  var deleteAllTasks: () -> Void
-  var checkIfTasksNeedResetting: () -> Void
-  var resetTasks: () -> Void
-  var sortTasks: () -> Void
-  var deleteSingleTask: (_ id: UUID) -> Void
-  var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
+  let tasks: [Task]
+  let offsets: [CGFloat]
+  let addNewTask: (_ task: Task) -> Void
+  let editTask: (_ task: Task) -> Void
+  let updateTask: (_ id: UUID) -> Void
+  let deleteAllTasks: () -> Void
+  let checkIfTasksNeedResetting: () -> Void
+  let resetTasks: () -> Void
+  let sortTasks: () -> Void
+  let deleteSingleTask: (_ id: UUID) -> Void
+  let setOffset: (_ index: Int, _ offset: CGFloat) -> Void
 
   @AppStorage("user_name") var userName = ""
 
