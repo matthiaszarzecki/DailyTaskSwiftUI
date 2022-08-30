@@ -50,9 +50,8 @@ struct CancelButton: View {
 
 struct CancelButton_Previews: PreviewProvider {
   static var previews: some View {
-    CancelButton {
-    }
-    .padding()
-    .previewLayout(.sizeThatFits)
+    CancelButton {}
+      .padding()
+      .previewLayout(.sizeThatFits)
   }
 }

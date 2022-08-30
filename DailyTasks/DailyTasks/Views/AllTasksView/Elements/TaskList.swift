@@ -60,7 +60,7 @@ struct TaskList_Previews: PreviewProvider {
 
     TaskList(
       tasks: .mockTasks,
-      // Offsets array MUST be the same length as tasks
+      // Offsets-array MUST be the same length as tasks
       offsets: [0, 0, -maxDragDistance, -maxDragDistance, 0],
       editTask: { _ in },
       toggleTaskAsDone: { _ in },

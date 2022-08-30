@@ -37,16 +37,12 @@ struct TaskStatistics: View {
 
 struct TaskStatistics_Previews: PreviewProvider {
   static var previews: some View {
-    TaskStatistics(task: .mockTask01)
-      .padding()
-      .previewLayout(.sizeThatFits)
+    let tasks: [Task] = [.mockTask01, .mockTask02, .mockTask05]
 
-    TaskStatistics(task: .mockTask02)
-      .padding()
-      .previewLayout(.sizeThatFits)
-
-    TaskStatistics(task: .mockTask05)
-      .padding()
-      .previewLayout(.sizeThatFits)
+    ForEach(tasks, is: \.self) { task in
+      TaskStatistics(task: task)
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
   }
 }
