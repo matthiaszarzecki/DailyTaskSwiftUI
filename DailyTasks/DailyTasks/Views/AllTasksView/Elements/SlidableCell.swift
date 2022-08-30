@@ -127,9 +127,11 @@ struct SlidableCells_Previews: PreviewProvider {
   static var previews: some View {
     let maxDragDistance: CGFloat = 130
 
-    let configurations: [
-      (task: Task, isLastCellToBeShown: Bool, offset: CGFloat)
-    ] = [
+    let configurations: [(
+      task: Task,
+      isLastCellToBeShown: Bool,
+      offset: CGFloat
+    )] = [
       (.mockTask01, false, 0),
       (.mockTask02, false, -maxDragDistance),
       (.mockTask05, false, -maxDragDistance),
