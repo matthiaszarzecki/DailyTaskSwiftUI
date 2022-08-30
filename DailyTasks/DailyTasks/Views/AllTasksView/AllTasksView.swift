@@ -229,7 +229,7 @@ struct AllTasksDisplay: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     let tasks: [Task] = .mockTasks
-    
+
     AllTasksDisplay(
       tasks: tasks,
       // Offsets-array MUST be the same length as tasks
