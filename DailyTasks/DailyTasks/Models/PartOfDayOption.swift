@@ -8,15 +8,22 @@
 import Foundation
 
 struct PartOfDayOption: Hashable {
-  let index: Int
-  let name: String
-
   enum DaytimeOptions {
     static let morning = "Morning"
     static let daytime = "Daytime"
     static let evening = "Evening"
     static let allDay = "All Day"
   }
+
+  static let options = [
+    PartOfDayOption(index: 0, name: DaytimeOptions.morning),
+    PartOfDayOption(index: 1, name: DaytimeOptions.daytime),
+    PartOfDayOption(index: 2, name: DaytimeOptions.evening),
+    PartOfDayOption(index: 3, name: DaytimeOptions.allDay)
+  ]
+
+  let index: Int
+  let name: String
 
   static func displayString(id: Int) -> String {
     switch id {
@@ -32,11 +39,4 @@ struct PartOfDayOption: Hashable {
       return DaytimeOptions.allDay
     }
   }
-
-  static let options = [
-    PartOfDayOption(index: 0, name: DaytimeOptions.morning),
-    PartOfDayOption(index: 1, name: DaytimeOptions.daytime),
-    PartOfDayOption(index: 2, name: DaytimeOptions.evening),
-    PartOfDayOption(index: 3, name: DaytimeOptions.allDay)
-  ]
 }

@@ -9,6 +9,11 @@ import Foundation
 import SwiftUI
 
 class AllTasksViewModel: ObservableObject {
+  struct AllTasksViewState {
+    var allTasks: [Task] = []
+    var offsets: [CGFloat] = []
+  }
+
   @Published private(set) var state = AllTasksViewState()
   @AppStorage("all_daily_tasks") private var allTasksData = Data()
   @AppStorage("reset_date") private var resetDate = ISO8601DateFormatter().string(
@@ -195,12 +200,5 @@ class AllTasksViewModel: ObservableObject {
       return
     }
     self.allTasksData = encodedTasks
-  }
-
-  // MARK: - ViewState
-
-  struct AllTasksViewState {
-    var allTasks: [Task] = []
-    var offsets: [CGFloat] = []
   }
 }

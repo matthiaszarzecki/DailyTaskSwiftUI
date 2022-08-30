@@ -8,6 +8,16 @@
 import Foundation
 
 struct Task: Codable, Identifiable, Hashable {
+  enum CodingKeys: String, CodingKey {
+    case name
+    case status
+    case iconName
+    case currentStreak
+    case highestStreak
+    case partOfDay
+    case isPrivate
+  }
+
   var id = UUID()
 
   var name: String
@@ -72,16 +82,6 @@ struct Task: Codable, Identifiable, Hashable {
     try container.encode(highestStreak, forKey: .highestStreak)
     try container.encode(partOfDay, forKey: .partOfDay)
     try container.encode(isPrivate, forKey: .isPrivate)
-  }
-
-  enum CodingKeys: String, CodingKey {
-    case name
-    case status
-    case iconName
-    case currentStreak
-    case highestStreak
-    case partOfDay
-    case isPrivate
   }
 }
 
