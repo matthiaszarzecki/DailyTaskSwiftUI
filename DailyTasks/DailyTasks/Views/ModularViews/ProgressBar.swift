@@ -36,7 +36,7 @@ struct ProgressBar: View {
 struct ProgressBar_Previews: PreviewProvider {
   static var previews: some View {
     ProgressBar(
-      width: PreviewConstants.width,
+      width: .previewWidth,
       value: 0.3
     )
     .padding()

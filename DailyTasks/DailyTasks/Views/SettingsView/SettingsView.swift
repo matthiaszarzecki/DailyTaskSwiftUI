@@ -191,7 +191,7 @@ struct SettingsView_Previews: PreviewProvider {
         .foregroundColor(.green)
 
       SettingsView(
-        width: PreviewConstants.width,
+        width: .previewWidth,
         deleteAllTasks: {},
         resetTasks: {},
         closeOverlay: {},

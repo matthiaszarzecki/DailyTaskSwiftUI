@@ -69,7 +69,7 @@ struct IconGrid_Previews: PreviewProvider {
   static var previews: some View {
     IconGrid(
       selectedIcon: .constant(TaskIcon.bicycle.rawValue),
-      width: PreviewConstants.width
+      width: .previewWidth
     )
     .previewLayout(.sizeThatFits)
   }

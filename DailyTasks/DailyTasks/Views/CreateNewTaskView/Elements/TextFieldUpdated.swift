@@ -57,7 +57,7 @@ struct TaskNameTextField_Previews: PreviewProvider {
     TextFieldUpdated(
       text: .constant("Hello!"),
       placeholder: "Your new habit!",
-      width: PreviewConstants.width
+      width: .previewWidth
     )
     .padding()
     .previewLayout(.sizeThatFits)

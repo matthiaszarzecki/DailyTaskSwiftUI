@@ -140,7 +140,7 @@ struct UpdateTaskView_Previews: PreviewProvider {
         .edgesIgnoringSafeArea(.all)
 
       EditTaskView(
-        width: PreviewConstants.width,
+        width: .previewWidth,
         task: .mockTask01,
         editTask: { _ in },
         deleteSingleTask: { _ in },

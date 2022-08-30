@@ -110,7 +110,7 @@ struct CreateNewTaskView_Previews: PreviewProvider {
         .edgesIgnoringSafeArea(.all)
 
       CreateNewTaskView(
-        width: PreviewConstants.width,
+        width: .previewWidth,
         addNewTask: { _ in },
         closeOverlay: {}
       )

@@ -122,7 +122,7 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
   static var previews: some View {
     AllTasksViewUpperRow(
       tasks: .mockTasks,
-      width: PreviewConstants.width,
+      width: .previewWidth,
       showSettingsPopover: .constant(false),
       userName: .constant(MockClasses.userName),
       isPrivacyEnabled: true
