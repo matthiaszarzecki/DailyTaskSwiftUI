@@ -195,7 +195,7 @@ struct SettingsView_Previews: PreviewProvider {
         deleteAllTasks: {},
         resetTasks: {},
         closeOverlay: {},
-        userName: .constant(MockClasses.userName),
+        userName: .constant(.mockUserName),
         isPrivacyEnabled: .constant(true)
       )
     }

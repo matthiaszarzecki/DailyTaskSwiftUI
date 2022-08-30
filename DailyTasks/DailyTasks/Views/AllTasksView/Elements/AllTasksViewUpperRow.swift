@@ -124,7 +124,7 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
       tasks: .mockTasks,
       width: .previewWidth,
       showSettingsPopover: .constant(false),
-      userName: .constant(MockClasses.userName),
+      userName: .constant(.mockUserName),
       isPrivacyEnabled: true
     )
     .padding()
@@ -133,7 +133,7 @@ struct AllTasksViewUpperRow_Previews: PreviewProvider {
 
     AllTasksViewUpperRow(
       tasks: .mockTasks,
-      width: PreviewConstants.width,
+      width: .previewWidth,
       showSettingsPopover: .constant(false),
       userName: .constant(""),
       isPrivacyEnabled: false
