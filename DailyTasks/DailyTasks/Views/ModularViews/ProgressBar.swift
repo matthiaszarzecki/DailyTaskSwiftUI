@@ -27,7 +27,7 @@ struct ProgressBar: View {
         )
         .foregroundColor(.dailyHabitsGreen)
         .mask(RoundedRectangle(cornerRadius: height / 2, style: .continuous))
-        .animation(.linear)
+        .animation(.easeOut(duration: 0.75), value: value)
     }
     .mask(RoundedRectangle(cornerRadius: height / 2, style: .continuous))
   }
