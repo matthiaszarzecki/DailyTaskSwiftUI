@@ -120,26 +120,24 @@ struct AllTasksViewUpperRow: View {
 
 struct AllTasksViewUpperRow_Previews: PreviewProvider {
   static var previews: some View {
-    AllTasksViewUpperRow(
-      tasks: .mockTasks,
-      width: .previewWidth,
-      showSettingsPopover: .constant(false),
-      userName: .constant(.mockUserName),
-      isPrivacyEnabled: true
-    )
-    .padding()
-    .backgroundColor(.green)
-    .previewLayout(.sizeThatFits)
+    let configurations: [(userName: String, isPrivacyEnabled: Bool)] = [
+      (.mockUserName, true),
+      ("", false)
+    ]
 
-    AllTasksViewUpperRow(
-      tasks: .mockTasks,
-      width: .previewWidth,
-      showSettingsPopover: .constant(false),
-      userName: .constant(""),
-      isPrivacyEnabled: false
-    )
-    .padding()
-    .backgroundColor(.green)
-    .previewLayout(.sizeThatFits)
+    ForEach(0..<configurations.count, id: \.self) { index in
+      let configuration = configurations[index]
+
+      AllTasksViewUpperRow(
+        tasks: .mockTasks,
+        width: .previewWidth,
+        showSettingsPopover: .constant(false),
+        userName: .constant(configuration.userName),
+        isPrivacyEnabled: configuration.isPrivacyEnabled
+      )
+      .padding()
+      .backgroundColor(.green)
+      .previewLayout(.sizeThatFits)
+    }
   }
 }
