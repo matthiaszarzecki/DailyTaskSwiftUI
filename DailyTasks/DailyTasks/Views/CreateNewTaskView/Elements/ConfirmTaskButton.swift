@@ -52,28 +52,20 @@ struct ConfirmTaskButton: View {
 
 struct ConfirmTaskButton_Previews: PreviewProvider {
   static var previews: some View {
-    ConfirmTaskButton(
-      taskName: "Hello",
-      startStreak: "",
-      selectedIcon: "",
-      selectedPartOfDay: 0,
-      isPrivate: false,
-      addNewTask: { _ in },
-      closeOverlay: {}
-    )
-    .padding()
-    .previewLayout(.sizeThatFits)
+    let taskNames: [String] = ["Hello", ""]
 
-    ConfirmTaskButton(
-      taskName: "",
-      startStreak: "",
-      selectedIcon: "",
-      selectedPartOfDay: 0,
-      isPrivate: false,
-      addNewTask: { _ in },
-      closeOverlay: {}
-    )
-    .padding()
-    .previewLayout(.sizeThatFits)
+    ForEach(taskNames, id: \.self) { name in
+      ConfirmTaskButton(
+        taskName: name,
+        startStreak: "",
+        selectedIcon: "",
+        selectedPartOfDay: 0,
+        isPrivate: false,
+        addNewTask: { _ in },
+        closeOverlay: {}
+      )
+      .padding()
+      .previewLayout(.sizeThatFits)
+    }
   }
 }

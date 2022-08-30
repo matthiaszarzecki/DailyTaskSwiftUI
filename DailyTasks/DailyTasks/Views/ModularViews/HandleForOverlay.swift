@@ -35,9 +35,8 @@ struct HandleForOverlay: View {
 
 struct HandleForOverlay_Previews: PreviewProvider {
   static var previews: some View {
-    HandleForOverlay {
-    }
-    .padding()
-    .previewLayout(.sizeThatFits)
+    HandleForOverlay {}
+      .padding()
+      .previewLayout(.sizeThatFits)
   }
 }
