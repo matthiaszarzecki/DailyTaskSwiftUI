@@ -19,6 +19,7 @@ opt_in_rules:
   - closure_spacing
   - collection_alignment
   - colon # promote to error
+  - comma_inheritance
   - convenience_type
   - discouraged_assert
   - discouraged_object_literal
