@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
   /// Sets the background to a color.
   func backgroundColor(_ color: Color) -> some View {
-    self.background(Rectangle().foregroundColor(color))
+    background(color)
   }
 
   /// Allows to only round specific corners.
