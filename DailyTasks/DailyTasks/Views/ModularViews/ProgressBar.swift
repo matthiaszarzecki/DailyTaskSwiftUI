@@ -11,7 +11,7 @@ struct ProgressBar: View {
   let width: CGFloat
   let value: Double
 
-  private let height: CGFloat = 14
+  private let height: CGFloat = 16
 
   private var background: some View {
     Rectangle()
@@ -34,13 +34,13 @@ struct ProgressBar: View {
         .animation(.easeOut(duration: 0.75), value: value)
 
       // Highlight
-      let sidePadding: CGFloat = .spacing6
+      let sidePadding: CGFloat = .spacing12
       Rectangle()
         .frame(
           width: (0.0...accomplishedPartWidth).clamp(
             accomplishedPartWidth - sidePadding
           ),
-          height: height * 0.35
+          height: height * 0.3
         )
         .foregroundColor(.dailyHabitsGreenHighlight)
         .mask(RoundedRectangle(cornerRadius: height / 2, style: .continuous))
