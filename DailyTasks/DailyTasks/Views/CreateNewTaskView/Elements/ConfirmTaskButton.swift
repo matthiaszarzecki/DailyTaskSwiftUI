@@ -31,7 +31,8 @@ struct ConfirmTaskButton: View {
           currentStreak: streak,
           highestStreak: 0,
           partOfDay: selectedPartOfDay,
-          isPrivate: isPrivate
+          isPrivate: isPrivate,
+          week: .fullWeek
         )
 
         addNewTask(task)

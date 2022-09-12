@@ -16,6 +16,7 @@ struct Task: Codable, Identifiable, Hashable {
     case highestStreak
     case partOfDay
     case isPrivate
+    case week
   }
 
   var id = UUID()
@@ -34,6 +35,7 @@ struct Task: Codable, Identifiable, Hashable {
   var partOfDay: Int
 
   var isPrivate: Bool
+  var week: Week
 
   init(
     name: String,
@@ -42,7 +44,8 @@ struct Task: Codable, Identifiable, Hashable {
     currentStreak: Int,
     highestStreak: Int,
     partOfDay: Int,
-    isPrivate: Bool
+    isPrivate: Bool,
+    week: Week
   ) {
     self.name = name
     self.status = status
@@ -51,6 +54,7 @@ struct Task: Codable, Identifiable, Hashable {
     self.highestStreak = highestStreak
     self.partOfDay = partOfDay
     self.isPrivate = isPrivate
+    self.week = week
   }
 
   init(from decoder: Decoder) throws {
@@ -70,6 +74,14 @@ struct Task: Codable, Identifiable, Hashable {
     } else {
       isPrivate = false
     }
+
+    // week has been added during production, and might
+    // not exist. Set default to a full week in that case.
+    if let weekInStorage = try? container.decode(Week.self, forKey: .week) {
+      week = weekInStorage
+    } else {
+      week = .fullWeek
+    }
   }
 
   func encode(to encoder: Encoder) throws {
@@ -82,6 +94,7 @@ struct Task: Codable, Identifiable, Hashable {
     try container.encode(highestStreak, forKey: .highestStreak)
     try container.encode(partOfDay, forKey: .partOfDay)
     try container.encode(isPrivate, forKey: .isPrivate)
+    try container.encode(week, forKey: .week)
   }
 }
 
@@ -93,7 +106,8 @@ extension Task {
     currentStreak: 2,
     highestStreak: 4,
     partOfDay: 0,
-    isPrivate: false
+    isPrivate: false,
+    week: .fullWeek
   )
 
   static let mockTask02 = Task(
@@ -103,7 +117,8 @@ extension Task {
     currentStreak: 1,
     highestStreak: 0,
     partOfDay: 1,
-    isPrivate: false
+    isPrivate: false,
+    week: .fullWeek
   )
 
   static let mockTask03 = Task(
@@ -113,7 +128,8 @@ extension Task {
     currentStreak: 14,
     highestStreak: 167,
     partOfDay: 3,
-    isPrivate: false
+    isPrivate: false,
+    week: .fullWeek
   )
 
   static let mockTask04 = Task(
@@ -123,7 +139,8 @@ extension Task {
     currentStreak: 68,
     highestStreak: 68,
     partOfDay: 4,
-    isPrivate: false
+    isPrivate: false,
+    week: .fullWeek
   )
 
   static let mockTask05 = Task(
@@ -137,7 +154,8 @@ extension Task {
     currentStreak: 1,
     highestStreak: 68,
     partOfDay: 4,
-    isPrivate: true
+    isPrivate: true,
+    week: .fullWeek
   )
 }
 

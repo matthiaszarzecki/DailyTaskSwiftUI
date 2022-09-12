@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Week: Codable {
+struct Week: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
     case monday
     case tuesday
@@ -18,6 +18,16 @@ struct Week: Codable {
     case sunday
   }
 
+  static let fullWeek = Week(
+    monday: true,
+    tuesday: true,
+    wednesday: true,
+    thursday: true,
+    friday: true,
+    saturday: true,
+    sunday: true
+  )
+
   var monday: Bool
   var tuesday: Bool
   var wednesday: Bool
@@ -25,6 +35,24 @@ struct Week: Codable {
   var friday: Bool
   var saturday: Bool
   var sunday: Bool
+
+  init(
+    monday: Bool,
+    tuesday: Bool,
+    wednesday: Bool,
+    thursday: Bool,
+    friday: Bool,
+    saturday: Bool,
+    sunday: Bool
+  ) {
+    self.monday = monday
+    self.tuesday = tuesday
+    self.wednesday = wednesday
+    self.thursday = thursday
+    self.friday = friday
+    self.saturday = saturday
+    self.sunday = sunday
+  }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -84,4 +112,3 @@ struct Week: Codable {
     try container.encode(saturday, forKey: .saturday)
   }
 }
-
