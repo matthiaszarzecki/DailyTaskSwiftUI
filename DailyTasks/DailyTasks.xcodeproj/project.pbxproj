@@ -42,6 +42,7 @@
 		CC0AD8732625C879003F9A9F /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AD8722625C879003F9A9F /* View-Extension.swift */; };
 		CC40E4D62628790400059061 /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40E4D52628790400059061 /* CreateNewTaskView.swift */; };
 		CC40E4E026287D0600059061 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40E4DF26287D0600059061 /* TaskCell.swift */; };
+		CC9A61AD28D069B90031A2F2 /* WeekdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9A61AC28D069B90031A2F2 /* WeekdayRow.swift */; };
 		CCC5135D28CF17C4007999FD /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5135C28CF17C4007999FD /* Week.swift */; };
 		CCC5530826306F3F003C7DBC /* IconGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5530726306F3F003C7DBC /* IconGrid.swift */; };
 		CCC5530D26306F88003C7DBC /* PartOfDayOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5530C26306F88003C7DBC /* PartOfDayOption.swift */; };
@@ -106,6 +107,7 @@
 		CC0AD8722625C879003F9A9F /* View-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Extension.swift"; sourceTree = "<group>"; };
 		CC40E4D52628790400059061 /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
 		CC40E4DF26287D0600059061 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		CC9A61AC28D069B90031A2F2 /* WeekdayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRow.swift; sourceTree = "<group>"; };
 		CCC5135C28CF17C4007999FD /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		CCC5530726306F3F003C7DBC /* IconGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGrid.swift; sourceTree = "<group>"; };
 		CCC5530C26306F88003C7DBC /* PartOfDayOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDayOption.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				6E89A040263300C700586C1D /* ConfirmTaskButton.swift */,
 				CCC5530726306F3F003C7DBC /* IconGrid.swift */,
 				6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */,
+				CC9A61AC28D069B90031A2F2 /* WeekdayRow.swift */,
 				6EB31E3B28B8016100C71BDC /* PrivacyRow.swift */,
 				6E89A0332632FD8E00586C1D /* StreakRow.swift */,
 				6E89A03B2632FFC700586C1D /* TextFieldUpdated.swift */,
@@ -491,6 +494,7 @@
 				6E89A06726330F5E00586C1D /* AllTasksViewUpperRow.swift in Sources */,
 				CC0AD7FE2625AAC3003F9A9F /* SceneDelegate.swift in Sources */,
 				CC0AD8732625C879003F9A9F /* View-Extension.swift in Sources */,
+				CC9A61AD28D069B90031A2F2 /* WeekdayRow.swift in Sources */,
 				6EE6083628A7DED50095ED9A /* SlidableCell.swift in Sources */,
 				6E1DE0DA26341CE500222676 /* OverlayBackground.swift in Sources */,
 				6EB12ECD26261394001065C8 /* AllTasksViewModel.swift in Sources */,
