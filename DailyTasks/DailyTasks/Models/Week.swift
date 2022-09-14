@@ -36,6 +36,10 @@ struct Week: Codable, Hashable {
   var saturday: Bool
   var sunday: Bool
 
+  var allDays: [Bool] {
+    [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+  }
+
   init(
     monday: Bool,
     tuesday: Bool,
