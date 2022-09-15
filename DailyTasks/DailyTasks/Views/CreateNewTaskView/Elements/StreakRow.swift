@@ -38,6 +38,7 @@ struct StreakRow_Previews: PreviewProvider {
     StreakRow(
       startStreak: .constant("")
     )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

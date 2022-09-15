@@ -71,6 +71,7 @@ struct IconGrid_Previews: PreviewProvider {
       selectedIcon: .constant(TaskIcon.bicycle.rawValue),
       width: .previewWidth
     )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

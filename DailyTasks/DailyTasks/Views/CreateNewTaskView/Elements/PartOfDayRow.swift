@@ -54,6 +54,7 @@ struct PartOfDayRow_Previews: PreviewProvider {
     PartOfDayRow(
       selectedPartOfDay: .constant(1)
     )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

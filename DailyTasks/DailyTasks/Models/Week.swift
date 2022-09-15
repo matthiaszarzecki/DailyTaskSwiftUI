@@ -104,6 +104,46 @@ struct Week: Codable, Hashable {
     }
   }
 
+  static func getDisplayName(index: Int) -> String {
+    var returnName = ""
+
+    if index == 0 {
+      returnName = "Mo"
+    } else if index == 1 {
+      returnName = "Tu"
+    } else if index == 2 {
+      returnName = "We"
+    } else if index == 3 {
+      returnName = "Th"
+    } else if index == 4 {
+      returnName = "Fr"
+    } else if index == 5 {
+      returnName = "Sa"
+    } else if index == 6 {
+      returnName = "Su"
+    }
+
+    return returnName
+  }
+
+  mutating func setWeekday(index: Int, status: Bool) {
+    if index == 0 {
+      monday = status
+    } else if index == 1 {
+      tuesday = status
+    } else if index == 2 {
+      wednesday = status
+    } else if index == 3 {
+      thursday = status
+    } else if index == 4 {
+      friday = status
+    } else if index == 5 {
+      saturday = status
+    } else if index == 6 {
+      sunday = status
+    }
+  }
+
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
 

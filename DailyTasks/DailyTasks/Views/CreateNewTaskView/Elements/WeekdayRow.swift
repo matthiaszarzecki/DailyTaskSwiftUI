@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct WeekdayRow: View {
-  @Binding var selectedPartOfDay: Int
+  @Binding var week: Week
 
   private let padding: CGFloat = .spacing6
 
   var body: some View {
     HStack {
-      ForEach(PartOfDayOption.options, id: \.self) { option in
-        if selectedPartOfDay == option.index {
-          Text(option.name)
+      ForEach(0..<week.allDays.count, id: \.self) { index in
+        let weekDay = week.allDays[index]
+        let displayName = Week.getDisplayName(index: index)
+        if weekDay {
+          Text(displayName)
             .padding(padding)
             .backgroundColor(.white)
             .foregroundColor(.gray)
@@ -27,10 +29,10 @@ struct WeekdayRow: View {
         } else {
           Button(
             action: {
-              selectedPartOfDay = option.index
+              week.setWeekday(index: index, status: !weekDay)
             },
             label: {
-              Text("\(option.name)")
+              Text(displayName)
                 .padding(padding)
                 .backgroundColor(.gray)
                 .foregroundColor(.white)
@@ -51,9 +53,10 @@ struct WeekdayRow: View {
 
 struct WeekdayRow_Previews: PreviewProvider {
   static var previews: some View {
-    PartOfDayRow(
-      selectedPartOfDay: .constant(1)
+    WeekdayRow(
+      week: .constant(.fullWeek)
     )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

@@ -59,6 +59,7 @@ struct PrivacyRow_Previews: PreviewProvider {
     PrivacyRow(
       isPrivate: .constant(false)
     )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }
