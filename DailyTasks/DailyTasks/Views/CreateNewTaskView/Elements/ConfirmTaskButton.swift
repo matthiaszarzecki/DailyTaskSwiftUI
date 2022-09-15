@@ -13,6 +13,7 @@ struct ConfirmTaskButton: View {
   var selectedIcon: String
   var selectedPartOfDay: Int
   var isPrivate: Bool
+  var week: Week
   var addNewTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
 
@@ -32,7 +33,7 @@ struct ConfirmTaskButton: View {
           highestStreak: 0,
           partOfDay: selectedPartOfDay,
           isPrivate: isPrivate,
-          week: .fullWeek
+          week: week
         )
 
         addNewTask(task)
@@ -62,6 +63,7 @@ struct ConfirmTaskButton_Previews: PreviewProvider {
         selectedIcon: "",
         selectedPartOfDay: 0,
         isPrivate: false,
+        week: .mockWeek,
         addNewTask: { _ in },
         closeOverlay: {}
       )

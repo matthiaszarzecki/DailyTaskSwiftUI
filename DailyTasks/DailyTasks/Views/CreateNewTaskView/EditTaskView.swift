@@ -42,6 +42,8 @@ struct EditTaskView: View {
 
           PartOfDayRow(selectedPartOfDay: $task.partOfDay)
 
+          WeekdayRow(week: $task.week)
+
           PrivacyRow(isPrivate: $task.isPrivate)
 
           HStack {

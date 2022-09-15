@@ -156,3 +156,15 @@ struct Week: Codable, Hashable {
     try container.encode(saturday, forKey: .saturday)
   }
 }
+
+extension Week {
+  static let mockWeek = Week(
+    monday: true,
+    tuesday: true,
+    wednesday: false,
+    thursday: true,
+    friday: false,
+    saturday: false,
+    sunday: true
+  )
+}

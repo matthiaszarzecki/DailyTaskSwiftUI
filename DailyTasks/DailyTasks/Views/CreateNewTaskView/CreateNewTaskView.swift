@@ -15,8 +15,9 @@ struct CreateNewTaskView: View {
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
-  @State private var selectedIcon = "drop"
+  @State private var selectedIcon = TaskIcon.drop.rawValue
   @State private var isPrivate = false
+  @State private var week: Week = .fullWeek
 
   private let exampleTasks = [
     "Drink water",
@@ -56,6 +57,8 @@ struct CreateNewTaskView: View {
 
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
 
+          WeekdayRow(week: $week)
+
           PrivacyRow(isPrivate: $isPrivate)
 
           HStack {
@@ -68,6 +71,7 @@ struct CreateNewTaskView: View {
               selectedIcon: selectedIcon,
               selectedPartOfDay: selectedPartOfDay,
               isPrivate: isPrivate,
+              week: week,
               addNewTask: addNewTask,
               closeOverlay: closeOverlay
             )
