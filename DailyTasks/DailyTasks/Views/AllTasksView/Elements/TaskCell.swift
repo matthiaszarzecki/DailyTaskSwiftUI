@@ -9,53 +9,94 @@ import SwiftUI
 
 struct TaskCell: View {
   let task: Task
-  
+  let isLastCellToBeShown: Bool
+  let height: CGFloat
+
   private let iconSize: CGFloat = 30
-  
-  var taskIcon: some View {
-    Image(systemName: task.iconName)
+
+  private var backgroundName: String {
+    if task.partOfDay == 0 {
+      return "background_morning"
+    } else if task.partOfDay == 1 {
+      return "background_daytime"
+    } else if task.partOfDay == 2 {
+      return "background_evening"
+    } else {
+      return "background_all_day"
+    }
+  }
+
+  private var danger: Bool {
+    let ratio = Double(task.currentStreak) / Double(task.highestStreak)
+    let daysAfterDangerStartsAfterStreakBreaking = 10
+
+    // e.g. 10 days - ratio of 0.1. 100 days - 0.01
+    let dangerRatio = 1.0 / Double(daysAfterDangerStartsAfterStreakBreaking)
+    return ratio < dangerRatio
+  }
+
+  private var taskIcon: some View {
+    // When a long-running task has been
+    // failed recently, color the icon red.
+    let color: Color = danger ? .red : .gray
+
+    return Image(systemName: task.iconName)
+      .font(.system(size: 14))
       .frame(width: iconSize, height: iconSize, alignment: .center)
-      .backgroundColor(.gray)
+      .backgroundColor(color)
       .foregroundColor(.white)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
-  
-  var statusIcon: some View {
+
+  @ViewBuilder
+  private var statusIcon: some View {
     if task.status {
-      return AnyView(Image(systemName: "checkmark")
+      Image(systemName: "checkmark")
         .frame(width: iconSize, height: iconSize, alignment: .center)
         .foregroundColor(.white)
         .backgroundColor(.dailyHabitsGreen)
-        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
     } else {
-      return AnyView(Rectangle()
+      Rectangle()
         .frame(width: iconSize, height: iconSize, alignment: .center)
         .foregroundColor(.dailyHabitsGray)
-        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous)))
+        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
   }
-  
-  var emptyPlaceholderToAnchorOverlaysOn: some View {
+
+  private var emptyPlaceholderToAnchorOverlaysOn: some View {
     Rectangle()
       .frame(width: iconSize, height: iconSize, alignment: .center)
       .foregroundColor(.clear)
   }
-  
-  var body: some View {
-    VStack {
-      HStack {
+
+  private var privacyIcon: some View {
+    Group {
+      if task.isPrivate {
+        Image(systemName: "eye.slash")
+          .font(.system(size: 14))
+          .foregroundColor(.dailyHabitsGreen)
+      }
+    }
+  }
+
+  private var cellBody: some View {
+    VStack(spacing: 0) {
+      HStack(spacing: 12) {
         emptyPlaceholderToAnchorOverlaysOn
 
         if task.status {
-          Text("\(task.name)")
+          Text(task.name)
             .foregroundColor(.dailyHabitsGreen)
             .strikethrough()
+            .minimumScaleFactor(0.7)
         } else {
-          Text("\(task.name)")
+          Text(task.name)
+            .minimumScaleFactor(0.7)
         }
-        
+
         Spacer()
-        
+
         emptyPlaceholderToAnchorOverlaysOn
       }
       .overlay(
@@ -66,31 +107,59 @@ struct TaskCell: View {
         statusIcon,
         alignment: .topTrailing
       )
-      .padding(.bottom, 4)
-      .padding(.trailing, 8)
-      
+      .padding(.bottom, .spacing4)
+
       TaskStatistics(task: task)
+        .overlay(
+          privacyIcon,
+          alignment: .bottomTrailing
+        )
     }
-    .backgroundColor(.white)
+    .padding(
+      EdgeInsets(
+        top: .spacing12,
+        leading: .spacing8,
+        bottom: .spacing12,
+        trailing: .spacing8
+      )
+    )
+    .background(
+      Image(backgroundName)
+        .resizable(resizingMode: .tile)
+    )
+    .frame(height: height)
     .cornerRadius(12, corners: [.topRight, .bottomRight])
+  }
+
+  var body: some View {
+    if isLastCellToBeShown {
+      cellBody
+        .cornerRadius(12, corners: [.bottomLeft])
+    } else {
+      cellBody
+    }
   }
 }
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    TaskCell(task: MockClasses.task01)
+    let configurations: [(task: Task, isLastCellToBeShown: Bool)] = [
+      (.mockTask01, false),
+      (.mockTask02, false),
+      (.mockTask05, false),
+      (.mockTask05, true)
+    ]
+
+    ForEach(0..<configurations.count, id: \.self) { index in
+      let configuration = configurations[index]
+      TaskCell(
+        task: configuration.task,
+        isLastCellToBeShown: configuration.isLastCellToBeShown,
+        height: 74
+      )
       .padding()
-      .backgroundColor(.red)
+      .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
-    
-    TaskCell(task: MockClasses.task02)
-      .padding()
-      .backgroundColor(.red)
-      .previewLayout(.sizeThatFits)
-      
-    TaskCell(task: MockClasses.task05)
-      .padding()
-      .backgroundColor(.red)
-      .previewLayout(.sizeThatFits)
+    }
   }
 }

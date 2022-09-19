@@ -12,26 +12,30 @@ struct ConfirmTaskButton: View {
   var startStreak: String
   var selectedIcon: String
   var selectedPartOfDay: Int
+  var isPrivate: Bool
+  var week: Week
   var addNewTask: (_ task: Task) -> Void
   var closeOverlay: () -> Void
-  
+
   var body: some View {
     let disabled = taskName.isEmpty
     let color: Color = disabled ? .gray : .dailyHabitsGreen
-    
+
     return Button(
       action: {
         let streak = Int(startStreak) ?? 0
-        
+
         let task = Task(
           name: taskName,
           status: false,
           iconName: selectedIcon,
           currentStreak: streak,
           highestStreak: 0,
-          partOfDay: selectedPartOfDay
+          partOfDay: selectedPartOfDay,
+          isPrivate: isPrivate,
+          week: week
         )
-        
+
         addNewTask(task)
         closeOverlay()
       },
@@ -50,26 +54,21 @@ struct ConfirmTaskButton: View {
 
 struct ConfirmTaskButton_Previews: PreviewProvider {
   static var previews: some View {
-    ConfirmTaskButton(
-      taskName: "Hello",
-      startStreak: "",
-      selectedIcon: "",
-      selectedPartOfDay: 0,
-      addNewTask: {_ in },
-      closeOverlay: {}
-    )
-    .padding()
-    .previewLayout(.sizeThatFits)
-    
-    ConfirmTaskButton(
-      taskName: "",
-      startStreak: "",
-      selectedIcon: "",
-      selectedPartOfDay: 0,
-      addNewTask: {_ in },
-      closeOverlay: {}
-    )
-    .padding()
-    .previewLayout(.sizeThatFits)
+    let taskNames: [String] = ["Hello", ""]
+
+    ForEach(taskNames, id: \.self) { name in
+      ConfirmTaskButton(
+        taskName: name,
+        startStreak: "",
+        selectedIcon: "",
+        selectedPartOfDay: 0,
+        isPrivate: false,
+        week: .mockWeek,
+        addNewTask: { _ in },
+        closeOverlay: {}
+      )
+      .padding()
+      .previewLayout(.sizeThatFits)
+    }
   }
 }

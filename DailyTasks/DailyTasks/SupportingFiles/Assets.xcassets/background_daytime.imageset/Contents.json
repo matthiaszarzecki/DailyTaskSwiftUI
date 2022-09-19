@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "stripes_plaid_03.png",
       "idiom" : "universal"
     }
   ],

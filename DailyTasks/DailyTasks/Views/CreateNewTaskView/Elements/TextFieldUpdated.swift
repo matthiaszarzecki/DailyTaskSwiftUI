@@ -17,15 +17,15 @@ struct TextFieldUpdated: View {
       ZStack {
         Rectangle()
           .foregroundColor(.gray)
-        
+
         TextField(placeholder, text: $text)
           .font(.title3)
-          .frame(width: width - 24*2, height: 48, alignment: .center)
+          .frame(width: width - .spacing24 * 2, height: 48, alignment: .center)
           .foregroundColor(.white)
       }
-      .frame(width: width - 16*2, height: 48, alignment: .center)
+      .frame(width: width - .spacing16 * 2, height: 48, alignment: .center)
       .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-      
+
       HStack {
         Spacer()
         Button(
@@ -35,13 +35,20 @@ struct TextFieldUpdated: View {
           label: {
             Image(systemName: "xmark.circle.fill")
               .foregroundColor(.white)
-              .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 8))
+              .padding(
+                EdgeInsets(
+                  top: .spacing16,
+                  leading: .spacing16,
+                  bottom: .spacing16,
+                  trailing: .spacing8
+                )
+              )
           }
         )
       }
     }
     .padding()
-    .frame(width: width - 16*2, height: 48, alignment: .center)
+    .frame(width: width - .spacing16 * 2, height: 48, alignment: .center)
   }
 }
 
@@ -50,7 +57,7 @@ struct TaskNameTextField_Previews: PreviewProvider {
     TextFieldUpdated(
       text: .constant("Hello!"),
       placeholder: "Your new habit!",
-      width: PreviewConstants.width
+      width: .previewWidth
     )
     .padding()
     .previewLayout(.sizeThatFits)

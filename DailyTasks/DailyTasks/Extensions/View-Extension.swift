@@ -10,15 +10,15 @@ import SwiftUI
 extension View {
   /// Sets the background to a color.
   func backgroundColor(_ color: Color) -> some View {
-    return self.background(Rectangle().foregroundColor(color))
+    background(color)
   }
-  
+
   /// Allows to only round specific corners.
   func cornerRadius(
     _ radius: CGFloat,
     corners: UIRectCorner
   ) -> some View {
-    return clipShape(
+    clipShape(
       RoundedCorner(
         radius: radius,
         corners: corners

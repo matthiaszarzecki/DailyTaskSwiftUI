@@ -1,22 +1,27 @@
 //
-//  PartOfDayRow.swift
+//  PrivacyRow.swift
 //  DailyTasks
 //
-//  Created by Matthias Zarzecki on 23.04.21.
+//  Created by Matthias Zarzecki on 25.08.22.
 //
 
 import SwiftUI
 
-struct PartOfDayRow: View {
-  @Binding var selectedPartOfDay: Int
+struct PrivacyRow: View {
+  @Binding var isPrivate: Bool
 
   private let padding: CGFloat = .spacing6
 
+  private let privacyOptions: [(isPrivate: Bool, title: String)] = [
+    (false, "Public"),
+    (true, "Private")
+  ]
+
   var body: some View {
     HStack {
-      ForEach(PartOfDayOption.options, id: \.self) { option in
-        if selectedPartOfDay == option.index {
-          Text(option.name)
+      ForEach(privacyOptions, id: \.title) { privacyOption in
+        if isPrivate == privacyOption.isPrivate {
+          Text(privacyOption.title)
             .padding(padding)
             .backgroundColor(.white)
             .foregroundColor(.gray)
@@ -27,10 +32,10 @@ struct PartOfDayRow: View {
         } else {
           Button(
             action: {
-              selectedPartOfDay = option.index
+              isPrivate.toggle()
             },
             label: {
-              Text("\(option.name)")
+              Text(privacyOption.title)
                 .padding(padding)
                 .backgroundColor(.gray)
                 .foregroundColor(.white)
@@ -49,10 +54,10 @@ struct PartOfDayRow: View {
   }
 }
 
-struct PartOfDayRow_Previews: PreviewProvider {
+struct PrivacyRow_Previews: PreviewProvider {
   static var previews: some View {
-    PartOfDayRow(
-      selectedPartOfDay: .constant(1)
+    PrivacyRow(
+      isPrivate: .constant(false)
     )
     .padding()
     .previewLayout(.sizeThatFits)

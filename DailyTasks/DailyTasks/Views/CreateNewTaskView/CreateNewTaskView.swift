@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct CreateNewTaskView: View {
-  var width: CGFloat
-  var addNewTask: (_ task: Task) -> Void
-  var closeOverlay: () -> Void
+  let width: CGFloat
+  let addNewTask: (_ task: Task) -> Void
+  let closeOverlay: () -> Void
 
   @State private var taskName = "New Task!"
   @State private var startStreak = "0"
   @State private var selectedPartOfDay = 1
-  @State private var selectedIcon = "drop"
-  
-  private let exampleTasks = ["Drink water", "Go for a walk", "Eat fruit or vegetable", "Go for a run", "Go outside"]
-  
+  @State private var selectedIcon = TaskIcon.drop.rawValue
+  @State private var isPrivate = false
+  @State private var week: Week = .fullWeek
+
+  private let exampleTasks = [
+    "Drink water",
+    "Go for a walk",
+    "Eat a fruit",
+    "Go for a run",
+    "Go outside",
+    "Read 10 pages in a book",
+    "Play Guitar",
+    "Eat a vegetable",
+    "Do 10 push-ups"
+  ]
+
   var body: some View {
     ZStack {
       // Background Part
@@ -28,23 +40,27 @@ struct CreateNewTaskView: View {
       VStack {
         // Upper "empty" part
         Spacer()
-        
+
         // Actual popover part
         VStack {
           Text("Start a new habit!")
             .font(.largeTitle)
             .padding()
-          
+
           TextFieldUpdated(
             text: $taskName,
             placeholder: "Your new Habit!",
             width: width
           )
-          
+
           IconGrid(selectedIcon: $selectedIcon, width: width)
 
           PartOfDayRow(selectedPartOfDay: $selectedPartOfDay)
-          
+
+          WeekdayRow(week: $week)
+
+          PrivacyRow(isPrivate: $isPrivate)
+
           HStack {
             CancelButton(
               closeOverlay: closeOverlay
@@ -54,13 +70,19 @@ struct CreateNewTaskView: View {
               startStreak: startStreak,
               selectedIcon: selectedIcon,
               selectedPartOfDay: selectedPartOfDay,
+              isPrivate: isPrivate,
+              week: week,
               addNewTask: addNewTask,
               closeOverlay: closeOverlay
             )
           }
           .padding()
         }
-        .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.6, alignment: .center)
+        .frame(
+          width: width - .spacing12,
+          height: UIScreen.main.bounds.size.height * 0.7,
+          alignment: .center
+        )
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
@@ -70,7 +92,7 @@ struct CreateNewTaskView: View {
           alignment: .top
         )
       }
-      
+
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
@@ -80,7 +102,9 @@ struct CreateNewTaskView: View {
     .onAppear {
       taskName = exampleTasks.randomElement() ?? ""
     }
-    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+    .transition(
+      AnyTransition.opacity.combined(with: .move(edge: .bottom))
+    )
   }
 }
 
@@ -90,9 +114,9 @@ struct CreateNewTaskView_Previews: PreviewProvider {
       Rectangle()
         .foregroundColor(.green)
         .edgesIgnoringSafeArea(.all)
-      
+
       CreateNewTaskView(
-        width: PreviewConstants.width,
+        width: .previewWidth,
         addNewTask: { _ in },
         closeOverlay: {}
       )

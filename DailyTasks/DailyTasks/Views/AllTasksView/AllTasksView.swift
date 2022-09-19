@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllTasksView: View {
   @ObservedObject private var viewModel = AllTasksViewModel()
-  
+
   var body: some View {
     AllTasksDisplay(
       tasks: viewModel.state.allTasks,
@@ -28,42 +28,47 @@ struct AllTasksView: View {
 }
 
 struct AllTasksDisplay: View {
-  var tasks: [Task]
-  var offsets: [CGFloat]
-  var addNewTask: (_ task: Task) -> Void
-  var editTask: (_ task: Task) -> Void
-  var updateTask: (_ id: UUID) -> Void
-  var deleteAllTasks: () -> Void
-  var checkIfTasksNeedResetting: () -> Void
-  var resetTasks: () -> Void
-  var sortTasks: () -> Void
-  var deleteSingleTask: (_ id: UUID) -> Void
-  var setOffset: (_ index: Int, _ offset: CGFloat) -> Void
-  
-  @AppStorage("user_name") var userName: String = ""
+  let tasks: [Task]
+  let offsets: [CGFloat]
+  let addNewTask: (_ task: Task) -> Void
+  let editTask: (_ task: Task) -> Void
+  let updateTask: (_ id: UUID) -> Void
+  let deleteAllTasks: () -> Void
+  let checkIfTasksNeedResetting: () -> Void
+  let resetTasks: () -> Void
+  let sortTasks: () -> Void
+  let deleteSingleTask: (_ id: UUID) -> Void
+  let setOffset: (_ index: Int, _ offset: CGFloat) -> Void
 
-  @State private var currentlyEditedTaskIndex = 0
+  @AppStorage("user_name") var userName = ""
+
+  @State private var currentlyEditedTaskIndex: Int = .zero
+  @State private var isPrivacyEnabled = false
 
   @State private var showNewTaskPopover = false
   @State private var showUpdateTaskPopover = false
   @State private var showSettingsPopover = false
 
-  let upperPartHeight: CGFloat = 128
-  let lowerPartHeight: CGFloat = 0
-  var upperAndLowerPartHeight: CGFloat {
-    return upperPartHeight + lowerPartHeight
+  private let upperPartHeight: CGFloat = 128
+  private let lowerPartHeight: CGFloat = .zero
+  private var upperAndLowerPartHeight: CGFloat {
+    upperPartHeight + lowerPartHeight
   }
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {
         // Actual Task List
-        VStack {
+        VStack(spacing: 0) {
           // Spacer
           Rectangle()
             .foregroundColor(.clear)
-            .frame(width: geometry.size.width, height: 124, alignment: .center)
-          
+            .frame(
+              width: geometry.size.width,
+              height: 124,
+              alignment: .leading
+            )
+
           TaskList(
             tasks: tasks,
             offsets: offsets,
@@ -71,10 +76,15 @@ struct AllTasksDisplay: View {
             toggleTaskAsDone: updateTask,
             setOffset: setOffset,
             showUpdateTaskPopover: $showUpdateTaskPopover,
-            currentlyEditedTaskIndex: $currentlyEditedTaskIndex
+            currentlyEditedTaskIndex: $currentlyEditedTaskIndex,
+            isPrivacyEnabled: isPrivacyEnabled
           )
-          .frame(width: geometry.size.width, height: geometry.size.height - 100, alignment: .top)
-          
+          .frame(
+            width: geometry.size.width,
+            height: geometry.size.height - 100,
+            alignment: .top
+          )
+
           // Sort Button
           .overlay(
             Button(
@@ -93,7 +103,12 @@ struct AllTasksDisplay: View {
                 .frame(width: 60, height: 60, alignment: .center)
                 .backgroundColor(.dailyHabitsGreen)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 20,
+                    style: .continuous
+                  )
+                )
                 .padding()
                 .shadow(radius: 10)
               }
@@ -118,7 +133,12 @@ struct AllTasksDisplay: View {
                 .frame(width: 60, height: 60, alignment: .center)
                 .backgroundColor(.dailyHabitsGreen)
                 .foregroundColor(.white)
-                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .mask(
+                  RoundedRectangle(
+                    cornerRadius: 20,
+                    style: .continuous
+                  )
+                )
                 .padding()
                 .shadow(radius: 10)
               }
@@ -126,20 +146,21 @@ struct AllTasksDisplay: View {
             alignment: .bottomLeading
           )
         }
-        
-        VStack {
+
+        VStack(spacing: 0) {
           AllTasksViewUpperRow(
             tasks: tasks,
             width: geometry.size.width,
             height: upperPartHeight,
             showSettingsPopover: $showSettingsPopover,
-            userName: $userName
+            userName: $userName,
+            isPrivacyEnabled: isPrivacyEnabled
           )
-          
+
           Spacer()
         }
       }
-      
+
       if showNewTaskPopover {
         OverlayBackground(closeOverlay: closeCreateTaskView)
         CreateNewTaskView(
@@ -148,7 +169,7 @@ struct AllTasksDisplay: View {
           closeOverlay: closeCreateTaskView
         )
       }
-      
+
       if showUpdateTaskPopover {
         OverlayBackground(closeOverlay: closeEditTaskView)
         EditTaskView(
@@ -159,7 +180,7 @@ struct AllTasksDisplay: View {
           closeOverlay: closeEditTaskView
         )
       }
-      
+
       if showSettingsPopover {
         OverlayBackground(closeOverlay: closeSettingsView)
         SettingsView(
@@ -167,36 +188,38 @@ struct AllTasksDisplay: View {
           deleteAllTasks: deleteAllTasks,
           resetTasks: resetTasks,
           closeOverlay: closeSettingsView,
-          userName: $userName
+          userName: $userName,
+          isPrivacyEnabled: $isPrivacyEnabled
         )
       }
     }
-    
+
     // When the app is put to the foreground,
     // check if a reset should happen.
     .onReceive(
       NotificationCenter.default.publisher(
-        for: UIApplication.willEnterForegroundNotification)
+        for: UIApplication.willEnterForegroundNotification
+      )
     ) { _ in
       print("### Checking for update after putting app into foreground")
       checkIfTasksNeedResetting()
     }
   }
-  
-  func closeCreateTaskView() {
+
+  private func closeCreateTaskView() {
     withAnimation {
       showNewTaskPopover = false
     }
   }
-  
-  func closeEditTaskView() {
+
+  private func closeEditTaskView() {
     withAnimation {
       showUpdateTaskPopover = false
       setOffset(currentlyEditedTaskIndex, 0)
     }
   }
-  
-  func closeSettingsView() {
+
+  private func closeSettingsView() {
     withAnimation {
       showSettingsPopover = false
     }
@@ -205,19 +228,21 @@ struct AllTasksDisplay: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
+    let tasks: [Task] = .mockTasks
+
     AllTasksDisplay(
-      tasks: MockClasses.tasks,
-      // Offsets MUST be the same length as tasks
-      offsets: Array.init(repeating: 0, count: MockClasses.tasks.count),
-      addNewTask: {_ in },
-      editTask: {_ in },
-      updateTask: {_ in },
+      tasks: tasks,
+      // Offsets-array MUST be the same length as tasks
+      offsets: Array(repeating: 0, count: tasks.count),
+      addNewTask: { _ in },
+      editTask: { _ in },
+      updateTask: { _ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
       resetTasks: {},
       sortTasks: {},
-      deleteSingleTask: {_ in },
-      setOffset: {_, _ in }
+      deleteSingleTask: { _ in },
+      setOffset: { _, _ in }
     )
   }
 }

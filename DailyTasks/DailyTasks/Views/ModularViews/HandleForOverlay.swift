@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HandleForOverlay: View {
-  var closeOverlay: () -> Void
-  
+  let closeOverlay: () -> Void
+
   var body: some View {
     Button(
       action: {
@@ -20,7 +20,14 @@ struct HandleForOverlay: View {
           .frame(width: 60, height: 6, alignment: .center)
           .mask(RoundedRectangle(cornerRadius: 3, style: .continuous))
           .foregroundColor(.dailyHabitsGray)
-          .padding(EdgeInsets(top: 8, leading: 12, bottom: 12, trailing: 12))
+          .padding(
+            EdgeInsets(
+              top: .spacing8,
+              leading: .spacing12,
+              bottom: .spacing12,
+              trailing: .spacing12
+            )
+          )
       }
     )
   }
@@ -28,7 +35,7 @@ struct HandleForOverlay: View {
 
 struct HandleForOverlay_Previews: PreviewProvider {
   static var previews: some View {
-    HandleForOverlay(closeOverlay: {})
+    HandleForOverlay {}
       .padding()
       .previewLayout(.sizeThatFits)
   }

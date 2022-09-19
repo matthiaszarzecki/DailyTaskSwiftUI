@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
-  var width: CGFloat
-  var deleteAllTasks: () -> Void
-  var resetTasks: () -> Void
-  var closeOverlay: () -> Void
+  let width: CGFloat
+  let deleteAllTasks: () -> Void
+  let resetTasks: () -> Void
+  let closeOverlay: () -> Void
   @Binding var userName: String
-  
+  @Binding var isPrivacyEnabled: Bool
+
   @State private var showActualDeleteButton = false
   @State private var showActualResetButton = false
-  
-  var safeDeleteAllTasksButton: some View {
+
+  private var safeDeleteAllTasksButton: some View {
     Button(
       action: {
         withAnimation {
@@ -34,8 +35,8 @@ struct SettingsView: View {
       }
     )
   }
-  
-  var actualDeleteAllTasksButton: some View {
+
+  private var actualDeleteAllTasksButton: some View {
     Button(
       action: {
         deleteAllTasks()
@@ -51,8 +52,8 @@ struct SettingsView: View {
       }
     )
   }
-  
-  var safeResetTasksButton: some View {
+
+  private var safeResetTasksButton: some View {
     Button(
       action: {
         withAnimation {
@@ -60,7 +61,7 @@ struct SettingsView: View {
         }
       },
       label: {
-        Text("Reset All Tasks")
+        Text("Jump to next day")
           .padding()
           .backgroundColor(.red)
           .foregroundColor(.white)
@@ -69,8 +70,8 @@ struct SettingsView: View {
       }
     )
   }
-  
-  var actualResetTasksButton: some View {
+
+  private var actualResetTasksButton: some View {
     Button(
       action: {
         resetTasks()
@@ -86,12 +87,12 @@ struct SettingsView: View {
       }
     )
   }
-  
-  var debugActions: some View {
+
+  private var debugActions: some View {
     VStack {
       Text("Debug Actions")
-        .font(.title)
-      
+        .font(.title2)
+
       HStack {
         safeDeleteAllTasksButton
         if showActualDeleteButton {
@@ -105,50 +106,64 @@ struct SettingsView: View {
         }
       }
     }
-    .frame(width: width - 32*2, height: 150, alignment: .center)
+    .frame(width: width - .spacing32 * 2, height: 150, alignment: .center)
     .padding()
     .backgroundColor(.dailyHabitsGray)
     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
   }
-  
-  var profileNameAndImage: some View {
+
+  private var profileNameAndImage: some View {
     HStack {
       TextFieldUpdated(
         text: $userName,
         placeholder: "What's your name?",
-        width: width - 80
+        width: width * 0.8
       )
 
-      Spacer()
-      
       Image(systemName: "person.crop.circle")
         .foregroundColor(.dailyHabitsGreen)
-        .font(.title)
-        .padding()
+        .font(.system(size: 42))
+        .padding(.leading, .spacing4)
+        .padding(4)
     }
-    .padding()
+    .frame(width: width - 12, alignment: .center)
+    .padding(.bottom, .spacing8)
   }
-  
+
   var body: some View {
     ZStack {
       // Empty background
       Rectangle()
         .foregroundColor(.clear)
-      
+
       VStack {
         // Upper "empty" part
         Spacer()
-        
+
         // The actual view
         VStack {
           profileNameAndImage
+
+          Toggle(
+            "Private Mode",
+            isOn: $isPrivacyEnabled
+          )
+          .tint(.dailyHabitsGreen)
+          .frame(width: width - .spacing16 * 2, alignment: .center)
+          .padding(.bottom, .spacing12)
+
           debugActions
+
           CancelButton(
-            closeOverlay: { closeOverlay() },
+            closeOverlay: closeOverlay,
             color: .dailyHabitsGreen
           )
         }
-        .frame(width: width - 12, height: UIScreen.main.bounds.size.height * 0.5, alignment: .center)
+        .frame(
+          width: width - .spacing6 * 2,
+          height: UIScreen.main.bounds.size.height * 0.5,
+          alignment: .center
+        )
         .backgroundColor(.white)
         .cornerRadius(8, corners: [.topLeft, .topRight])
         .cornerRadius(38, corners: [.bottomLeft, .bottomRight])
@@ -161,10 +176,12 @@ struct SettingsView: View {
       // Move everything up a bit for
       // the line between the view at
       // the bottom of the screen.
-      .offset(y: -4)
+      .offset(y: -.spacing4)
       .edgesIgnoringSafeArea(.all)
     }
-    .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+    .transition(
+      AnyTransition.opacity.combined(with: .move(edge: .bottom))
+    )
   }
 }
 
@@ -174,13 +191,14 @@ struct SettingsView_Previews: PreviewProvider {
       Rectangle()
         .edgesIgnoringSafeArea(.all)
         .foregroundColor(.green)
-      
+
       SettingsView(
-        width: PreviewConstants.width,
+        width: .previewWidth,
         deleteAllTasks: {},
         resetTasks: {},
         closeOverlay: {},
-        userName: .constant(MockClasses.userName)
+        userName: .constant(.mockUserName),
+        isPrivacyEnabled: .constant(true)
       )
     }
   }
