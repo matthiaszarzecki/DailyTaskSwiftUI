@@ -29,6 +29,7 @@ class AllTasksViewModel: ObservableObject {
 
   func checkIfTasksNeedResetting() {
     loadAllTasks()
+
     if
       let expiryDateParsed = ISO8601DateFormatter().date(from: resetDate),
       Date() > expiryDateParsed
@@ -42,6 +43,8 @@ class AllTasksViewModel: ObservableObject {
       resetAllTasks()
     } else {
       print("### Not Resetting Tasks")
+
+      setTasksToDoneBasedOnWeekday()
     }
 
     sortTasks()
@@ -49,6 +52,8 @@ class AllTasksViewModel: ObservableObject {
   }
 
   func resetAllTasks() {
+    // Set "Done" Tasks to "Todo" and increase streak counter
+
     // Counter for counting how many tasks have
     // been reset (only done tasks get reset).
     var counter: Int = .zero
@@ -78,8 +83,44 @@ class AllTasksViewModel: ObservableObject {
         state.allTasks[index].currentStreak = .zero
       }
     }
+
+    setTasksToDoneBasedOnWeekday()
+
     saveAllData()
     print("Reset \(counter) Tasks!")
+  }
+
+  func setTasksToDoneBasedOnWeekday() {
+    // Set tasks to "Done" that are not supposed to happen the current weekday
+    // Weekdays are in the range of 1 to 7 BEGINNING WITH SUNDAY
+    let weekday = Calendar.current.component(.weekday, from: Date())
+
+    for index in 0..<state.allTasks.count {
+      let currentTask = state.allTasks[index]
+
+      // If the task is still "todo"
+      if !currentTask.status {
+        // And the task is not supposed to be done that weekday
+        if weekday == 2, !currentTask.week.monday {
+          // Set that task to be done
+          state.allTasks[index].status = true
+        } else if weekday == 3, !currentTask.week.tuesday {
+          state.allTasks[index].status = true
+        } else if weekday == 4, !currentTask.week.wednesday {
+          state.allTasks[index].status = true
+        } else if weekday == 5, !currentTask.week.thursday {
+          state.allTasks[index].status = true
+        } else if weekday == 6, !currentTask.week.friday {
+          state.allTasks[index].status = true
+        } else if weekday == 7, !currentTask.week.saturday {
+          state.allTasks[index].status = true
+        } else if weekday == 1, !currentTask.week.sunday {
+          state.allTasks[index].status = true
+        }
+      }
+    }
+
+    saveAllData()
   }
 
   func getResetDate() -> String {
