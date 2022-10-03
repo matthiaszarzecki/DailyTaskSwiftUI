@@ -157,11 +157,10 @@
 				6E89A040263300C700586C1D /* ConfirmTaskButton.swift */,
 				CCC5530726306F3F003C7DBC /* IconGrid.swift */,
 				6E89A02E2632FD0000586C1D /* PartOfDayRow.swift */,
-				CC9A61AC28D069B90031A2F2 /* WeekdayRow.swift */,
-				CCAD8B2928EB4D6000632F03 /* ActivatableButton.swift */,
 				6EB31E3B28B8016100C71BDC /* PrivacyRow.swift */,
 				6E89A0332632FD8E00586C1D /* StreakRow.swift */,
 				6E89A03B2632FFC700586C1D /* TextFieldUpdated.swift */,
+				CC9A61AC28D069B90031A2F2 /* WeekdayRow.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -177,6 +176,7 @@
 		6E9FF7AA262CBD1D00CA7743 /* ModularViews */ = {
 			isa = PBXGroup;
 			children = (
+				CCAD8B2928EB4D6000632F03 /* ActivatableButton.swift */,
 				6E1DE0E426341F3800222676 /* HandleForOverlay.swift */,
 				6E1DE0D926341CE500222676 /* OverlayBackground.swift */,
 				6EB8EBDB262A4EDD00E1484D /* ProgressBar.swift */,
