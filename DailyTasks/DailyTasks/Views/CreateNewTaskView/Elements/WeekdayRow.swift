@@ -18,44 +18,18 @@ struct WeekdayRow: View {
       ForEach(0..<week.allDays.count, id: \.self) { index in
         let weekDay = week.allDays[index]
         let displayName = Week.getDisplayName(index: index)
-
-        if weekDay {
-          Button(
-            action: {
-              week.setWeekday(index: index, status: !weekDay)
-            },
-            label: {
-              Text(displayName)
-                .padding(padding)
-                .frame(width: width)
-                .backgroundColor(.white)
-                .foregroundColor(.gray)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 2)
-                )
-            }
-          )
-        } else {
-          Button(
-            action: {
-              week.setWeekday(index: index, status: !weekDay)
-            },
-            label: {
-              Text(displayName)
-                .padding(padding)
-                .frame(width: width)
-                .backgroundColor(.gray)
-                .foregroundColor(.white)
-                .mask(
-                  RoundedRectangle(
-                    cornerRadius: 10,
-                    style: .continuous
-                  )
-                )
-            }
-          )
+        let action = {
+          week.setWeekday(index: index, status: !weekDay)
         }
+
+        ActivatableButton(
+          displayName: displayName,
+          isActive: weekDay,
+          actionWhenActive: action,
+          actionWhenInActive: action,
+          padding: padding,
+          width: width
+        )
       }
     }
     .padding(.spacing6)
