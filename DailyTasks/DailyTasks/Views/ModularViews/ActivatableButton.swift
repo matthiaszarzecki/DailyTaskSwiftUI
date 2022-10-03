@@ -27,6 +27,20 @@ struct ActivatableButton: View {
             RoundedRectangle(cornerRadius: 10)
               .stroke(Color.gray, lineWidth: 2)
           )
+          .overlay(
+            ZStack {
+              Circle()
+                .frame(width: 6, height: 6)
+                .backgroundColor(.white)
+
+              Image(systemName: "checkmark.circle")
+                .frame(width: 6, height: 6)
+                .foregroundColor(.gray)
+            }
+            .frame(width: 6, height: 6)
+            .offset(x: 6, y: -8),
+            alignment: .topTrailing
+          )
       }
     } else {
       Button(action: actionWhenInActive) {
@@ -52,7 +66,7 @@ struct ActivatableButton_Previews: PreviewProvider {
 
     ForEach(configurations, id: \.self) { configuration in
       ActivatableButton(
-        displayName: "Hello",
+        displayName: "He",
         isActive: configuration,
         actionWhenActive: {},
         actionWhenInActive: {},
