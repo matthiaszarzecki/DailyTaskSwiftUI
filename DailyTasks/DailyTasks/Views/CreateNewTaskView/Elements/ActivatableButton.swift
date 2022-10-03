@@ -17,38 +17,50 @@ struct ActivatableButton: View {
 
   var body: some View {
     if isActive {
-      Button(
-        action: actionWhenActive,
-        label: {
-          Text(displayName)
-            .padding(padding)
-            .frame(width: width)
-            .backgroundColor(.white)
-            .foregroundColor(.gray)
-            .overlay(
-              RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 2)
-            )
-        }
-      )
+      Button(action: actionWhenActive) {
+        Text(displayName)
+          .padding(padding)
+          .frame(width: width)
+          .backgroundColor(.white)
+          .foregroundColor(.gray)
+          .overlay(
+            RoundedRectangle(cornerRadius: 10)
+              .stroke(Color.gray, lineWidth: 2)
+          )
+      }
     } else {
-      Button(
-        action: actionWhenInActive,
-        label: {
-          Text(displayName)
-            .padding(padding)
-            .frame(width: width)
-            .backgroundColor(.gray)
-            .foregroundColor(.white)
-            .mask(
-              RoundedRectangle(
-                cornerRadius: 10,
-                style: .continuous
-              )
+      Button(action: actionWhenInActive) {
+        Text(displayName)
+          .padding(padding)
+          .frame(width: width)
+          .backgroundColor(.gray)
+          .foregroundColor(.white)
+          .mask(
+            RoundedRectangle(
+              cornerRadius: 10,
+              style: .continuous
             )
-        }
-      )
+          )
+      }
     }
   }
 }
 
+struct ActivatableButton_Previews: PreviewProvider {
+  static var previews: some View {
+    let configurations = [true, false]
+
+    ForEach(configurations, id: \.self) { configuration in
+      ActivatableButton(
+        displayName: "Hello",
+        isActive: configuration,
+        actionWhenActive: {},
+        actionWhenInActive: {},
+        padding: .spacing4,
+        width: 38
+      )
+      .padding()
+      .previewLayout(.sizeThatFits)
+    }
+  }
+}
