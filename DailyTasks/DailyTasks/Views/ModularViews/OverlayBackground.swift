@@ -13,17 +13,12 @@ struct OverlayBackground: View {
   let closeOverlay: () -> Void
 
   var body: some View {
-    Button(
-      action: {
-        closeOverlay()
-      },
-      label: {
-        Rectangle()
-          .foregroundColor(.black)
-          .opacity(0.6)
-          .edgesIgnoringSafeArea(.all)
-      }
-    )
+    Button(action: closeOverlay) {
+      Rectangle()
+        .foregroundColor(.black)
+        .opacity(0.6)
+        .edgesIgnoringSafeArea(.all)
+    }
     .transition(.opacity)
   }
 }

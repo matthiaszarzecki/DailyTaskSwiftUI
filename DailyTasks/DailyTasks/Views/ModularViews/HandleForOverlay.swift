@@ -11,25 +11,20 @@ struct HandleForOverlay: View {
   let closeOverlay: () -> Void
 
   var body: some View {
-    Button(
-      action: {
-        closeOverlay()
-      },
-      label: {
-        Rectangle()
-          .frame(width: 60, height: 6, alignment: .center)
-          .mask(RoundedRectangle(cornerRadius: 3, style: .continuous))
-          .foregroundColor(.dailyHabitsGray)
-          .padding(
-            EdgeInsets(
-              top: .spacing8,
-              leading: .spacing12,
-              bottom: .spacing12,
-              trailing: .spacing12
-            )
+    Button(action: closeOverlay) {
+      Rectangle()
+        .frame(width: 60, height: 6, alignment: .center)
+        .mask(RoundedRectangle(cornerRadius: 3, style: .continuous))
+        .foregroundColor(.dailyHabitsGray)
+        .padding(
+          EdgeInsets(
+            top: .spacing8,
+            leading: .spacing12,
+            bottom: .spacing12,
+            trailing: .spacing12
           )
-      }
-    )
+        )
+    }
   }
 }
 
