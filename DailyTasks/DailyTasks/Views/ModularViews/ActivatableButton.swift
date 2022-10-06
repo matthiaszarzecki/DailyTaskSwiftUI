@@ -15,6 +15,25 @@ struct ActivatableButton: View {
   let padding: CGFloat
   let width: CGFloat
 
+  private var checkmark: some View {
+    let size: CGFloat = 16
+
+    return ZStack {
+      Circle()
+        // The Circle should be minimally smaller
+        // so that there is no white border
+        .frame(width: size - 1, height: size - 1)
+        .foregroundColor(.white)
+
+      Image(systemName: "checkmark.circle")
+        .resizable()
+        .frame(width: size, height: size)
+        .foregroundColor(.gray)
+    }
+    .frame(width: 12, height: 12)
+    .offset(x: 4, y: -4)
+  }
+
   var body: some View {
     if isActive {
       Button(action: actionWhenActive) {
@@ -28,17 +47,7 @@ struct ActivatableButton: View {
               .stroke(Color.gray, lineWidth: 2)
           )
           .overlay(
-            ZStack {
-              Circle()
-                .frame(width: 6, height: 6)
-                .backgroundColor(.white)
-
-              Image(systemName: "checkmark.circle")
-                .frame(width: 6, height: 6)
-                .foregroundColor(.gray)
-            }
-            .frame(width: 6, height: 6)
-            .offset(x: 6, y: -8),
+            checkmark,
             alignment: .topTrailing
           )
       }
