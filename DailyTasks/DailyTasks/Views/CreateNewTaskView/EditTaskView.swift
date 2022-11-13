@@ -47,6 +47,20 @@ struct EditTaskView: View {
           PrivacyRow(isPrivate: $task.isPrivate)
 
           HStack {
+            Text("Change Streak:")
+            TextFieldStreaks(
+              text: Binding(
+                get: { "\(task.currentStreak)" },
+                set: { newValue in
+                  task.currentStreak = Int(newValue) ?? 0
+                }
+              ),
+              placeholder: "\(task.currentStreak)",
+              width: width / 2
+            )
+          }
+
+          HStack {
             Button(
               action: {
                 withAnimation {
@@ -111,7 +125,7 @@ struct EditTaskView: View {
         }
         .frame(
           width: width,
-          height: UIScreen.main.bounds.size.height * 0.7,
+          height: UIScreen.main.bounds.size.height * 0.9,
           alignment: .center
         )
         .backgroundColor(.white)
