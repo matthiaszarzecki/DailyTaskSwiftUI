@@ -110,7 +110,7 @@ custom_rules:
     message: "Avoid using multi-line comment markers like */ and /* - use // and /// instead."
 
   avoid_background_color:
-    regex: '.background(Color.'
+    regex: '\.background\(Color\.'
     message: "Avoid using .background(Color), use .backgroundColor() instead."
 
   use_int_zero_property_in_initialization:
