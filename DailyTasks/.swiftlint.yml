@@ -93,7 +93,7 @@ custom_rules:
     message: "Don't compare to false, use !value."
 
   commented_out_code:
-    regex: '(?&lt;!:|\/)\/\/\h*[a-z.](?!wiftlint)'
+    regex: '(?=&lt;!:|\/)\/\/\h*[a-z.](?!wiftlint)'
     message: "Comment starting with lowercase letter - did you forget to delete old code?"
 
   multiline_commented_out_code:
