@@ -106,7 +106,7 @@ custom_rules:
     message: "Avoid using AnyView - use @ViewBuilder instead."
 
   avoid_multiline_comment_markers:
-    regex: '*/'
+    regex: '\*/'
     message: "Avoid using multi-line comment markers like */ and /* - use // and /// instead."
 
   avoid_background_color:
