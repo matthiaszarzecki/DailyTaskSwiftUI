@@ -200,6 +200,15 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
+		6ED7228529B2546A002123F5 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				6E89A0292632B28800586C1D /* PreviewConstants.swift */,
+				CC0AD8602625C4E9003F9A9F /* String-Extension.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		CC0AD7EF2625AAC3003F9A9F = {
 			isa = PBXGroup;
 			children = (
@@ -237,8 +246,6 @@
 		CC0AD8032625AAC5003F9A9F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				6E89A0292632B28800586C1D /* PreviewConstants.swift */,
-				CC0AD8602625C4E9003F9A9F /* String-Extension.swift */,
 				CC0AD8042625AAC5003F9A9F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -294,6 +301,7 @@
 		CC0AD8402625BE28003F9A9F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6ED7228529B2546A002123F5 /* Mocks */,
 				CCC5530C26306F88003C7DBC /* PartOfDayOption.swift */,
 				CC0AD83B2625BE15003F9A9F /* Task.swift */,
 				6EB31E3D28B822A800C71BDC /* TaskIcon.swift */,
