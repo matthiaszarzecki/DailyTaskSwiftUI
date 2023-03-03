@@ -16,7 +16,7 @@ extension Color {
 
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {
-    let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+    let hex = hex.trimmingCharacters(in: .alphanumerics.inverted)
     var int: UInt64 = .zero
     Scanner(string: hex).scanHexInt64(&int)
     let a, r, g, b: UInt64
