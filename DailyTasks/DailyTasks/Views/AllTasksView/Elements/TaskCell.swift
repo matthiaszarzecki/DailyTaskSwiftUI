@@ -143,7 +143,11 @@ struct TaskCell: View {
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    let configurations: [(task: Task, isLastCellToBeShown: Bool, displayName: String)] = [
+    let configurations: [(
+      task: Task,
+      isLastCellToBeShown: Bool,
+      displayName: String
+    )] = [
       (.mockTask01, false, "Todo"),
       (.mockTask02, false, "Done"),
       (.mockTask05, false, "Danger Done"),
