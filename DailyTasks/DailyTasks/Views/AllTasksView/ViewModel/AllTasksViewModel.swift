@@ -91,8 +91,8 @@ class AllTasksViewModel: ObservableObject {
   }
 
   func setTasksToDoneBasedOnWeekday() {
-    // Set tasks to "Done" that are not supposed to happen the current weekday
-    // Weekdays are in the range of 1 to 7 BEGINNING WITH SUNDAY
+    // Set tasks to "Done" that are not supposed to happen the current weekday.
+    // Weekdays are in the range of 1 to 7 BEGINNING WITH SUNDAY.
     let weekday = Calendar.current.component(.weekday, from: Date())
 
     for index in 0..<state.allTasks.count {
