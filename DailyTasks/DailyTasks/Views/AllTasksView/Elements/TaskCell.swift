@@ -143,11 +143,11 @@ struct TaskCell: View {
 
 struct TaskCell_Previews: PreviewProvider {
   static var previews: some View {
-    let configurations: [(task: Task, isLastCellToBeShown: Bool)] = [
-      (.mockTask01, false),
-      (.mockTask02, false),
-      (.mockTask05, false),
-      (.mockTask05, true)
+    let configurations: [(task: Task, isLastCellToBeShown: Bool, displayName: String)] = [
+      (.mockTask01, false, "Todo"),
+      (.mockTask02, false, "Done"),
+      (.mockTask05, false, "Danger Done"),
+      (.mockTask05, true, "Last Cell")
     ]
 
     ForEach(0..<configurations.count, id: \.self) { index in
@@ -160,6 +160,7 @@ struct TaskCell_Previews: PreviewProvider {
       .padding()
       .backgroundColor(.purple)
       .previewLayout(.sizeThatFits)
+      .previewDisplayName(configuration.displayName)
     }
   }
 }
