@@ -191,11 +191,17 @@ class AllTasksViewModel: ObservableObject {
   }
 
   private func createNotification() -> UNNotificationRequest {
+    let currentBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+    DispatchQueue.main.async {
+      UIApplication.shared.applicationIconBadgeNumber += 1
+    }
+
     // Create notification
     let content = UNMutableNotificationContent()
     content.title = "The Day is almost over!"
     content.subtitle = "Do you have tasks still to do?"
     content.sound = UNNotificationSound.default
+    content.badge = currentBadgeNumber as NSNumber
 
     var components = DateComponents()
     components.hour = 22

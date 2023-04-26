@@ -207,6 +207,14 @@ struct AllTasksDisplay: View {
       checkIfTasksNeedResetting()
       setDailyReminderNotification()
     }
+
+    .onReceive(
+      NotificationCenter.default.publisher(
+        for: UIApplication.willResignActiveNotification
+      )
+    ) { _ in
+      UIApplication.shared.applicationIconBadgeNumber = .zero
+    }
   }
 
   private func closeCreateTaskView() {
@@ -235,7 +243,6 @@ struct ContentView_Previews: PreviewProvider {
 
     AllTasksDisplay(
       tasks: tasks,
-      // TODO: Automate this
       // Offsets-array MUST be the same length as tasks
       offsets: Array(repeating: 0, count: tasks.count),
       addNewTask: { _ in },
