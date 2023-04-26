@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UserNotifications
 
 class AllTasksViewModel: ObservableObject {
   struct AllTasksViewState {
@@ -150,6 +151,64 @@ class AllTasksViewModel: ObservableObject {
 
   func setOffset(index: Int, offset: CGFloat) {
     state.offsets[index] = offset
+  }
+
+  func setDailyReminderNotification() {
+    let currentNotificationCenter = UNUserNotificationCenter.current()
+
+    currentNotificationCenter.requestAuthorization(
+      options: [.alert, .badge, .sound]
+    ) { success, error in
+      if success {
+        print("Permissions Given!")
+      } else if let error = error {
+        print(error.localizedDescription)
+      }
+    }
+
+    currentNotificationCenter.getNotificationSettings { settings in
+      if settings.authorizationStatus == .notDetermined {
+        // Notification permission has not been asked yet
+        print("Notifications have not been requested yet")
+      } else if settings.authorizationStatus == .denied {
+        // Notification permission was previously denied, go to settings & privacy to re-enable
+        print("Notifications have been denied")
+      } else if settings.authorizationStatus == .authorized {
+        // Notification permission was already granted
+        print("Notifications have been granted")
+
+        let notificationRequest = createNotification()
+        currentNotificationCenter.add(notificationRequest)
+      }
+    }
+  }
+
+  private func createNotification() -> UNNotificationRequest {
+    // Create notification
+    let content = UNMutableNotificationContent()
+    content.title = "The Day is almost over!"
+    content.subtitle = "Do you have tasks still to do?"
+    content.sound = UNNotificationSound.default
+
+    var components = DateComponents()
+    components.hour = 22
+    components.day = Calendar.current.component(.day, from: Date())
+    components.month = Calendar.current.component(.month, from: Date())
+    components.year = Calendar.current.component(.year, from: Date())
+
+    let trigger = UNCalendarNotificationTrigger(
+      dateMatching: components,
+      repeats: false
+    )
+
+    // choose a random identifier
+    let request = UNNotificationRequest(
+      identifier: UUID().uuidString,
+      content: content,
+      trigger: trigger
+    )
+
+    return request
   }
 
   // MARK: - Sort action

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UserNotifications
 
 struct AllTasksView: View {
   @ObservedObject private var viewModel = AllTasksViewModel()
@@ -20,6 +19,7 @@ struct AllTasksView: View {
       updateTask: viewModel.toggleTaskAsDone,
       deleteAllTasks: viewModel.deleteAllTasks,
       checkIfTasksNeedResetting: viewModel.checkIfTasksNeedResetting,
+      setDailyReminderNotification: viewModel.setDailyReminderNotification,
       resetTasks: viewModel.resetAllTasks,
       sortTasks: viewModel.sortTasks,
       deleteSingleTask: viewModel.deleteSingleTask,
@@ -36,6 +36,7 @@ struct AllTasksDisplay: View {
   let updateTask: (_ id: UUID) -> Void
   let deleteAllTasks: () -> Void
   let checkIfTasksNeedResetting: () -> Void
+  let setDailyReminderNotification: () -> Void
   let resetTasks: () -> Void
   let sortTasks: () -> Void
   let deleteSingleTask: (_ id: UUID) -> Void
@@ -204,58 +205,7 @@ struct AllTasksDisplay: View {
     ) { _ in
       print("### Checking for update after putting app into foreground")
       checkIfTasksNeedResetting()
-
-      UNUserNotificationCenter.current().requestAuthorization(
-        options: [.alert, .badge, .sound]
-      ) { success, error in
-        if success {
-          print("All set!")
-        } else if let error = error {
-          print(error.localizedDescription)
-        }
-      }
-
-      let current = UNUserNotificationCenter.current()
-
-      current.getNotificationSettings { settings in
-        if settings.authorizationStatus == .notDetermined {
-          // Notification permission has not been asked yet
-          print("Notifications have not been requested yet")
-        } else if settings.authorizationStatus == .denied {
-          // Notification permission was previously denied, go to settings & privacy to re-enable
-          print("Notifications have been denied")
-        } else if settings.authorizationStatus == .authorized {
-          // Notification permission was already granted
-          print("Notifications have been granted")
-
-          // Create notification
-          let content = UNMutableNotificationContent()
-          content.title = "The Day is almost over!"
-          content.subtitle = "Do you have tasks still to do?"
-          content.sound = UNNotificationSound.default
-
-          var components = DateComponents()
-          components.hour = 22
-          components.day = Calendar.current.component(.day, from: Date())
-          components.month = Calendar.current.component(.month, from: Date())
-          components.year = Calendar.current.component(.year, from: Date())
-
-          let trigger = UNCalendarNotificationTrigger(
-            dateMatching: components,
-            repeats: false
-          )
-
-          // choose a random identifier
-          let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
-            content: content,
-            trigger: trigger
-          )
-
-          // add our notification request
-          UNUserNotificationCenter.current().add(request)
-        }
-      }
+      setDailyReminderNotification()
     }
   }
 
@@ -285,6 +235,7 @@ struct ContentView_Previews: PreviewProvider {
 
     AllTasksDisplay(
       tasks: tasks,
+      // TODO: Automate this
       // Offsets-array MUST be the same length as tasks
       offsets: Array(repeating: 0, count: tasks.count),
       addNewTask: { _ in },
@@ -292,6 +243,7 @@ struct ContentView_Previews: PreviewProvider {
       updateTask: { _ in },
       deleteAllTasks: {},
       checkIfTasksNeedResetting: {},
+      setDailyReminderNotification: {},
       resetTasks: {},
       sortTasks: {},
       deleteSingleTask: { _ in },
