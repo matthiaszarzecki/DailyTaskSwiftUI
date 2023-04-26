@@ -186,7 +186,7 @@ class AllTasksViewModel: ObservableObject {
         if !self.isNotificationScheduled {
           let notificationRequest = self.createNotification()
           currentNotificationCenter.add(notificationRequest)
-          isNotificationScheduled = true
+          self.isNotificationScheduled = true
         }
       }
     }
