@@ -21,8 +21,6 @@ class AllTasksViewModel: ObservableObject {
     from: Date.distantPast
   )
 
-  @AppStorage("is_daily_notification_scheduled") private var isNotificationScheduled = false
-
   init() {
     loadAllTasks()
 
@@ -44,8 +42,6 @@ class AllTasksViewModel: ObservableObject {
       // resetDate = getResetDateOneMinuteInTheFuture()
 
       resetAllTasks()
-
-      isNotificationScheduled = false
     } else {
       print("### Not Resetting Tasks")
 
@@ -183,10 +179,12 @@ class AllTasksViewModel: ObservableObject {
         // Notification permission was already granted
         print("Notifications have been granted")
 
-        if !self.isNotificationScheduled {
-          let notificationRequest = self.createNotification()
-          currentNotificationCenter.add(notificationRequest)
-          self.isNotificationScheduled = true
+        currentNotificationCenter.getPendingNotificationRequests { requests in
+          // Schedule new notification only when not already scheduled
+          if requests.count < 1 {
+            let notificationRequest = self.createNotification()
+            currentNotificationCenter.add(notificationRequest)
+          }
         }
       }
     }
