@@ -177,7 +177,7 @@ class AllTasksViewModel: ObservableObject {
         // Notification permission was already granted
         print("Notifications have been granted")
 
-        let notificationRequest = createNotification()
+        let notificationRequest = self.createNotification()
         currentNotificationCenter.add(notificationRequest)
       }
     }
