@@ -199,7 +199,7 @@ class AllTasksViewModel: ObservableObject {
     // Create notification
     let content = UNMutableNotificationContent()
     content.title = "The Day is almost over!"
-    content.subtitle = "Do you have tasks still to do?"
+    content.body = "Do you have tasks still to do?"
     content.sound = UNNotificationSound.default
     content.badge = currentBadgeNumber as NSNumber
 
