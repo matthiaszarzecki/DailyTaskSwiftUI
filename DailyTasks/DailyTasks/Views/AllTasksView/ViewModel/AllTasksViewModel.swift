@@ -15,9 +15,14 @@ class AllTasksViewModel: ObservableObject {
     var offsets: [CGFloat] = []
   }
 
-  @Published private(set) var state = AllTasksViewState()
-  @AppStorage("all_daily_tasks") private var allTasksData = Data()
-  @AppStorage("reset_date") private var resetDate = ISO8601DateFormatter().string(
+  @Published
+  private(set) var state = AllTasksViewState()
+
+  @AppStorage("all_daily_tasks")
+  private var allTasksData = Data()
+
+  @AppStorage("reset_date")
+  private var resetDate = ISO8601DateFormatter().string(
     from: Date.distantPast
   )
 
