@@ -26,6 +26,9 @@ class AllTasksViewModel: ObservableObject {
     from: Date.distantPast
   )
 
+  /// The hour of day at which the tasks roll over.
+  private static let resetHour = 4
+
   init() {
     loadAllTasks()
 
@@ -48,6 +51,9 @@ class AllTasksViewModel: ObservableObject {
 
       resetAllTasks()
     } else {
+      // Note: the pending reset date is deliberately left untouched here.
+      // Overwriting it would push the boundary further into the future and
+      // skip the reset entirely — see getResetDate() below.
       print("### Not Resetting Tasks")
 
       setTasksToDoneBasedOnWeekday()
@@ -129,21 +135,29 @@ class AllTasksViewModel: ObservableObject {
     saveAllData()
   }
 
+  /// The next occurrence of the reset hour, whether that is later today or tomorrow.
+  ///
+  /// FIX: The previous implementation added a day first and then called
+  /// `date(bySettingHour:minute:second:of:)`, which is not a setter — it
+  /// searches *forward* for a matching time and so never returns anything
+  /// earlier than its input. Adding a day first therefore overshot by an
+  /// extra day whenever the app was opened after the reset hour, meaning
+  /// tasks only rolled over every other day. Matching directly from `now`
+  /// gives the correct boundary in both cases: at 01:00 this returns today
+  /// at 04:00, at 10:00 it returns tomorrow at 04:00.
+  ///
+  /// FIX: This also no longer returns an empty string on failure. An empty
+  /// string does not parse back into a `Date`, which made
+  /// `checkIfTasksNeedResetting()` take the else branch forever — tasks
+  /// would never reset again.
   func getResetDate() -> String {
-    // Set expiry date to next day...
-    let expiryAdvance = DateComponents(day: 1)
-    if let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date()) {
-      // ...at 0400 in the morning.
-      if let nextDateAdapted = Calendar.current.date(
-        bySettingHour: 4,
-        minute: 0,
-        second: 0,
-        of: nextDate
-      ) {
-        return ISO8601DateFormatter().string(from: nextDateAdapted)
-      }
-    }
-    return ""
+    let nextDate = Calendar.current.nextDate(
+      after: Date(),
+      matching: DateComponents(hour: Self.resetHour, minute: 0, second: 0),
+      matchingPolicy: .nextTime
+    ) ?? Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+
+    return ISO8601DateFormatter().string(from: nextDate)
   }
 
   func getResetDateOneMinuteInTheFuture() -> String {
